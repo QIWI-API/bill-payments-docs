@@ -1,4 +1,4 @@
-﻿# Ответы
+# Ответы
 
 ###### Последнее обновление: 2016-10-09 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_responses_ru.html.md)
 

@@ -1,4 +1,4 @@
-﻿# QIWI Bill Payments REST API {#pull_rest_api}
+# QIWI Bill Payments REST API {#pull_rest_api}
 
 ###### Последнее обновление: 2017-05-31 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_payments_invoice_api_ru.html.md)
 

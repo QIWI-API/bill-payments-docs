@@ -1,4 +1,4 @@
-﻿# Форма выставления счета {#http}
+# Форма выставления счета {#http}
 
 ###### Последнее обновление: 2017-06-15 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_webform_ru.html.md)
 

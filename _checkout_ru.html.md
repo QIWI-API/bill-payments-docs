@@ -1,4 +1,4 @@
-﻿# Платежная форма QIWI {#checkout}
+# Платежная форма QIWI {#checkout}
 
 ###### Последнее обновление: 2017-02-12 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_checkout_ru.html.md)
 
