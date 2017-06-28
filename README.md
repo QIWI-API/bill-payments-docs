@@ -7,7 +7,7 @@
 - карты 
 - терминалы
 
-## [Введение](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/payments-rest-api_ru.html)
+## [Введение](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/payments-rest-api_ru.html.md)
 ## [Работа со счетами](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_payments_invoice_api_ru.html.md)
 ## [Платежная форма](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_checkout_ru.html.md)
 ## [Работа со счетами](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_payments_invoice_api_ru.html.md)
