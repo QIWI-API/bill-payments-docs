@@ -1,5 +1,6 @@
-﻿
-# Уведомления об оплате счетов {#notification}
+﻿# Уведомления об оплате счетов {#notification}
+
+###### Последнее обновление: 2017-05-31 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_notification_ru.html.md)
 
 Уведомление представляет собой POST-запрос. Тело запроса содержит сериализованные данные счета в теле запроса (кодировка UTF-8), и параметр `command=bill`.
 
