@@ -86,7 +86,7 @@ user|String|Идентификатор кошелька пользователя
 
 Параметр|Тип|Описание
 --------|---|--------
-result_code|String| Bad request, auth failed, general decline, retriable error, success 
+result_code|String| BAD_REQUEST, AUTH_FAILED, FATAL_ERROR, TEMPORAL_ERROR, SUCCESS 
 error_code|String|[Код результата](#errors)
 description|String|Описание ошибки
 
