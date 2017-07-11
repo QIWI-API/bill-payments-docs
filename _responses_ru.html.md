@@ -1,4 +1,4 @@
-# Ответы
+# Ответы {#responses}
 
 ###### Последнее обновление: 2016-10-09 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_responses_ru.html.md)
 
@@ -92,8 +92,8 @@ description|String|Описание ошибки
 
 <a href="#" onclick="history.back(); return false">Назад</a>
 
-# Статусы операций
 
+<<<<<<< HEAD
 ## Статусы оплаты счетов {#status}
 
 Статус|Описание|Финальный
@@ -125,3 +125,5 @@ TODO
 * Признак означает, что при повторном запросе результат не изменится (ошибка не временная, проанализируйте данные запроса или обратитесь в Support).
 
 <a href="#" onclick="history.back(); return false">Назад</a>
+=======
+>>>>>>> stable
