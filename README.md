@@ -3,10 +3,10 @@
 
 Доступные способы оплаты:
 
-- баланс QIWI Кошелька
-- баланс мобильного оператора
 - карты 
+- баланс QIWI Кошелька
 - терминалы
+- баланс мобильного оператора
 
 ### [Введение](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/payments-rest-api_ru.html.md)
 ### [Работа со счетами](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_payments_invoice_api_ru.html.md)
