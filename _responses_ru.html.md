@@ -11,21 +11,23 @@
 </aside>
 	 
 ~~~json
-{
- "response": {
-  "result_code": 0,
+{  
+  "result_code": "SUCCESS",
   "bill": {
     "bill_id": "BILL-1",
     "amount": "10.00",
-    "originAmount": "10.00", 
-    "ccy": "RUB",
-    "originCcy": "RUB",
-    "status": "waiting",
-    "error": 0,
-    "user": "tel:+79031234567",
-    "comment": "test"
+    "currency": "RUB",
+    "status": "waiting",    
+    "user": {
+                "email": "test@qiwi.com",
+                "phone": "79191234567",
+                "user_id": "shop_user_id"
+            },
+    "comment": "test",
+    "create_datetime": "2017-06-28T21:57:45.540Z",
+    "lifetime_datetime": "2017-08-12T21:57:45.541Z"
   }
-}}
+}
 ~~~
 
 Параметр|Тип|Описание
@@ -33,13 +35,12 @@
 result_code|Integer|[Код результата](#errors)
 bill_id|String|Уникальный идентификатор счета в системе провайдера
 amount|String|Сумма счета, округленная до 2 или 3 знаков после запятой. Способ округления зависит от валюты.
-originAmount|String|Сумма счета в исходной валюте счета (см. параметр `originCcy`), округленная до 2 или 3 знаков после запятой. Способ округления зависит от валюты.
-ccy	|String|Идентификатор валюты (Alpha-3 ISO 4217 код)
-originCcy|String|Идентификатор валюты выставленного счета (Alpha-3 ISO 4217 код)
+currency|String|Идентификатор валюты (Alpha-3 ISO 4217 код)
 status	|String|Текущий [статус счета](#status)
-error	|Integer|Код ошибки
-user|String|Идентификатор кошелька пользователя, которому выставлен счет (номер телефона в международном формате с префиксом "tel:")
+user|Object|Объект, содержащий идентификаторы пользователя, которому выставлен счет (номер телефона в международном формате, email или произвольный строковый id)
 comment|String|Комментарий к счету
+create_datetime|Date|Дата выставления счета
+lifetime_datetime|Date|Дата истечения срока действия счета
 
 <a href="#" onclick="history.back(); return false">Назад</a>
 
@@ -50,13 +51,11 @@ comment|String|Комментарий к счету
 ~~~json
 {
  "response": {
-  "result_code": 0,
+  "result_code": "SUCCESS",
   "refund": {
     "refund_id": "122swbill",
     "amount": "10.0",
-    "status": "processing",
-    "error": 0,
-    "user": "tel:+79161231212"
+    "status": "processing"
   }
 }}
 ~~~
@@ -67,8 +66,6 @@ result_code|Integer|[Код результата](#errors)
 refund_id|String|Уникальный идентификатор операции возврата счета в системе провайдера
 amount|String|Сумма к возврату. Положительное число, округленное до 2 или 3 знаков после запятой. Способ округления зависит от валюты.
 status	|String|Текущий [статус операции возврата](#status_refund)
-error	|Integer|Код ошибки при проведении возврата платежа. В случае если сумма, переданная в запросе, превышает сумму самого счета либо сумму счета, оставшуюся после предыдущих возвратов, в ответе будет возвращен код ошибки 242.
-user|String|Идентификатор кошелька пользователя, которому выставлен счет. Представляет собой номер телефона пользователя в международном формате с префиксом "tel:"
 
 <a href="#" onclick="history.back(); return false">Назад</a>
 
