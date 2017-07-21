@@ -100,9 +100,9 @@ Content-Type: text/json
 <h3 class="request method">Запрос → PATCH</h3>
 
 ~~~http
-PATCH /api/v2/prv/bills/BILL-2 HTTP/1.1
+PATCH /api/v3/prv/bills/BILL-2 HTTP/1.1
 Accept: text/json
-Authorization: Basic ***
+Authorization: Bearer ***
 Host: api.qiwi.com
 Content-Type: application/x-www-form-urlencoded; charset=utf-8
 
@@ -112,41 +112,20 @@ HTTP/1.1 200 OK
 Content-Type: text/json
 {
    "response": {
-      "result_code": 0,
+      "result_code": "SUCCESS",
       "bill": {
          "bill_id": "BILL-2",
          "amount": "10.00",
-         "ccy": "RUB",
+         "currency": "RUB",
          "status": "rejected",
-         "error": 0,
-         "user": "tel:+79031234567",
-         "comment": "test"
-      }
-   }
-}
-~~~
-
-~~~shell
-user@server:~$ curl "https://api.qiwi.com/api/v3/prv/bills/BILL-2"
-  -X PATCH
-  --header "Authorization: Bearer ***"
-  --header "Accept: text/json"
-  -d 'status=rejected'
-
-
-HTTP/1.1 200 OK
-Content-Type: text/json
-{
-   "response": {
-      "result_code": 0,
-      "bill": {
-         "bill_id": "BILL-2",
-         "amount": "10.00",
-         "ccy": "RUB",
-         "status": "rejected",
-         "error": 0,
-         "user": "tel:+79031234567",
-         "comment": "test"
+         "user": {
+                "email": "test@qiwi.com",
+                "phone": "79191234567",
+                "user_id": "shop_user_id2"
+            },
+         "comment": "test",
+         "create_datetime": "2017-06-28T21:57:45.540Z",
+         "lifetime_datetime": "2017-08-12T21:57:45.541Z"
       }
    }
 }
@@ -181,7 +160,7 @@ Content-Type: text/json
 
 ## Возврат оплаченного счета {#refund}
 
-С помощью данного запроса можно произвести полный или частичный возврат средств по счету, оплаченному клиентом, на его учетную запись Visa QIWI Wallet. При этом создается платеж, обратный платежу на оплату счета. Валюта платежа совпадает с валютой исходного счета.
+С помощью данного запроса можно произвести полный или частичный возврат средств по счету, оплаченному клиентом. При этом создается платеж, обратный платежу на оплату счета. Валюта платежа совпадает с валютой исходного счета.
 
 По одному и тому же счету можно выполнять несколько операций возврата, при условии что:
 
@@ -189,7 +168,7 @@ Content-Type: text/json
 * для разных операций возврата одного счета используются разные идентификаторы.
 
 <aside class="warning">
-Если сумма, переданная в запросе, превышает сумму самого счета либо сумму счета, оставшуюся после предыдущих возвратов, в ответе будет возвращен код ошибки 242.
+Если сумма, переданная в запросе, превышает сумму самого счета либо сумму счета, оставшуюся после предыдущих возвратов, в ответе будет возвращен код ошибки TODO ПРОПИСАТЬ.
 </aside>
 
 ### Последовательность операций возврата
@@ -201,29 +180,6 @@ Content-Type: text/json
 * Данный сценарий можно повторять несколько раз до тех пор, пока счет не будет полностью отменен (возвращена вся сумма).
 
 <h3 class="request method">Запрос → PUT</h3>
-
-~~~shell
-user@server:~$ curl "https://api.qiwi.com/api/v3/prv/bills/test234578/refund/122swbill"
-  -v -w "%{http_code}"
-  -X PUT
-  --header "Accept: text/json"
-  --header "Authorization: Bearer ***"
-  -d 'amount=5.0'
-
-HTTP/1.1 200 OK
-Content-Type: text/json
-{
-   "response": {
-      "result_code": 0,
-      "refund": {
-         "refund_id": "122swbill",
-         "amount": "5.00",
-         "status": "success",
-         "error": 0
-      }
-   }
-}
-~~~
 
 ~~~http
 PUT /api/v3/prv/bills/BILL-1/refund/122swbill HTTP/1.1
@@ -238,12 +194,11 @@ HTTP/1.1 200 OK
 Content-Type: text/json
 {
    "response": {
-      "result_code": 0,
+      "result_code": "SUCCESS",
       "refund": {
          "refund_id": "122swbill",
          "amount": "5.00",
-         "status": "success",
-         "error": 0
+         "status": "success"
       }
    }
 }
@@ -291,28 +246,6 @@ amount | Сумма возврата. Должна быть меньше либ�
 
 <h3 class="request method">Запрос → GET</h3>
 
-~~~shell
-user@server:~$ curl "https://api.qiwi.com/api/v3/prv/bills/test234578/refund/122swbill"
-  -v -w "%{http_code}"
-  --header "Accept: text/json"
-  --header "Authorization: Bearer ***"
-
-
-HTTP/1.1 200 OK
-Content-Type: text/json
-{
-   "response": {
-      "result_code": 0,
-      "refund": {
-         "refund_id": "122swbill",
-         "amount": "5.00",
-         "status": "success",
-         "error": 0
-      }
-   }
-}
-~~~
-
 ~~~http
 GET /api/v3/prv/bills/BILL-1/refund/122swbill HTTP/1.1
 Accept: text/json
@@ -325,12 +258,11 @@ HTTP/1.1 200 OK
 Content-Type: text/json
 {
    "response": {
-      "result_code": 0,
+      "result_code": "SUCCESS",
       "refund": {
          "refund_id": "122swbill",
          "amount": "5.00",
-         "status": "success",
-         "error": 0
+         "status": "success"
       }
    }
 }
