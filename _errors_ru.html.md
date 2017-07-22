@@ -1,4 +1,4 @@
-# Список ошибок {#errors}
+# Список ошибок {#err-codes}
 
 ###### Последнее обновление: 2017-07-11 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/_errors_ru.html.md)
 
