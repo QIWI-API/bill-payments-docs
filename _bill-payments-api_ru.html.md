@@ -1,6 +1,6 @@
 # QIWI Bill Payments REST API {#bill-payments-api}
 
-###### Последнее обновление: 2017-05-31 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_payments_invoice_api_ru.html.md)
+###### Последнее обновление: 2017-07-22 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_payments_invoice_api_ru.html.md)
 
 ## Последовательность операций {#steps}
 
@@ -31,7 +31,99 @@ user@server:~$ curl "адрес сервера"
 Заголовок представляет собой параметр Authorization, значение которого представлено как: "Bearer <a href="#auth_param">SECRET_KEY</a>"
 </aside>
 
-## ТУТ ПРО ПЕРЕАДРЕСАЦИЮ НА OPLATA.QIWI.COM
+## Создание платежной формы {#create-payment-form}
+
+Запрос подготавливает данные, для создания платежной формы.
+
+* Сценарий
+  * Выполнение запроса создания платежной формы
+  * Переадресация пользователя на платежную форму
+    * Ссылка передается в параметре ответа [pay_url](#responses)
+
+~~~shell
+user@server:~$ curl "https://api.qiwi.com/api/v3/prv/bills/Bill-1"
+  -X PUT --header "Accept: text/json"
+  --header "Authorization: Bearer ***"
+  --header "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
+  -d 'user=tel%3A%2B79161111111&amount=1.00&ccy=RUB&comment=comment&lifetime=2016-09-25T15:00:00'&extras=name1
+
+
+HTTP/1.1 200 OK
+Content-Type: text/json
+{
+  "response": {
+     "result_code": SUCCESS,
+     "bill": {
+        "bill_id": "BILL-1",
+        "amount": "10.00",
+        "currency": "RUB",
+        "status": "waiting",
+        "user": {
+           "phone":+79031234567",
+        },
+        "extras": {
+           "name1": "",
+        },
+        "comment": "comment",
+        "create_datetime": "2017-06-28T21:57:45.540Z",
+        "lifetime_datetime": "2017-08-12T21:57:45.541Z",
+        "pay_url":"https://oplata.qiwi.com/?uid=87213878361287"
+     }
+  }
+}
+~~~
+
+
+<h3 class="request method">Запрос → PUT</h3>
+
+<ul class="nestedList url">
+    <li><h3>URL <span>https://api.qiwi.com/api/v3/prv/bills/<a>bill_id</a></span></h3>
+        <ul>
+        <strong>В pathname PUT-запроса используются два параметра счета:</strong>
+             <li><strong>bill_id</strong> - уникальный идентификатор счета в системе провайдера.</li>
+        </ul>
+    </li>
+</ul>
+
+<ul class="nestedList header">
+    <li><h3>HEADERS</h3>
+        <ul>
+             <li>Accept: text/json или Accept: application/json - формат ответа JSON</li>
+             <li>Accept: text/xml или Accept: application/xml - формат ответа XML</li>
+             <li>Content-type: application/x-www-form-urlencoded; charset=utf-8</li>
+             <li>Authorization: Bearer ***</li>
+        </ul>
+    </li>
+</ul>
+
+<ul class="nestedList params">
+    <li><h3>Параметры</h3><span>Параметры передаются в теле запроса как formdata</span>
+    </li>
+</ul>
+
+Параметр|Описание|Тип|Обяз.
+---------|--------|---|------
+user | Идентификатор пользователя, на который выставляется счет.  \n Email, phone, user_id | String(20)|+
+amount | Сумма, на которую выставляется счет. Способ округления зависит от валюты | Number(6.3)|+
+currency | Идентификатор валюты (Alpha-3 ISO 4217 код). Может использоваться любая валюта, предусмотренная договором с КИВИ | String(3)|+
+comment | Комментарий к счету | String(255)|+
+extras | Дополнительные параметры запроса. | String(255)|-
+lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус и последующая оплата станет невозможна.<br> **Внимание! По истечении 28 суток от даты выставления счет автоматически будет переведен в финальный статус.**|dateTime|+
+pay_source |<br>"mobile" - оплата счета будет производиться с баланса мобильного телефона пользователя, <br>"qw" – любым способом через интерфейс Visa QIWI Wallet.<br> По умолчанию "qw" |String|-
+prv_name|Название провайдера.| String(100)|-
+
+
+<h3 class="request">Ответ ←</h3>
+
+Формат ответа зависит от заголовка "Accept" в исходном запросе:
+
+* Accept: text/json или Accept: application/json - формат ответа JSON
+* Accept: text/xml или Accept: application/xml - формат ответа XML
+
+
+[Параметры ответа](#responses)
+
+[Ответ в случае ошибки](#response_error)
 
 ## Проверка статуса оплаты счета {#invoice-status}
 
