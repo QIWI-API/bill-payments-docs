@@ -45,7 +45,7 @@ user@server:~$ curl "https://api.qiwi.com/api/v3/prv/bills/Bill-1"
   -X PUT --header "Accept: text/json"
   --header "Authorization: Bearer ***"
   --header "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
-  -d 'user=tel%3A%2B79161111111&amount=1.00&ccy=RUB&comment=comment&lifetime=2016-09-25T15:00:00'&extras=name1
+  -d 'user=phone=2B79161111111&amount=1.00&ccy=RUB&comment=comment&lifetime=2016-09-25T15:00:00'&extras_name=name1
 
 
 HTTP/1.1 200 OK
