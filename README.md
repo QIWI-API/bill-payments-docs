@@ -14,6 +14,11 @@ QIWI Bill Payments API открывает доступ к операциям с�
 
 <img src="https://corp.qiwi.com/dam/jcr:a1566862-7c83-4a6b-89ec-276954bd8ee7/method_main.png"/>
 
+## Node.js SDK
+
+https://github.com/QIWI-API/bill-payments-node-js-sdk
+
+
 ## Содержание
 ### [Введение](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/payments-rest-api_ru.html.md)
 ### [Работа со счетами](https://github.com/QIWI-API/bill-payments-docs/blob/master/_bill-payments-api_ru.html.md)
@@ -24,6 +29,8 @@ QIWI Bill Payments API открывает доступ к операциям с�
 ### [Таблица статусов обработки](https://github.com/QIWI-API/bill-payments-docs/blob/master/_results_ru.html.md)
 ### [Статусы платежей](https://github.com/QIWI-API/bill-payments-docs/blob/master/_statuses_ru.html.md)
 ### [Коды ошибок](https://github.com/QIWI-API/bill-payments-docs/blob/master/_errors_ru.html.md)
+
+
 
 
 
