@@ -16,21 +16,21 @@ toc_footers:
  - <a href='http://pullapi-test.qiwi.com'>Песочница</a>
 
 includes:
- - bill-payments-api_ru
- - webform_ru
- - checkout_ru
- - notification_ru
- - responses_ru
- - statuses_ru
- - errors_ru
+ - bill-payments/bill-payments-api_ru
+ - bill-payments/webform_ru
+ - bill-payments/notification_ru
+ - bill-payments/responses_ru
+ - bill-payments/results_ru
+ - bill-payments/statuses_ru
+ - bill-payments/errors_ru
 
 ---
 
 # Введение {#introduction}
 
-###### Последнее обновление: 2017-05-31 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/payments-rest-api_ru.html.md)
+###### Последнее обновление: 2017-07-22 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/payments-rest-api_ru.html.md)
 
-IWI Bill Payments API открывает доступ к операциям со счетами на оплату из вашего приложения. Счет - универсальная заявка на оплату. Пользователь может оплатить его с помощью любого из доступных способов оплат, пока не истекло время жизни счета. Поддерживаются следующие операции:
+QIWI Bill Payments API открывает доступ к операциям со счетами на оплату из вашего приложения. Счет - универсальная заявка на оплату. Пользователь может оплатить его с помощью любого из доступных способов оплат, пока не истекло время жизни счета. Поддерживаются следующие операции:
 
 * открытие платежной страницы
 * отмена неоплаченных счетов
@@ -45,7 +45,7 @@ IWI Bill Payments API открывает доступ к операциям со
 * с баланса своего QIWI Кошелька
 * с баланса мобильного телефона.
 
-Для оплата пользователям доступна    
+Для оплаты пользователям доступна    
 * в интерфейсе [платежной формы QIWI](https://oplata.qiwi.com)
 * на сайте [qiwi.com](https://qiwi.com)
 * в мобильных приложений QIWI    
@@ -63,8 +63,10 @@ IWI Bill Payments API открывает доступ к операциям со
 
 Параметр|Описание|Тип
  ---------|--------|---
- public_key | Открытый ключ для авторизации провайдера в платежной форме | String
- secret_key | Секретный ключ для авторизации в API| String
+ api_id | Идентификатор для авторизации провайдера в API | Integer
+ api_secret | Секретный ключ для авторизации в API| String
+ prv_id | Числовой идентификатор провайдера (идентификатор сайта) | Integer
+ secret_key | Base64 хешированный набор параметров вида: `prv_id|api_id|md5(api_secret)`| String
 
 
 <aside class="notice">
