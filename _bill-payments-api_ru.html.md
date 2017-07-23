@@ -67,7 +67,7 @@ Content-Type: text/json
         "comment": "comment",
         "create_datetime": "2017-06-28T21:57:45.540Z",
         "lifetime_datetime": "2017-08-12T21:57:45.541Z",
-        "pay_url":"https://oplata.qiwi.com/?uid=87213878361287"
+        "payment_url":"https://oplata.qiwi.com/?uid=87213878361287"
      }
   }
 }
