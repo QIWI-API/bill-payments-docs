@@ -6,23 +6,6 @@
 
 <h3 class="request method">Запрос → POST</h3>
 
-~~~shell
-Пример
-
-user@server:~$ curl "https://server.ru/qiwi-notify.php"
-  -v -w "%{http_code}"
-  -X POST
-  --header "Accept: application/json"
-  --header "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
-  --header "X-Api-Signature: J4WNfNZd***V5mv2w="
-  -d 'prv_id=2040&bill_id=BILL-1&status=paid&error=0&amount=1.00&phone=tel%3A%2B79031811737&payment_date=2017-03-01T19%3A00%3A00&currency=RUB&comment=test&version=1'
-
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{"error": 0}
-~~~
-
 ~~~http
 Пример
 POST /qiwi-notify.php HTTP/1.1
@@ -31,7 +14,7 @@ Content-type: application/x-www-form-urlencoded
 X-Api-Signature: J4WNfNZd***V5mv2w=
 Host: server.ru
 
-prv_id=2040&bill_id=BILL-1&status=paid&error=0&amount=1.00&phone=tel%3A%2B79031811737&payment_date=2017-03-01T19%3A00%3A00&currency=RUB&comment=test&version=1
+prv_id=2040&bill_id=BILL-1&status=paid&amount=1.00&phone=%2B79031811737&email=test@test.ru&payment_date=2017-03-01T19%3A00%3A00&currency=RUB&comment=test&version=1
 
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -78,8 +61,7 @@ bill_id|Уникальный идентификатор счета в систе
 amount | Сумма счета. Способ округления зависит от валюты | Number(6.3)
 currency | Идентификатор валюты счета (Alpha-3 ISO 4217 код) | String(3)
 status | [Статусы](#status)|String
-error | [Ошибки](#errors)| String(20)
-user | Номер Visa Qiwi Wallet, на который был выставлен счет | Number
+phone | Номер телефона, на который был выставлен счет (если был указан при выставлении счета) | Number
 email | E-mail пользователя (если был указан при выставлении счета). | String
 user_id | Идентификатор пользователя в системе провайдера (если был указан при выставлении счета). | String
 payment_date | Дата оплаты счета | URL-закодированная строка ГГГГ-ММ-ДДTЧЧ:ММ:СС
@@ -122,9 +104,7 @@ Content-Type: application/json
 
 ## Авторизация уведомлений {#notifications_auth}
 
-Используется авторизация по цифровой подписи. В https-запросах необходимо также проверять серверный сертификат Visa QIWI Wallet.
-
-Подпись уведомления отправляется в заголовке `X-Api-Signature`. Для формирования подписи используется механизм проверки целостности HMAC с хэш-функцией SHA256.
+Используется авторизация по цифровой подписи. Подпись уведомления отправляется в заголовке `X-Api-Signature`. Для формирования подписи используется механизм проверки целостности HMAC с хэш-функцией SHA256.
 
 HMAC sha256 от части полей, с разделителем |.+secret_key
 X-Api-Signature: J4WNfNZd***V5mv2w=
@@ -162,75 +142,9 @@ X-Api-Signature: J4WNfNZd***V5mv2w=
 4. HMAC-хэш преобразовать из строк в байты с использованием кодировки UTF-8 и base64-преобразовать.
 5. Сравнить значение заголовка X-Api-Signature с результатом 4.
 
-~~~php
-<?php
-
-function hexToStr($hex){
-    $string='';
-    for ($i=0; $i < strlen($hex)-1; $i+=2){
-        $string .= chr(hexdec($hex[$i].$hex[$i+1]));
-    }
-    return $string;
-}
-
-//функция генерации подписи по ключу и строке параметров
-function checkSign($key, $req){
-    $sign_hash = hash_hmac("sha1", $req, $key);
-    $sign_tr = hexToStr($sign_hash);
-    $sign = base64_encode($sign_tr);
-    return $sign;
-}
-
-//Функция возвращает упорядоченную строку значений параметров POST-запроса
-function getReqParams(){
-    $reqparams = "";
-    ksort($_POST);
-    foreach ($_POST as $param => $valuep) {
-        $reqparams = "$reqparams|$valuep";
-    }
-    return substr($reqparams,1);
-}
-
-//Извлечение цифровой подписи из заголовков запроса
-function getSign(){
-    $HEADERS = getallheaders();
-    foreach ($HEADERS as $header => $value) {
-       if ($header == 'X-Api-Signature') {
-            $SIGN_REQ = $value;
-       }
-    }
-    return $SIGN_REQ;
-}
-
-// Сортировка параметров
-$Request = getReqParams();
-// Пароль ishop для уведомлений магазина
-$NOTIFY_PWD = "***";
-// Вычисляем подпись
-$reqres = checkSign($NOTIFY_PWD, $Request);
-
-// Подпись из запроса
-$SIGN_REQ = getSign();
-
-if ($reqres == $SIGN_REQ) {
-    $error = 0;
-}
-else $error = 151;
-
-//Ответ
-header('Content-Type: text/xml');
-$xmlres = <<<XML
-<?xml version="1.0"?>
-<result>
-<result_code>$error</result_code>
-</result>
-XML;
-echo $xmlres;
-?>
-~~~
-
 ### Пример реализации
 
+TODO
 
 ## Коды уведомлений  {#notify_codes}
 
@@ -239,6 +153,6 @@ echo $xmlres;
 0|Успех
 5|Ошибка формата параметров запроса
 13|Ошибка соединения с базой данных
-150|Ошибка проверки пароля
 151|Ошибка проверки подписи
-300|Ошибка связи с сервером
+TODO ?|Неверный номер заказа
+300|Иная ошибка
