@@ -17,6 +17,7 @@ toc_footers:
 
 includes:
  - bill-payments/bill-payments-api_ru
+ - bill-payments/checkout_ru
  - bill-payments/webform_ru
  - bill-payments/notification_ru
  - bill-payments/responses_ru
