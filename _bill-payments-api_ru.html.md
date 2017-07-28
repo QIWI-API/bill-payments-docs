@@ -4,7 +4,7 @@
 
 ## Последовательность операций {#steps}
 
-<img src="images/bill_payments.png" />
+![Operation Flow](images/bill_payments.png)
 
 * Пользователь формирует заказ на сайте провайдера.
 
@@ -286,7 +286,7 @@ Content-Type: text/json
 
 ### Последовательность операций возврата
 
-<img src="images/bill_payments_refund.png" />
+![Refund Operation Flow](images/bill_payments_refund.png)
 
 * Провайдер отправляет запрос на осуществление возврата.
 * Чтобы убедиться, что возврат платежа проведен успешно, можно периодически опрашивать API о [текущем статусе возврата](#refund_status) до получения финального статуса.

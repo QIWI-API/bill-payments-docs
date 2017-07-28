@@ -80,8 +80,3 @@ pay_source |Способ оплаты по умолчанию, который н
 
     `sign = HMAС(SHA256, API_password, Invoice_parameters)`
 
-~~~php
-<?php
-
-?>
-~~~
