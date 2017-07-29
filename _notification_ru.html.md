@@ -42,7 +42,7 @@ Aдрес вашего сервера для уведомлений вы мож�
 <ul class="nestedList header">
     <li><h3>HEADERS</h3>
         <ul>
-             <li>X-Api-Signature: ***</li>
+             <li>X-Api-Signature-SHA256: ***</li>
              <li>Accept: application/json</li>
              <li>Content-type: application/x-www-form-urlencoded</li>
         </ul>
