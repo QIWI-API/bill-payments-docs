@@ -13,6 +13,7 @@ services:
 
 toc_footers:
  - <a href='/'>На главную</a>
+ - <a href='mailto:api_help@qiwi.com'>Обратная связь</a>
  - <a href='http://pullapi-test.qiwi.com'>Песочница</a>
 
 includes:
@@ -76,7 +77,7 @@ QIWI Bill Payments API открывает доступ к операциям с�
 <ul class="nestedList notice_image">
     <li><h3>Подробнее</h3>
         <ul>
-             <li><img src="images/pull_rest_auth.png" /></li>
+             <li><img src="/images/pull_rest_auth.png" /></li>
         </ul>
     </li>
 </ul>
