@@ -21,7 +21,7 @@
 <h3 class="request method">REDIRECT → </h3>
 
 <ul class="nestedList url">
-    <li><h3>URL <span>https://oplata.qiwi.com/form/create</span></h3></li>
+    <li><h3>URL <span>https://oplata.qiwi.com/form/</span></h3></li>
 </ul>
 
 ~~~http
@@ -49,7 +49,7 @@ Host: oplata.qiwi.com
 public_key | Ключ идентификации провайдера.|String|+|+|+
 bill_id|Уникальный идентификатор счета в системе провайдера|String(30)|+|+|С подписью
 amount| Сумма, на которую выставляется счет. Способ округления зависит от валюты | Number(6.3)|+|+|С подписью
-sign|[Подпись запроса](#http_sign)|String|+|-|+
+sign|[Подпись запроса](#http_sign)|String|+|-|-
 phone | Идентификатор QIWI Wallet, на который выставляется счет (в международном формате). | String(20)|+|+|-
 email | E-mail пользователя, куда будет отправлена ссылка для оплаты счета. | String|+|+|-
 user_id | Идентификатор пользователя в системе провайдера. | String|+|+|-
