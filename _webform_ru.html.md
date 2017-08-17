@@ -21,18 +21,18 @@
 <h3 class="request method">REDIRECT → </h3>
 
 <ul class="nestedList url">
-    <li><h3>URL <span>https://oplata.qiwi.com/form/</span></h3></li>
+    <li><h3>URL <span>https://oplata.qiwi.com/form/create</span></h3></li>
 </ul>
 
 ~~~http
   Простое открытие формы
-GET /form/?public_key=08hvq08yw4fqw&amount=100.0&success_url=http%3A%2F%2Ftest.ru%3F&email=m@ya.ru HTTP/1.1
+GET /form/create?public_key=08hvq08yw4fqw&amount=100.0&success_url=http%3A%2F%2Ftest.ru%3F&email=m@ya.ru HTTP/1.1
 Host: oplata.qiwi.com
 ~~
 
 ~~~http
   C подписью
-GET /form/?public_key=08hvq08yw4fqw&bill_id=Bill-1&sign=09jvrq09pwh3rq2e2&amount=100.0 HTTP/1.1
+GET /form/create?public_key=08hvq08yw4fqw&bill_id=Bill-1&sign=09jvrq09pwh3rq2e2&amount=100.0 HTTP/1.1
 Host: oplata.qiwi.com
 ~~~
 
