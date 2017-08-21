@@ -8,7 +8,7 @@
 
 * Пользователь формирует заказ на сайте провайдера.
 
-* Провайдер перенаправляет пользователя на [Платежную форму](#checkout) QIWI Кассы для оплаты счета.
+* Провайдер перенаправляет пользователя на [Платежную форму](#create-payment-form) QIWI Кассы для оплаты счета.
 
 * После успешной оплаты счета провайдер получает [уведомление](#notification) (предварительно необходимо настроить отправку уведомлений в [Личном кабинете](https://kassa.qiwi.com)). Уведомления об оплате счета содержат параметры авторизации, которые необходимо проверять на сервере провайдера. Уведомления могут высылаться как при оплате счета, так и в других случаях (если пользователь отклонил счет или при оплате возникла ошибка).
 
@@ -33,19 +33,19 @@ user@server:~$ curl "адрес сервера"
 
 ## Создание платежной формы {#create-payment-form}
 
-Запрос подготавливает данные, для создания платежной формы.
+Запрос подготавливает данные для создания платежной формы.
 
 * Сценарий
   * Выполнение запроса создания платежной формы
   * Переадресация пользователя на платежную форму
-    * Ссылка передается в параметре ответа [pay_url](#responses)
+    * Ссылка передается в параметре ответа [pay_url](#response_bill)
 
 ~~~shell
 user@server:~$ curl "https://api.qiwi.com/api/v3/prv/bills/Bill-1"
   -X PUT --header "Accept: text/json"
   --header "Authorization: Bearer ***"
   --header "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
-  -d 'user=phone=2B79161111111&amount=1.00&ccy=RUB&comment=comment&lifetime=2016-09-25T15:00:00'&extras_name=name1
+  -d 'user=phone=2B79161111111&amount=1.00&ccy=RUB&comment=comment&lifetime=2016-09-25T15:00:00&extras_name=name1'
 
 
 HTTP/1.1 200 OK
@@ -67,7 +67,7 @@ Content-Type: text/json
         "comment": "comment",
         "create_datetime": "2017-06-28T21:57:45.540Z",
         "lifetime_datetime": "2017-08-12T21:57:45.541Z",
-        "payment_url":"https://oplata.qiwi.com/?uid=87213878361287"
+        "pay_url":"https://oplata.qiwi.com/?uid=87213878361287"
      }
   }
 }
@@ -79,7 +79,7 @@ Content-Type: text/json
 <ul class="nestedList url">
     <li><h3>URL <span>https://api.qiwi.com/api/v3/prv/bills/<a>bill_id</a></span></h3>
         <ul>
-        <strong>В pathname PUT-запроса используются два параметра счета:</strong>
+        <strong>В pathname PUT-запроса используется параметр счета:</strong>
              <li><strong>bill_id</strong> - уникальный идентификатор счета в системе провайдера.</li>
         </ul>
     </li>
@@ -103,7 +103,7 @@ Content-Type: text/json
 
 Параметр|Описание|Тип|Обяз.
 ---------|--------|---|------
-user | Идентификатор пользователя, на который выставляется счет.  \n Email, phone, user_id | String(20)|+
+user | Идентификатор пользователя, на который выставляется счет.<br>E-mail, phone, user_id | String(20)|+
 amount | Сумма, на которую выставляется счет. Способ округления зависит от валюты | Number(6.3)|+
 currency | Идентификатор валюты (Alpha-3 ISO 4217 код). Может использоваться любая валюта, предусмотренная договором с КИВИ | String(3)|+
 comment | Комментарий к счету | String(255)|+
@@ -187,7 +187,8 @@ Content-Type: text/json
 
 
 ## Отмена неоплаченного счета {#cancel}
-позволяет отменить неоплаченный клиентом счет.
+
+Запрос позволяет отменить неоплаченный клиентом счет.
 
 <h3 class="request method">Запрос → PATCH</h3>
 
