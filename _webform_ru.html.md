@@ -1,6 +1,6 @@
 # Форма выставления счета {#http}
 
-###### Последнее обновление: 2017-08-17 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_webform_ru.html.md)
+###### Последнее обновление: 2017-06-15 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_webform_ru.html.md)
 
 Клиенту отображается платежная форма с выбором способа оплаты выставленного счета.
 
@@ -25,14 +25,8 @@
 </ul>
 
 ~~~http
-  Простое открытие формы
-GET /form/create?public_key=08hvq08yw4fqw&amount=100.0&success_url=http%3A%2F%2Ftest.ru%3F&email=m@ya.ru HTTP/1.1
-Host: oplata.qiwi.com
-~~
 
-~~~http
-  C подписью
-GET /form/create?public_key=08hvq08yw4fqw&bill_id=Bill-1&sign=09jvrq09pwh3rq2e2&amount=100.0 HTTP/1.1
+GET /form/create?public_key=08hvq08yw4fqw&amount=100.0&success_url=http%3A%2F%2Ftest.ru%3F&email=m@ya.ru HTTP/1.1
 Host: oplata.qiwi.com
 ~~~
 
@@ -49,7 +43,7 @@ Host: oplata.qiwi.com
 public_key | Ключ идентификации провайдера.|String|+|+|+
 bill_id|Уникальный идентификатор счета в системе провайдера|String(30)|+|+|С подписью
 amount| Сумма, на которую выставляется счет. Способ округления зависит от валюты | Number(6.3)|+|+|С подписью
-sign|[Подпись запроса](#http_sign)|String|+|-|-
+sign|[Подпись запроса](#http_sign)|String|+|-|+
 phone | Идентификатор QIWI Wallet, на который выставляется счет (в международном формате). | String(20)|+|+|-
 email | E-mail пользователя, куда будет отправлена ссылка для оплаты счета. | String|+|+|-
 user_id | Идентификатор пользователя в системе провайдера. | String|+|+|-
@@ -63,6 +57,12 @@ pay_source |Способ оплаты по умолчанию, который н
 ## Подпись {#http_sign}
 
 Вызов веб-формы выставления счета с авторизацией требует вычисления параметра `sign` (цифровой подписи).
+
+~~~http
+
+GET /form/create?public_key=08hvq08yw4fqw&bill_id=Bill-1&sign=09jvrq09pwh3rq2e2&amount=100.0 HTTP/1.1
+Host: oplata.qiwi.com
+~~~
 
 <aside class="notice">
 Для вычисления подписи используется API password – пароль, соответствующий <a href='#auth_param'>API_ID</a>
