@@ -7,7 +7,6 @@
 <h3 class="request method">Запрос → POST</h3>
 
 ~~~http
-Пример
 POST /qiwi-notify.php HTTP/1.1
 Accept: application/json
 Content-type: application/x-www-form-urlencoded
@@ -16,10 +15,12 @@ Host: server.ru
 
 prv_id=2040&bill_id=BILL-1&status=paid&amount=1.00&phone=%2B79031811737&email=test@test.ru&payment_date=2017-03-01T19%3A00%3A00&currency=RUB&comment=test&version=1
 
+
 HTTP/1.1 200 OK
 Content-Type: application/json
-
-{"error": 0}
+{
+ "error": 0
+}
 ~~~
 
 <ul class="nestedList url">
@@ -29,14 +30,6 @@ Content-Type: application/json
 
 <aside class="notice">
 Aдрес вашего сервера для уведомлений вы можете настроить на сайте <a href="https://kassa.qiwi.com/">kassa.qiwi.com</a>
-
-<ul class="nestedList notice_image">
-   <li><h3>Подробнее</h3>
-        <ul>
-           <li><img src="images/pull_rest_notification_url.png" /></li>
-        </ul>
-   </li>
-</ul>
 </aside>
 
 <ul class="nestedList header">
@@ -80,7 +73,9 @@ version | Версия уведомлений | Number
 HTTP/1.1 200 OK
 Content-Type: application/json
 
-{"error": 0}
+{
+ "error": 0
+}
 ~~~
 
 <aside class="warning">
@@ -142,9 +137,6 @@ X-Api-Signature: J4WNfNZd***V5mv2w=
 4. HMAC-хэш преобразовать из строк в байты с использованием кодировки UTF-8 и base64-преобразовать.
 5. Сравнить значение заголовка X-Api-Signature с результатом 4.
 
-### Пример реализации
-
-TODO
 
 ## Коды уведомлений  {#notify_codes}
 
