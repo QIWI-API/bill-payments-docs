@@ -23,8 +23,8 @@ Host: server.ru
       "value" : "PAID",  
       "update_datetime" : "2017-12-27T16:01:00Z" },
     "user": {
-      "phone": "79082402088", 
-      "user_id" : "dsfc2recdf23c234324cdscfewcr234esdcf23", 
+      "phone": "79261234567", 
+      "user_id" : "dsfc2recd123sdadx3dscfewcr234esdcf23", 
       "email" : "example@gmail.com"
     },
     "creation_datetime": "2017-08-17T09:56:02.241Z",
