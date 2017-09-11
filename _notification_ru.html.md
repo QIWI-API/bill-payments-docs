@@ -16,7 +16,7 @@ Host: server.ru
 {
   "bill": {
     "bill_id": "a475c739-0561-4a23-9d18-a96934a7d690",
-    "prv_id":270304,
+    "site_id":270304,
     "amount": 1,
     "currency": "RUB",
     "status":  { 
@@ -127,7 +127,7 @@ X-Api-Signature: J4WNfNZd***V5mv2w=
    * currency
    * email (если есть)
    * phone (если есть)
-   * prv_id
+   * site_id
    * status.value
    * user_id (если есть)
 * Параметры для подписи переводятся в байт-представление с UTF-8 и располагаются в алфавитном порядке.
