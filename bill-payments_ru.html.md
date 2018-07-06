@@ -5,8 +5,7 @@ search: true
 
 metatitle: Универсальный платежный API 1.0.0 beta
 
-metadescription: Универсальный платежный API открывает доступ к операциям с выставляемыми счетами. Счет - универсальная заявка на оплату. По-умолчанию пользователю доступно несколько способов оплаты. 
-В API поддерживаются операции выставления и отмены счетов, возврата средств по оплаченным счетам, а также проверки статуса выполнения операций.
+metadescription: Универсальный платежный API открывает доступ к операциям с выставляемыми счетами. Счет - универсальная заявка на оплату. По-умолчанию пользователю доступно несколько способов оплаты. В API поддерживаются операции выставления и отмены счетов, возврата средств по оплаченным счетам, а также проверки статуса выполнения операций.
 
 language_tabs:
   - shell
@@ -24,7 +23,7 @@ toc_footers:
 
 # Универсальный платежный API {#introduction}
 
-###### Последнее обновление: 2018-01-29 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_ru.html.md)
+###### Последнее обновление: 2018-07-06 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_ru.html.md)
 
 Универсальный платежный API открывает доступ к операциям с выставляемыми счетами. Счет - универсальная заявка на оплату. По-умолчанию пользователю доступно несколько способов оплаты. 
 В API поддерживаются операции выставления и отмены счетов, возврата средств по оплаченным счетам, а также проверки статуса выполнения операций.
@@ -715,7 +714,6 @@ curl https://api.qiwi.com/partner/bill/v1/bills/{billId}/refunds/{refundId}\
 	"datetime": "2005-08-09T18:31:42+03:00",
 	"traceId" : ""
 }
-
 ~~~
 
 <ul class="nestedList header">
@@ -728,8 +726,6 @@ curl https://api.qiwi.com/partner/bill/v1/bills/{billId}/refunds/{refundId}\
 
 Параметр|Тип|Описание
 --------|---|--------
-errorCode|String|Если ответ содержит ошибку: [Код ошибки](#err-codes)
-description|String|Если ответ содержит ошибку: Описание ошибки
 datetime|String|Если ответ содержит ошибку: Системная дата обработки запроса
 refund|Object|Данные о возврате
 refund.refundId|String|Уникальный идентификатор возврата в системе мерчанта
@@ -743,7 +739,7 @@ refund.billId|String| Уникальный номер счета (использ
 
 Метод запрашивает статус возврата.
 
-<h3 class="request method">Запрос → GET</h3>#
+<h3 class="request method">Запрос → GET</h3>
 
 ~~~javascript
 const billId = '893794793973';
@@ -762,11 +758,11 @@ curl https://api.qiwi.com/api/v3/prv/bills/893794793973/refund/899343443 \
 ~~~
 
 <ul class="nestedList url">
-    <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billId}/refunds/{refundId}</h3>
+    <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billId}/refunds/{refundId}</span></h3>
         <ul>
         <strong>Параметры:</strong>
-             <li><strong>billId</strong> - уникальный идентификатор счета в системе мерчанта, передается в pathname.</li>
-             <li><strong>refundId</strong> - уникальный идентификатор возврата в системе мерчанта, передается в pathname.</li>
+             <li><strong>billId</strong> - уникальный идентификатор счета в системе мерчанта.</li>
+             <li><strong>refundId</strong> - уникальный идентификатор возврата в системе мерчанта.</li>
         </ul>
     </li>
 </ul>
@@ -787,16 +783,13 @@ curl https://api.qiwi.com/api/v3/prv/bills/893794793973/refund/899343443 \
 
 ~~~json
 {
-  "resultCode": "SUCCESS",
-  "refund": {
-    "refundId": "2",
-    "status": "FULL",
     "amount": {
-      "value": 1.42,
+      "value": 50.50,
       "currency": "RUB"
     },
-    "datetime": "2018-02-28T16:18:36"
-  }
+    "datetime": "2018-03-01T16:06:57+03",
+    "refundId": "1",
+    "status": "PARTIAL"
 }
 ~~~
 
@@ -804,10 +797,12 @@ curl https://api.qiwi.com/api/v3/prv/bills/893794793973/refund/899343443 \
 
 ~~~json
 {
-  "result_code": "AUTH_FAILED",
-  "error_code": "auth.unauthorized",
-  "description": "Неверные аутентификационные данные",
-  "datetime": "2018-02-28T13:22:12.513Z"
+	"serviceName": "invoicing",
+	"errorCode": "refund.incorrect.amount",
+	"description": "Неверная сумма возврата",
+	"userMessage": "Неверная сумма возврата",
+	"datetime": "2005-08-09T18:31:42+03:00",
+	"traceId" : ""
 }
 ~~~
 
@@ -821,12 +816,10 @@ curl https://api.qiwi.com/api/v3/prv/bills/893794793973/refund/899343443 \
 
 Параметр|Тип|Описание
 --------|---|--------
-result_code|String|[Результат запроса](#results)
-error_code|String|Если ответ содержит ошибку: [Код ошибки](#err-codes)
 description|String|Если ответ содержит ошибку: Описание ошибки
 datetime|String|Если ответ содержит ошибку: Системная дата обработки запроса
 refund|Object|Данные о возврате
-refund.refund_id|String|Уникальный идентификатор возврата в системе мерчанта
+refund.refundId|String|Уникальный идентификатор возврата в системе мерчанта
 refund.amount|Number|Сумма счета, округленная до 2 знаков после запятой в меньшую сторону
 refund.currency	|String|Идентификатор валюты счета (Alpha-3 ISO 4217 код)
 refund.status	|String|Статус возврата [статус возврата](#status)
