@@ -87,7 +87,7 @@ const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 </ul>
 
 ~~~javascript
-const public_key = 'Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******';
+const publicKey = 'Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******';
 
 const params = {
     publicKey,
