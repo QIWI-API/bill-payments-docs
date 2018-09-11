@@ -30,6 +30,10 @@ toc_footers:
 
 **Для работы API потребуются публичный и секретный ключи. Ключи создаются в личном кабинете после [регистрации и подключения](https://kassa.qiwi.com/pay).**
 
+## SDK и библиотеки {#node_sdk}
+
+* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Готовое решение для разработки server2server интеграции c помощью Node.js.
+
 ## Последовательность операций {#steps}
 
 ![Operation Flow](/images/bill_payments.png)
@@ -45,10 +49,6 @@ toc_footers:
 * Также есть возможность
   * [запросить текущий статус оплаты счета](#invoice-status),
   * [отменить неоплаченный счет](#cancel).
-
-## Средства для разработки {#node_sdk}
-
-* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Готовое решение для разработки server2server интеграции c помощью Node.js.
 
 ## Авторизация {#auth}
 
