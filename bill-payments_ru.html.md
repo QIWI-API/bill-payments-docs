@@ -30,6 +30,10 @@ toc_footers:
 
 **Для работы API потребуются публичный и секретный ключи. Ключи создаются в личном кабинете после [регистрации и подключения](https://kassa.qiwi.com/pay).**
 
+## SDK и библиотеки {#node_sdk}
+
+* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Готовое решение для разработки server2server интеграции c помощью Node.js.
+
 ## Последовательность операций {#steps}
 
 ![Operation Flow](/images/bill_payments.png)
@@ -45,10 +49,6 @@ toc_footers:
 * Также есть возможность
   * [запросить текущий статус оплаты счета](#invoice-status),
   * [отменить неоплаченный счет](#cancel).
-
-## Средства для разработки {#node_sdk}
-
-* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Готовое решение для разработки server2server интеграции c помощью Node.js.
 
 ## Авторизация {#auth}
 
@@ -305,7 +305,7 @@ Aдрес сервера для уведомлений указывается н
 
 1. Объединить значения параметров в одну строку с разделителем "\|":
 
-   `invoice_parameters = {amount.currency}|{amount.value}|{billId}|{siteId}|{status}`
+   `invoice_parameters = {amount.currency}|{amount.value}|{billId}|{siteId}|{status.value}`
 
    где `{*}` – значение параметра уведомления. Все значения при проверке подписи должны трактоваться как строки. 
 
