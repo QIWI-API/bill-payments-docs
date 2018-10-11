@@ -10,7 +10,7 @@ metadescription: Универсальный платежный API открыв�
 language_tabs:
   - shell
   - javascript: Node.js SDK
-
+  - php: PHP SDK
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 
@@ -23,16 +23,17 @@ toc_footers:
 
 # Универсальный платежный API {#introduction}
 
-###### Последнее обновление: 2018-09-26 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_ru.html.md)
+###### Последнее обновление: 2018-10-08 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_ru.html.md)
 
 Универсальный платежный API открывает доступ к операциям с выставляемыми счетами. Счет - универсальная заявка на оплату. По-умолчанию пользователю доступно несколько способов оплаты. 
 В API поддерживаются операции выставления и отмены счетов, возврата средств по оплаченным счетам, а также проверки статуса выполнения операций.
 
 **Для работы API потребуются публичный и секретный ключи. Ключи создаются в личном кабинете после [регистрации и подключения](https://kassa.qiwi.com/pay).**
 
-## SDK и библиотеки {#node_sdk}
+## SDK и библиотеки {#sdk}
 
 * [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Готовое решение для разработки server2server интеграции c помощью Node.js.
+* [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) - Готовое решение для разработки server2server интеграции c помощью PHP.
 
 ## Последовательность операций {#steps}
 
@@ -72,6 +73,17 @@ const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 --header "Authorization: Bearer MjMyNDQxMjM6NDUzRmRnZDQ0M*******"
 ~~~
 
+~~~php
+<?php
+
+const SECRET_KEY = 'eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$billPayments = new Qiwi\Api\BillPayments(SECRET_KEY);
+
+?>
+~~~
+
 
 ## 1.1 Выставление счета через платежную форму {#http}
 
@@ -101,6 +113,24 @@ const link = qiwiApi.createPaymentForm(params);
 
 ~~~shell
 curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&email=m@ya.ru
+~~~
+
+~~~php
+<?php
+
+$publicKey = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zf******';
+$params = [
+  'publicKey' => $publicKey,
+  'amount' => 200,
+  'billId' => '893794793973'
+];
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$link = $billPayments->createPaymentForm($params);
+
+echo $link;
+
+?>
 ~~~
 
 <ul class="nestedList params">
@@ -159,6 +189,27 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
    "customer": {}, 
    "customFields": {}  
    }
+~~~
+
+~~~php
+<?php
+
+$billId = '893794793973';
+$fields = [
+  'amount' => 1.00,
+  'currency' => 'RUB',
+  'comment' => 'test',
+  'expirationDateTime' => '2018-03-02T08:44:07',
+  'email' => 'example@mail.org',
+  'account' => 'client4563'
+];
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->createBill($billId, $fields);
+
+print_r($response);
+
+?>
 ~~~
 
 
@@ -346,6 +397,29 @@ qiwiApi.checkNotificationSignature(
 ); // true
 ~~~
  
+ ~~~php
+<?php
+
+$validSignatureFromNotificationServer = '07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b';
+$notificationData = [
+  'bill' => [
+    'siteId' => 'test',
+    'billId' => 'test_bill',
+    'amount' => ['value' => 1, 'currency' => 'RUB'],
+    'status' => ['value' => 'PAID']
+  ],
+  'version' => '3'
+];
+$merchantSecret = 'test-merchant-secret-for-signature-check';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$billPayments->checkNotificationSignature(
+  $validSignatureFromNotificationServer, $notificationData, $merchantSecret
+); // true
+
+?>
+~~~
+
 Cтрока и ключ подписи кодируются в UTF-8.
 
 <ul class="nestedList params">
@@ -416,6 +490,19 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
 -X GET 
 -H 'Accept: application/json' 
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
+~~~
+
+~~~php
+<?php
+
+$billId = '893794793973';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->getBillInfo($billId);
+
+print_r($response);
+
+?>
 ~~~
 
 <ul class="nestedList url">
@@ -529,6 +616,19 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/reject
 -H 'Accept: application/json' 
 -H 'Content-Type: application/json' 
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
+~~~
+
+~~~php
+<?php
+
+$billId = '893794793973';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->cancelBill($billId);
+
+print_r($response);
+
+?>
 ~~~
 
 <ul class="nestedList url">
@@ -653,6 +753,21 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refunds/899343443
 }'
 ~~~
 
+~~~php
+<?php
+
+$billId = '893794793973';
+$refundId = '899343443';
+$amount = 12;
+$currency = 'RUB';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->refund($billId, $refundId, $amount, $currency);
+
+print_r($response);
+?>
+~~~
+
 <ul class="nestedList url">
     <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billId}/refunds/{refundId}</span></h3>
         <ul>
@@ -741,6 +856,20 @@ curl https://api.qiwi.com/partner/bill/v1/893794793973/refund/899343443
 -H 'Accept: application/json' 
 -H 'Content-Type: application/json' 
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
+~~~
+
+~~~php
+<?php
+
+$billId = '893794793973';
+$refundId = '899343443';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->getRefundInfo($billId, $refundId);
+
+print_r($response);
+
+?>
 ~~~
 
 <ul class="nestedList url">
