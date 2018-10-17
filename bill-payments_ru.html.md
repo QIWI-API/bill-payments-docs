@@ -17,7 +17,7 @@ services:
 
 toc_footers:
  - <a href='/'>На главную</a>
- - <a href='mailto:api_help@qiwi.com'>Обратная связь</a>
+ - <a href='mailto:bss@qiwi.com'>Обратная связь</a>
 
 ---
 

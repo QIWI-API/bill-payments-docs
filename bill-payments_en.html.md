@@ -17,7 +17,7 @@ language_tabs:
 
 toc_footers:
  - <a href='/'>Home page</a>
- - <a href='mailto:api_help@qiwi.com'>Feedback</a>
+ - <a href='mailto:bss@qiwi.com'>Feedback</a>
 
 ---
 
