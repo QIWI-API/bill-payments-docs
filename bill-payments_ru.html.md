@@ -397,7 +397,7 @@ qiwiApi.checkNotificationSignature(
 ); // true
 ~~~
  
- ~~~php
+~~~php
 <?php
 
 $validSignatureFromNotificationServer = '07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b';

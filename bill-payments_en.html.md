@@ -10,21 +10,20 @@ metadescription: QIWI Bill Payments API opens a way to operate with invoices fro
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 
+language_tabs:
+  - shell
+  - javascript: Node.js SDK
+  - php: PHP SDK
 
 toc_footers:
  - <a href='/'>Home page</a>
  - <a href='mailto:api_help@qiwi.com'>Feedback</a>
 
-includes:
- - bill-payments/webform_en
- - bill-payments/bill-payments-api_en
- - bill-payments/notification_en
-
 ---
 
 # Universal Payment Protocol {#introduction}
 
-###### Last update: 2018-09-27 | [Edit on GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_en.html.md)
+###### Last update: 2018-10-17 | [Edit on GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_en.html.md)
 
 QIWI Bill Payments API opens a way to operations with invoices from your service or application. Invoice is the unique request for the payment. The user may pay the invoice with any accessible means. API supports  issuing and cancelling invoices, making refunds and checking operation status.
 
@@ -33,7 +32,9 @@ QIWI Bill Payments API opens a way to operations with invoices from your service
 
 ## SDK and Libraries {#node_sdk}
 
-* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Node JS package of ready-to-use solutions for server2server integration development to begin accepting payments on your site.
+* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Node JS package of ready-to-use solutions for server2server integration development.
+* [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) -  PHP package of ready-to-use solutions for server2server integration development.
+
 
 ## Invoicing Operations Flow {#steps}
 
@@ -76,6 +77,17 @@ const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 --header "Authorization: Bearer MjMyNDQxMjM6NDUzRmRnZDQ0M*******"
 ~~~
 
+~~~php
+<?php
+
+const SECRET_KEY = 'eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$billPayments = new Qiwi\Api\BillPayments(SECRET_KEY);
+
+?>
+~~~
+
 
 ## 1.1 Invoice Issue on Pay Form {#http}
 
@@ -91,6 +103,24 @@ const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 
 ~~~shell
 --header "Authorization: Bearer MjMyNDQxMjM6NDUzRmRnZDQ0M*******"
+~~~
+
+~~~php
+<?php
+
+$publicKey = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zf******';
+$params = [
+  'publicKey' => $publicKey,
+  'amount' => 200,
+  'billId' => '893794793973'
+];
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$link = $billPayments->createPaymentForm($params);
+
+echo $link;
+
+?>
 ~~~
 
 <h3 class="request method" id="payform_flow">REDIRECT → </h3>
@@ -174,6 +204,26 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
    }
 ~~~
 
+~~~php
+<?php
+
+$billId = '893794793973';
+$fields = [
+  'amount' => 1.00,
+  'currency' => 'RUB',
+  'comment' => 'test',
+  'expirationDateTime' => '2018-03-02T08:44:07',
+  'email' => 'example@mail.org',
+  'account' => 'client4563'
+];
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->createBill($billId, $fields);
+
+print_r($response);
+
+?>
+~~~
 
 <ul class="nestedList url">
     <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billId}</span></h3>
@@ -358,6 +408,29 @@ qiwiApi.checkNotificationSignature(
 ); // true
 ~~~
 
+~~~php
+<?php
+
+$validSignatureFromNotificationServer = '07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b';
+$notificationData = [
+  'bill' => [
+    'siteId' => 'test',
+    'billId' => 'test_bill',
+    'amount' => ['value' => 1, 'currency' => 'RUB'],
+    'status' => ['value' => 'PAID']
+  ],
+  'version' => '3'
+];
+$merchantSecret = 'test-merchant-secret-for-signature-check';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$billPayments->checkNotificationSignature(
+  $validSignatureFromNotificationServer, $notificationData, $merchantSecret
+); // true
+
+?>
+~~~
+
 String and key of the signature are encoded in UTF-8.
 
 <ul class="nestedList params">
@@ -429,6 +502,19 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
 -X GET
 -H 'Accept: application/json'
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
+~~~
+
+~~~php
+<?php
+
+$billId = '893794793973';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->getBillInfo($billId);
+
+print_r($response);
+
+?>
 ~~~
 
 <ul class="nestedList url">
@@ -541,6 +627,19 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/reject
 -H 'Accept: application/json'
 -H 'Content-Type: application/json'
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
+~~~
+
+~~~php
+<?php
+
+$billId = '893794793973';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->cancelBill($billId);
+
+print_r($response);
+
+?>
 ~~~
 
 <ul class="nestedList url">
@@ -669,6 +768,22 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refunds/899343443
 }'
 ~~~
 
+~~~php
+<?php
+
+$billId = '893794793973';
+$refundId = '899343443';
+$amount = 12;
+$currency = 'RUB';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->refund($billId, $refundId, $amount, $currency);
+
+print_r($response);
+?>
+~~~
+
+
 <ul class="nestedList url">
     <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billId}/refunds/{refundId}</span></h3>
         <ul>
@@ -757,6 +872,20 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refund/899343443
 -H 'Accept: application/json'
 -H 'Content-Type: application/json'
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
+~~~
+
+~~~php
+<?php
+
+$billId = '893794793973';
+$refundId = '899343443';
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$response = $billPayments->getRefundInfo($billId, $refundId);
+
+print_r($response);
+
+?>
 ~~~
 
 <ul class="nestedList url">
