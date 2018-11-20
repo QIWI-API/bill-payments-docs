@@ -35,9 +35,9 @@ toc_footers:
 
 ![Operation Flow](/images/var_1.png)
 
-![Image caption](images/QIWI_Kassa.svg)
+<a href="/images/QIWI_Kassa.svg">Скачать логотип QIWI Кассы</a>
 
-![Image caption](images/icons.svg)
+<a href="/images/icons.svg">Скачать иконки способов оплаты</a>
 
 Все варианты оформления  <a href="#design">в соответствующем разделе</a>
 
@@ -983,8 +983,8 @@ FULL| Полный возврат суммы|+
 
 ## Логотипы для скачивания
 
-![Image caption](images/QIWI_Kassa.svg)
+<a href="/images/QIWI_Kassa.svg">Скачать логотип QIWI Кассы</a>
 
-![Image caption](images/icons.svg)
+<a href="/images/icons.svg">Скачать иконки способов оплаты</a>
 
 
