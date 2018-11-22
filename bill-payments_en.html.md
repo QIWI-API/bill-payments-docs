@@ -39,14 +39,14 @@ QIWI Bill Payments API opens a way to operations with invoices from your service
 
   <a href="/images/icons.svg" download>Download payment methods' icons</a>
 
-  <a href="#design">Design guideline</a>
+  <a href="#design_guide">Design guideline</a>
 
 ## SDK and Libraries {#node_sdk}
 
 * [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Node JS package of ready-to-use solutions for server2server integration development.
 * [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) -  PHP package of ready-to-use solutions for server2server integration development.
 
-## CMS solutions
+## CMS Solutions
 
 [Online-Leyka](https://wordpress.org/plugins/leyka/)
 
@@ -984,7 +984,7 @@ Status|Description|Final
 PARTIAL | Partial refund of the invoice amount| -
 FULL| Full refund of the invoice amount|+
 
-## Design guideline {#design}
+## Design guideline {#design_guide}
 
  This guideline helps to reduce the time it takes customers to go from checkout to payment form.
 
