@@ -29,12 +29,26 @@ QIWI Bill Payments API opens a way to operations with invoices from your service
 
 **To use API,  you need public and secret keys. Keys are available after [registration and integration](https://kassa.qiwi.com/pay).**
 
+## Design
+
+ We recommend to show all payment methods' icons on your checkout page. It helps your customers find the proper method quickly. For example:
+
+  ![Operation Flow](/images/var_1_en.png)
+
+  <a href="/images/QIWI_Kassa.svg" download>Download logo</a>
+
+  <a href="/images/icons.svg" download>Download payment methods' icons</a>
+
+  <a href="#design">Design guideline</a>
 
 ## SDK and Libraries {#node_sdk}
 
 * [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Node JS package of ready-to-use solutions for server2server integration development.
 * [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) -  PHP package of ready-to-use solutions for server2server integration development.
 
+## CMS solutions
+
+[Online-Leyka](https://wordpress.org/plugins/leyka/)
 
 ## Invoicing Operations Flow {#steps}
 
@@ -969,3 +983,25 @@ Status|Description|Final
 ------|--------|---------
 PARTIAL | Partial refund of the invoice amount| -
 FULL| Full refund of the invoice amount|+
+
+## Design guideline {#design}
+
+ This guideline helps to reduce the time it takes customers to go from checkout to payment form.
+
+* If QIWI Universal Payment Protocol is the one of payments methods on your page, we recommend to show all available payment methods' icons:
+
+  ![Operation Flow](/images/var_1_en.png)
+
+   You can use 'QIWI Кассa' without logo (payment methods' icons are required):
+
+  ![Operation Flow](/images/var_2_en.png)
+
+* If QIWI Universal Payment Protocol is the only one method on your checkout, 'QIWI Кассa' or QIWI logo is not required. Show payment methods' icons under a payment button:
+
+  ![Operation Flow](/images/var_3_en.png)
+
+## Logos {#logos}
+
+  <a href="/images/QIWI_Kassa.svg" download>Download logo</a>
+
+  <a href="/images/icons.svg" download>Download payment methods' icons</a>
