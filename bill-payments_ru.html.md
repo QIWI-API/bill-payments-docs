@@ -49,7 +49,9 @@ toc_footers:
 
 ## Решения для CMS {#cms}
 
-[Онлайн Лейка](https://wordpress.org/plugins/leyka/)
+* [Wordpress](https://wordpress.org/plugins/woo-qiwi-payment-gateway/) -  расширение под Woocommerce для работы с заказами
+* [Онлайн Лейка](https://wordpress.org/plugins/leyka/) -  Wordpress расширение для благотворительности
+
 
 ## Последовательность операций {#steps}
 
