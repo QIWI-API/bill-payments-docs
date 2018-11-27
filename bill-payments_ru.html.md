@@ -545,32 +545,22 @@ print_r($response);
 >Пример тела ответа
 
 ~~~json
-{
-  "bill": {
-    "siteId": "23044",
+  {
+    "siteId": 23044,
     "billId": "893794793973",
     "amount": {
-      "value": 2.42,
+      "value": 100,
       "currency": "RUB"
     },
     "status": {
       "value": "WAITING",
-      "datetime": "2018-02-28T11:43:23"
-    },
-    "customer": {
-      "email": "test@qiwi.com",
-      "phone": "79191234567",
-      "account": "user_account"
-    },
-    "customFields": {
-      "city": "Moscow"
+      "changedDateTime": "2018-03-05T11:27:41+03:00"
     },
     "comment": "Text comment",
-    "creationDateTime": "2018-02-28T11:43:23",
-    "expirationDateTime": "2018-04-14T11:43:23",
-    "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=6848dd49-e260-4343-b258-62199cffe8c1"
+    "creationDateTime": "2018-03-05T11:27:41",
+    "expirationDateTime": "2018-04-13T14:30:00",
+    "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=d875277b-6f0f-445d-8a83-f62c7c07be77"
   }
-}
 ~~~
 
 >Пример тела ответа при ошибке
