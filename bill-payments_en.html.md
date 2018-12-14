@@ -14,6 +14,7 @@ language_tabs:
   - shell
   - javascript: Node.js SDK
   - php: PHP SDK
+  - java: Java SDK
 
 toc_footers:
  - <a href='/'>Home page</a>
@@ -45,10 +46,12 @@ QIWI Bill Payments API opens a way to operations with invoices from your service
 
 * [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Node JS package of ready-to-use solutions for server2server integration development.
 * [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) -  PHP package of ready-to-use solutions for server2server integration development.
+* [Java SDK](https://github.com/QIWI-API/bill-payments-java-sdk) - Java package of ready-to-use solutions for server2server integration development.
 
 ## CMS Solutions
 
-[Online-Leyka](https://wordpress.org/plugins/leyka/)
+* [Wordpress](https://wordpress.org/plugins/woo-qiwi-payment-gateway/) -  plugin for Woocommerce for work with orders
+* [Online Leyka](https://wordpress.org/plugins/leyka/) -  Wordpress plagin for charity
 
 ## Invoicing Operations Flow {#steps}
 
@@ -102,6 +105,10 @@ $billPayments = new Qiwi\Api\BillPayments(SECRET_KEY);
 ?>
 ~~~
 
+~~~java
+String secretKey = "eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************";
+ BillPaymentClient client = BillPaymentClientFactory.createDefault(secretKey);
+~~~
 
 ## 1.1 Invoice Issue on Pay Form {#http}
 
@@ -136,6 +143,19 @@ echo $link;
 
 ?>
 ~~~
+
+~~~java
+String publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc";
+ MoneyAmount amount = new MoneyAmount(
+        BigDecimal.valueOf(499.90),
+        Currency.getInstance("RUB")
+);
+String billId = UUID.randomUUID().toString();
+String successUrl = "https://merchant.com/payment/success?billId=893794793973";
+ String paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
+~~~
+
+
 
 <h3 class="request method" id="payform_flow">REDIRECT → </h3>
 
@@ -237,6 +257,25 @@ $response = $billPayments->createBill($billId, $fields);
 print_r($response);
 
 ?>
+~~~
+
+~~~java
+CreateBillInfo billInfo = new CreateBillInfo(
+                UUID.randomUUID().toString(),
+                new MoneyAmount(
+                        BigDecimal.valueOf(199.90),
+                        Currency.getInstance("RUB")
+                ),
+                "comment",
+                ZonedDateTime.now().plusDays(45),
+                new Customer(
+                        "example@mail.org",
+                        UUID.randomUUID().toString(),
+                        "79123456789"
+                ),
+                "http://merchant.ru/success"
+        );
+BillResponse response = client.createBill(billInfo);
 ~~~
 
 <ul class="nestedList url">
@@ -445,6 +484,25 @@ $billPayments->checkNotificationSignature(
 ?>
 ~~~
 
+~~~java
+String merchantSecret = "test-merchant-secret-for-signature-check";
+Notification notification = new Notification(
+        new Bill(
+                "test",
+                "test_bill",
+                new MoneyAmount(
+                        BigDecimal.ONE,
+                        Currency.getInstance("RUB")
+                ),
+                BillStatus.PAID
+        ),
+        "3"
+);
+String validSignature = "07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b";
+ BillPaymentsUtils.checkNotificationSignature(validSignature, notification, merchantSecret); //true
+~~~
+
+
 String and key of the signature are encoded in UTF-8.
 
 <ul class="nestedList params">
@@ -530,6 +588,12 @@ print_r($response);
 
 ?>
 ~~~
+
+~~~java
+String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
+ BillResponse response = client.getBillInfo(billId);
+~~~
+
 
 <ul class="nestedList url">
     <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billid}</span></h3>
@@ -654,6 +718,11 @@ $response = $billPayments->cancelBill($billId);
 print_r($response);
 
 ?>
+~~~
+
+~~~java
+String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
+ BillResponse response = client.cancelBill(billId);
 ~~~
 
 <ul class="nestedList url">
@@ -797,6 +866,15 @@ print_r($response);
 ?>
 ~~~
 
+~~~java
+String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
+String refundId = UUID.randomUUID().toString();
+MoneyAmount amount = new MoneyAmount(
+        BigDecimal.valueOf(104.90),
+        Currency.getInstance("RUB")
+);
+ RefundResponse refundResponse = client.refundBill(paidBillId, refundId, amount);
+~~~
 
 <ul class="nestedList url">
     <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billId}/refunds/{refundId}</span></h3>
@@ -900,6 +978,12 @@ $response = $billPayments->getRefundInfo($billId, $refundId);
 print_r($response);
 
 ?>
+~~~
+
+~~~java
+String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
+String refundId = '3444e8ca-cf68-4dbd-92ee-f68c4bf8f29b';
+ RefundResponse response = client.getRefundInfo(paidBillId, refundId);
 ~~~
 
 <ul class="nestedList url">
