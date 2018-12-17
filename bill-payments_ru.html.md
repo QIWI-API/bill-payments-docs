@@ -106,7 +106,7 @@ $billPayments = new Qiwi\Api\BillPayments(SECRET_KEY);
 
 ~~~java
 String secretKey = "eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************";
- BillPaymentClient client = BillPaymentClientFactory.createDefault(secretKey);
+BillPaymentClient client = BillPaymentClientFactory.createDefault(secretKey);
 ~~~
 
 
@@ -166,7 +166,7 @@ String publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ
 );
 String billId = UUID.randomUUID().toString();
 String successUrl = "https://merchant.com/payment/success?billId=893794793973";
- String paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
+String paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
 ~~~
 
 <ul class="nestedList params">
@@ -490,7 +490,7 @@ Notification notification = new Notification(
         "3"
 );
 String validSignature = "07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b";
- BillPaymentsUtils.checkNotificationSignature(validSignature, notification, merchantSecret); //true
+BillPaymentsUtils.checkNotificationSignature(validSignature, notification, merchantSecret); //true
 ~~~
 
 Cтрока и ключ подписи кодируются в UTF-8.
@@ -580,7 +580,7 @@ print_r($response);
 
 ~~~java
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
- BillResponse response = client.getBillInfo(billId);
+BillResponse response = client.getBillInfo(billId);
 ~~~
 
 <ul class="nestedList url">
@@ -701,7 +701,7 @@ print_r($response);
 
 ~~~java
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
- BillResponse response = client.cancelBill(billId);
+BillResponse response = client.cancelBill(billId);
 ~~~
 
 <ul class="nestedList url">
@@ -848,7 +848,7 @@ MoneyAmount amount = new MoneyAmount(
         BigDecimal.valueOf(104.90),
         Currency.getInstance("RUB")
 );
- RefundResponse refundResponse = client.refundBill(paidBillId, refundId, amount);
+RefundResponse refundResponse = client.refundBill(paidBillId, refundId, amount);
 ~~~
 
 <ul class="nestedList url">
@@ -957,8 +957,8 @@ print_r($response);
 
 ~~~java
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
-String refundId = '3444e8ca-cf68-4dbd-92ee-f68c4bf8f29b';
- RefundResponse response = client.getRefundInfo(paidBillId, refundId);
+String refundId = "3444e8ca-cf68-4dbd-92ee-f68c4bf8f29b";
+RefundResponse response = client.getRefundInfo(paidBillId, refundId);
 ~~~
 
 <ul class="nestedList url">
