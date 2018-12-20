@@ -12,6 +12,7 @@ language_tabs:
   - javascript: Node.js SDK
   - php: PHP SDK
   - java: Java SDK
+  - ppp: Popup
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 
@@ -53,6 +54,88 @@ toc_footers:
 
 * [Wordpress](https://wordpress.org/plugins/woo-qiwi-payment-gateway/) -  расширение под Woocommerce для работы с заказами
 * [Онлайн Лейка](https://wordpress.org/plugins/leyka/) -  Wordpress расширение для благотворительности
+
+## Checkout Popup
+
+[Скачать библиотеку QIWI Checkout Popup ](https://github.com/QIWI-API/qiwi-invoicing-popup)
+
+В библиотеке доступны 2 функции создание нового счета и открытие существующего.
+
+###  Выставление нового счета
+функция  QiwiCheckout.createInvoice
+
+Параметр|Описание|Тип|Обяз.
+---------|--------|---|---------|---|----
+publicKey | Ключ идентификации мерчанта, полученный в QIWI Кассе|String|+
+amount| Сумма, на которую выставляется счет, округленная в меньшую сторону до 2 десятичных знаков | Number(6.2)|-
+phone | Номер телефона пользователя, на который выставляется счет (в международном формате) | URL-закодированная строка|-
+email | E-mail пользователя, куда будет отправлена ссылка для оплаты счета | URL-закодированная строка|-
+account | Идентификатор пользователя в системе мерчанта | URL-закодированная строка |-
+comment | Комментарий к счету|URL-закодированная строка String(255)|-
+customFields|Дополнительные данные счета|URL-закодированная строка String(255)|-
+lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус EXPIRED и последующая оплата станет невозможна.|Строка в виде `ГГГГ-ММ-ДДTччмм`|-
+
+~~~ppp
+params = {
+    publicKey: '5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3c******',
+    amount: 1.23,
+
+    phone: '79123456789',
+    email: 'test@test.com',
+    account: 'acc789',
+    comment: 'Оплата',
+    customFields: {
+        data: 'data'
+    },
+    lifetime: '2019-04-04T1540'
+}
+
+QiwiCheckout.createInvoice(params)
+    .then(data => {
+        // ...
+    })
+    .catch(error => {
+        // ...
+    })
+~~~
+
+
+###  Открытие существующего счета
+функция  QiwiCheckout.openInvoice
+
+| Параметр | Описание | Тип | Обязательное |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
+| payUrl | URL инвойса | String | + |
+| phone | Номер телефона пользователя, на который выставляется счет (в международном формате) | String | - |
+| email | E-mail пользователя, куда будет отправлена ссылка для оплаты счета | String | - |
+|  account | Идентификатор пользователя в системе мерчанта | String | - |
+| comment | Комментарий к счету | String(255) | - |
+| customFields | Дополнительные данные счета | Object | - |
+| lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус EXPIRED и последующая оплата станет невозможна.| String | - |
+
+~~~ppp
+params = {
+    payUrl: 'https://oplata.qiwi.com/form?invoiceUid=06df838c-0f86-4be3-aced-a950c244b5b1',
+
+    phone: '79123456789',
+    email: 'test@test.com',
+    account: 'acc789',
+    comment: 'Оплата',
+    customFields: {
+        data: 'data'
+    },
+    lifetime: '2019-04-04T1540'
+}
+
+QiwiCheckout.openInvoice(params)
+    .then(data => {
+        // ...
+    })
+    .catch(error => {
+        // ...
+    })
+~~~
+
 
 
 ## Последовательность операций {#steps}
@@ -106,7 +189,7 @@ $billPayments = new Qiwi\Api\BillPayments(SECRET_KEY);
 
 ~~~java
 String secretKey = "eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************";
-BillPaymentClient client = BillPaymentClientFactory.createDefault(secretKey);
+ BillPaymentClient client = BillPaymentClientFactory.createDefault(secretKey);
 ~~~
 
 
@@ -166,7 +249,7 @@ String publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ
 );
 String billId = UUID.randomUUID().toString();
 String successUrl = "https://merchant.com/payment/success?billId=893794793973";
-String paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
+ String paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
 ~~~
 
 <ul class="nestedList params">
@@ -490,7 +573,7 @@ Notification notification = new Notification(
         "3"
 );
 String validSignature = "07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b";
-BillPaymentsUtils.checkNotificationSignature(validSignature, notification, merchantSecret); //true
+ BillPaymentsUtils.checkNotificationSignature(validSignature, notification, merchantSecret); //true
 ~~~
 
 Cтрока и ключ подписи кодируются в UTF-8.
@@ -580,7 +663,7 @@ print_r($response);
 
 ~~~java
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
-BillResponse response = client.getBillInfo(billId);
+ BillResponse response = client.getBillInfo(billId);
 ~~~
 
 <ul class="nestedList url">
@@ -701,7 +784,7 @@ print_r($response);
 
 ~~~java
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
-BillResponse response = client.cancelBill(billId);
+ BillResponse response = client.cancelBill(billId);
 ~~~
 
 <ul class="nestedList url">
@@ -848,7 +931,7 @@ MoneyAmount amount = new MoneyAmount(
         BigDecimal.valueOf(104.90),
         Currency.getInstance("RUB")
 );
-RefundResponse refundResponse = client.refundBill(paidBillId, refundId, amount);
+ RefundResponse refundResponse = client.refundBill(paidBillId, refundId, amount);
 ~~~
 
 <ul class="nestedList url">
@@ -957,8 +1040,8 @@ print_r($response);
 
 ~~~java
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
-String refundId = "3444e8ca-cf68-4dbd-92ee-f68c4bf8f29b";
-RefundResponse response = client.getRefundInfo(paidBillId, refundId);
+String refundId = '3444e8ca-cf68-4dbd-92ee-f68c4bf8f29b';
+ RefundResponse response = client.getRefundInfo(paidBillId, refundId);
 ~~~
 
 <ul class="nestedList url">
