@@ -65,12 +65,14 @@ toc_footers:
 ---------|--------|---|---------|---
 customFields[]|Дополнительные данные счета|URL-закодированная строка String(255)
 
->Пример выставления счета через платежную форму:
+ >Пример выставления счета через платежную форму
+
 ~~~shell
 curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customField[themeCode]=кодСтиля
 ~~~
 
->Пример выставления счета через API:
+ >Пример выставления счета через API
+
 ~~~shell
 curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
 -X PUT 

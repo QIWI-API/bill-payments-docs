@@ -63,12 +63,14 @@ Parameter|Description|Type
 ---------|--------|---|---------|---
 customFields[]|Additional invoice data|URL-encoded, String(255)|
 
->Invoice Issue on Pay Form:
+ >Invoice Issue on Pay Form
+
 ~~~shell
 curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customField[themeCode]=codeStyle
 ~~~
 
->Invoice Issue by API :
+ >Invoice Issue by API
+
 ~~~shell
 curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
 -X PUT 
