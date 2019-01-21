@@ -115,6 +115,8 @@ API requests from the merchant's side are authorized by the API secret key (SECR
 
 Public key (PUBLIC_KEY) is used when issuing invoices via the Pay Form.
 
+**Keys are available after [registration and integration](https://kassa.qiwi.com/pay).**
+
 <aside class="notice">
 Do not share secret key to third parties!
 </aside>
