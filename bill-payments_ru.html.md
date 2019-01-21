@@ -56,6 +56,41 @@ toc_footers:
 * [Онлайн Лейка](https://wordpress.org/plugins/leyka/) -  Wordpress расширение для благотворительности
 * [1С-Битрикс](http://marketplace.1c-bitrix.ru/solutions/qiwikassa.checkout/) - решение для работы с заказами
 
+## Персонализация {#pers}
+
+Персонализация  позволяет создать платежную форму под Ваш стиль, настраивается лого , фон и цвет кнопок. Настройка возможна на kassa.qiwi.com.
+Необходимо передавать экстру: "themeCode":"кодСтиля"
+
+Параметр|Описание|Тип|
+---------|--------|---|---------|---
+customFields[]|Дополнительные данные счета|URL-закодированная строка String(255)
+
+>Пример выставления счета через платежную форму:
+~~~shell
+curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customField[themeCode]=кодСтиля
+~~~
+
+>Пример выставления счета через API:
+~~~shell
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
+-X PUT 
+-H 'Accept: application/json' 
+-H 'Content-Type: application/json' 
+-H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
+-d '{ 
+   "amount": {  
+     "currency": "RUB",  
+     "value": 100.00 
+   }, 
+   "comment": "Text comment", 
+   "expirationDateTime": "2018-04-13T14:30:00+03:00", 
+   "customer": {}, 
+   "customFields"{"themeCode":"кодСтиля"} 
+   }
+~~~
+
+
+
 
 ## Последовательность операций {#steps}
 
@@ -358,7 +393,6 @@ comment|String|Комментарий к счету
 creationDateTime|Date| Системная дата создания счета. Формат даты:<br>`YYYY-MM-DDThh:mm:ss`
 payUrl|String|Ссылка на созданную платежную форму
 expirationDateTime|Date|Срок действия созданной формы для оплаты. Формат даты:<br>`YYYY-MM-DDThh:mm:ss`
-
 
 ## 2. Уведомления об оплате счетов {#notification}
 

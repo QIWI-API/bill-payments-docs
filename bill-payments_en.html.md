@@ -42,16 +42,51 @@ QIWI Bill Payments API opens a way to operations with invoices from your service
 
   <a href="#design_guide">Design guideline</a>
 
-## SDK and Libraries {#node_sdk}
+## SDK and Libraries {#sdk}
 
 * [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Node JS package of ready-to-use solutions for server2server integration development.
 * [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) -  PHP package of ready-to-use solutions for server2server integration development.
 * [Java SDK](https://github.com/QIWI-API/bill-payments-java-sdk) - Java package of ready-to-use solutions for server2server integration development.
 
-## CMS Solutions
+## CMS Solutions {#cms}
 
 * [Wordpress](https://wordpress.org/plugins/woo-qiwi-payment-gateway/) -  plugin for Woocommerce for work with orders
 * [Online Leyka](https://wordpress.org/plugins/leyka/) -  Wordpress plagin for charity
+* [1С-Bitrix](http://marketplace.1c-bitrix.ru/solutions/qiwikassa.checkout/) - plugin for work with orders
+
+## Personalization {#pers}
+
+Personalization allows you to create a payment form with your style, customizable logo, background and color of the buttons. Customization is possible on kassa.qiwi.com
+Must send extra: "themeCode":"codeStyle"
+
+Parameter|Description|Type
+---------|--------|---|---------|---
+customFields[]|Additional invoice data|URL-encoded, String(255)|
+
+>Invoice Issue on Pay Form:
+~~~shell
+curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customField[themeCode]=codeStyle
+~~~
+
+>Invoice Issue by API :
+~~~shell
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
+-X PUT 
+-H 'Accept: application/json' 
+-H 'Content-Type: application/json' 
+-H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
+-d '{ 
+   "amount": {  
+     "currency": "RUB",  
+     "value": 100.00 
+   }, 
+   "comment": "Text comment", 
+   "expirationDateTime": "2018-04-13T14:30:00+03:00", 
+   "customer": {}, 
+   "customFields"{"themeCode":"codeStyle"} 
+   }
+~~~
+
 
 ## Invoicing Operations Flow {#steps}
 
