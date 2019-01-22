@@ -15,6 +15,7 @@ language_tabs:
   - javascript: Node.js SDK
   - php: PHP SDK
   - java: Java SDK
+  - ppp: Popup
 
 toc_footers:
  - <a href='/'>Home page</a>
@@ -88,6 +89,92 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
    "customFields"{"themeCode":"codeStyle"} 
    }
 ~~~
+
+## Checkout Popup {#popup}
+
+[Download QIWI Checkout Popup ](https://github.com/QIWI-API/qiwi-invoicing-popup)
+
+The library has 2 functions: create a new invoice and open an existing one.
+
+###  Create new invoice {#createpopup}
+Function  QiwiCheckout.createInvoice
+
+| Parameter | Description | Type | Required |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
+| publicKey | Merchant public key received in QIWI Kassa | String | + |
+| amount | Amount of the invoice rounded down on two decimals | Number(6.2) | + |
+| phone | Phone number of the client to which the invoice is issuing (international format) | String | - |
+| email | E-mail of the client where the invoice payment link will be sent | String | - |
+| account | Client identifier in merchant’s system | String | - |
+| comment | Invoice commentary | String(255) | - |
+| customFields | Additional invoice data | Object | - |
+| lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void.
+Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| URL-encoded string
+YYYY-MM-DDThhmm | - |
+
+~~~ppp
+params = {
+    publicKey: '5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3c******',
+    amount: 1.23,
+
+    phone: '79123456789',
+    email: 'test@test.com',
+    account: 'acc789',
+    comment: 'Оплата',
+    customFields: {
+        data: 'data'
+    },
+    lifetime: '2019-04-04T1540'
+}
+
+QiwiCheckout.createInvoice(params)
+    .then(data => {
+        // ...
+    })
+    .catch(error => {
+        // ...
+    })
+~~~
+
+
+###  Open an existing one {#openpopup}
+Function  QiwiCheckout.openInvoice
+
+| Parameter | Description | Type | Required |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
+| payUrl | Pay form link| String | + |
+| phone | Phone number of the client to which the invoice is issuing (international format) | String | - |
+| email | E-mail of the client where the invoice payment link will be sent | String | - |
+|  account | Client identifier in merchant’s system | String | - |
+| comment | Invoice commentary | String(255) | - |
+| customFields | Additional invoice data | Object | - |
+| lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void.
+Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| URL-encoded string
+YYYY-MM-DDThhmm | - |
+
+~~~ppp
+params = {
+    payUrl: 'https://oplata.qiwi.com/form?invoiceUid=06df838c-0f86-4be3-aced-a950c244b5b1',
+
+    phone: '79123456789',
+    email: 'test@test.com',
+    account: 'acc789',
+    comment: 'Оплата',
+    customFields: {
+        data: 'data'
+    },
+    lifetime: '2019-04-04T1540'
+}
+
+QiwiCheckout.openInvoice(params)
+    .then(data => {
+        // ...
+    })
+    .catch(error => {
+        // ...
+    })
+~~~
+
 
 
 ## Invoicing Operations Flow {#steps}
