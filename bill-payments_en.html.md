@@ -116,6 +116,8 @@ Metod  QiwiCheckout.createInvoice
 Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| URL-encoded string
 YYYY-MM-DDThhmm | - |
 
+>Create new invoice
+
 ~~~ppp
 params = {
     publicKey: '5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3c******',
@@ -148,6 +150,7 @@ Function  QiwiCheckout.openInvoice
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
 | payUrl | Pay form link| String | + |
 
+>Open an existing one
 
 ~~~ppp
 params = {
