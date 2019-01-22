@@ -57,8 +57,8 @@ QIWI Bill Payments API opens a way to operations with invoices from your service
 
 ## Personalization {#pers}
 
-Personalization allows you to create a payment form with your style, customizable logo, background and color of the buttons. Customization is possible on kassa.qiwi.com
-Must send extra: "themeCode":"codeStyle"
+Personalization allows you to create a payment form with your style, customizable logo, background and color of the buttons.  You can create styles in your account on kassa.qiwi.com , when setting up codeStyle. Possible to create several styles.
+In the query, you must pass the variable: "themeCode": "codeStyle" in the customFields parameter.
 
 Parameter|Description|Type
 ---------|--------|---|---------|---
@@ -94,10 +94,14 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
 
 [Download QIWI Checkout Popup ](https://github.com/QIWI-API/qiwi-invoicing-popup)
 
-The library has 2 functions: create a new invoice and open an existing one.
+Installation:
+<script src='https://oplata.qiwi.com/popup/v1.js'></script>
+
+
+The library has 2 metods: create a new invoice and open an existing one.
 
 ###  Create new invoice {#createpopup}
-Function  QiwiCheckout.createInvoice
+Metod  QiwiCheckout.createInvoice
 
 | Parameter | Description | Type | Required |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
@@ -143,27 +147,11 @@ Function  QiwiCheckout.openInvoice
 | Parameter | Description | Type | Required |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
 | payUrl | Pay form link| String | + |
-| phone | Phone number of the client to which the invoice is issuing (international format) | String | - |
-| email | E-mail of the client where the invoice payment link will be sent | String | - |
-|  account | Client identifier in merchant’s system | String | - |
-| comment | Invoice commentary | String(255) | - |
-| customFields | Additional invoice data | Object | - |
-| lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void.
-Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| URL-encoded string
-YYYY-MM-DDThhmm | - |
+
 
 ~~~ppp
 params = {
-    payUrl: 'https://oplata.qiwi.com/form?invoiceUid=06df838c-0f86-4be3-aced-a950c244b5b1',
-
-    phone: '79123456789',
-    email: 'test@test.com',
-    account: 'acc789',
-    comment: 'Оплата',
-    customFields: {
-        data: 'data'
-    },
-    lifetime: '2019-04-04T1540'
+    payUrl: 'https://oplata.qiwi.com/form?invoiceUid=06df838c-0f86-4be3-aced-a950c244b5b1'
 }
 
 QiwiCheckout.openInvoice(params)
