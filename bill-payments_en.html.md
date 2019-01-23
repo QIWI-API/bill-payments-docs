@@ -55,7 +55,7 @@ QIWI Bill Payments API opens a way to operations with invoices from your service
 * [Online Leyka](https://wordpress.org/plugins/leyka/) -  Wordpress plagin for charity
 * [1С-Bitrix](http://marketplace.1c-bitrix.ru/solutions/qiwikassa.checkout/) - plugin for work with orders
 
-## Personalization {#pers}
+## Personalization {#custom}
 
 Personalization allows you to create a payment form with your style, customizable logo, background and color of the buttons.  You can create styles in your account on kassa.qiwi.com , when setting up codeStyle. Possible to create several styles.
 In the query, you must pass the variable: "themeCode": "codeStyle" in the customFields parameter.
