@@ -734,8 +734,7 @@ String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
 >Successful response body example
 
 ~~~json
-{
-  "bill": {
+ {
     "siteId": "23044",
     "billId": "893794793973",
     "amount": {
@@ -744,7 +743,7 @@ String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
     },
     "status": {
       "value": "WAITING",
-      "datetime": "2018-02-28T11:43:23"
+      "changedDateTime": "2018-02-28T11:43:23.386+03:00"
     },
     "customer": {
       "email": "test@qiwi.com",
@@ -755,11 +754,11 @@ String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
       "city": "Moscow"
     },
     "comment": "Text comment",
-    "creationDateTime": "2018-02-28T11:43:23",
-    "expirationDateTime": "2018-04-14T11:43:23",
+    "creationDateTime": "2018-02-28T11:43:23.612+03:00",
+    "expirationDateTime": "2018-04-14T11:43:23+03:00",
     "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=6848dd49-e260-4343-b258-62199cffe8c1"
   }
-}
+
 ~~~
 
 >Error response body example
