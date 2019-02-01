@@ -16,6 +16,7 @@ language_tabs:
   - php: PHP SDK
   - java: Java SDK
   - ppp: Popup
+  - csharp:.Net SDK
 
 toc_footers:
  - <a href='/'>Home page</a>
@@ -48,6 +49,7 @@ QIWI Bill Payments API opens a way to operations with invoices from your service
 * [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Node JS package of ready-to-use solutions for server2server integration development.
 * [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) -  PHP package of ready-to-use solutions for server2server integration development.
 * [Java SDK](https://github.com/QIWI-API/bill-payments-java-sdk) - Java package of ready-to-use solutions for server2server integration development.
+* [.Net SDK ](https://github.com/QIWI-API/bill-payments-dotnet-sdk) - C# .net package of ready-to-use solutions for server2server integration development.
 
 ## CMS Solutions {#cms}
 
@@ -227,6 +229,13 @@ String secretKey = "eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUy
  BillPaymentClient client = BillPaymentClientFactory.createDefault(secretKey);
 ~~~
 
+~~~csharp
+var secretKey = "eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************";
+
+var client = BillPaymentClientFactory.createDefault(secretKey);
+~~~
+
+
 ## 1.1 Invoice Issue on Pay Form {#http}
 
 It is the simplest way of integration. On opening Pay Form, client receives an invoice at the same time. The invoice data sends in URL explicitly. Client gets a Pay Form web page with multiple payment means. When using  this method, one cannot be sure that all invoices are issued by the merchant. [API invoice creation](#create) mitigates this risk.
@@ -270,6 +279,20 @@ String publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ
 String billId = UUID.randomUUID().toString();
 String successUrl = "https://merchant.com/payment/success?billId=893794793973";
  String paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
+~~~
+
+~~~csharp
+var publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc";
+
+var amount = new MoneyAmount
+{
+    ValueDecimal = 499.9m,
+    CurrencyEnum = CurrencyEnum.Rub
+};
+var billId = Guid.NewGuid().ToString();
+var successUrl = "https://merchant.com/payment/success?billId=893794793973";
+
+var paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
 ~~~
 
 
@@ -393,6 +416,28 @@ CreateBillInfo billInfo = new CreateBillInfo(
                 "http://merchant.ru/success"
         );
 BillResponse response = client.createBill(billInfo);
+~~~
+
+~~~csharp
+var billInfo = new CreateBillInfo
+{
+    BillId = Guid.NewGuid().ToString(),
+    Amount = new MoneyAmount
+    {
+        ValueDecimal = 199.9m,
+        CurrencyEnum = CurrencyEnum.Rub
+    },
+    Comment = "comment",
+    ExpirationDateTime = DateTime.Now.AddDays(45),
+    Customer = new Customer
+    {
+        Email = "example@mail.org",
+        Account = Guid.NewGuid().ToString(),
+        Phone = "79123456789"
+    },
+    SuccessUrl = new Uri("http://merchant.ru/success")
+};
+var response = client.createBill(billInfo);
 ~~~
 
 <ul class="nestedList url">
@@ -711,6 +756,12 @@ String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
  BillResponse response = client.getBillInfo(billId);
 ~~~
 
+~~~csharp
+var billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
+
+var response = client.getBillInfo(billId);
+~~~
+
 
 <ul class="nestedList url">
     <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billid}</span></h3>
@@ -839,6 +890,12 @@ print_r($response);
 ~~~java
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
  BillResponse response = client.cancelBill(billId);
+~~~
+
+~~~csharp
+var billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
+
+var response = client.cancelBill(billId);
 ~~~
 
 <ul class="nestedList url">
@@ -992,6 +1049,18 @@ MoneyAmount amount = new MoneyAmount(
  RefundResponse refundResponse = client.refundBill(paidBillId, refundId, amount);
 ~~~
 
+~~~csharp
+var billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
+var refundId = Guid.NewGuid().ToString();
+var amount = new MoneyAmount
+{
+    ValueDecimal = 104.9m,
+    CurrencyEnum = CurrencyEnum.Rub
+};
+
+var refundResponse = client.refundBill(paidBillId, refundId, amount);
+~~~
+
 <ul class="nestedList url">
     <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billId}/refunds/{refundId}</span></h3>
         <ul>
@@ -1100,6 +1169,13 @@ print_r($response);
 String billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
 String refundId = '3444e8ca-cf68-4dbd-92ee-f68c4bf8f29b';
  RefundResponse response = client.getRefundInfo(paidBillId, refundId);
+~~~
+
+~~~csharp
+var billId = "fcb40a23-6733-4cf3-bacf-8e425fd1fc71";
+var refundId = "3444e8ca-cf68-4dbd-92ee-f68c4bf8f29b";
+
+var response = client.getRefundInfo(paidBillId, refundId);
 ~~~
 
 <ul class="nestedList url">
