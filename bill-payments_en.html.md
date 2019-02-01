@@ -16,7 +16,7 @@ language_tabs:
   - php: PHP SDK
   - java: Java SDK
   - ppp: Popup
-  - csharp:.Net SDK
+  - csharp: .Net SDK
 
 toc_footers:
  - <a href='/'>Home page</a>

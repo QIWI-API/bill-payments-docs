@@ -13,7 +13,7 @@ language_tabs:
   - php: PHP SDK
   - java: Java SDK
   - ppp: Popup
-  - csharp:.Net SDK
+  - csharp: .Net SDK
   
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
