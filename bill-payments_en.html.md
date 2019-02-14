@@ -683,7 +683,7 @@ amount.value|The invoice amount. The number is rounded down with two decimal pla
 amount.currency|Currency identifier of the invoice (Alpha-3 ISO 4217 code)|String(3)
 bill.status|Invoice status data|Object
 status.value|Current [invoice status](#status)|String
-status.datetime|Status refresh date. Date format:<br>`YYYY-MM-DDThh:mm:ssZ`|Date
+status.changedDateTime|Status refresh date. Date format:<br>`YYYY-MM-DDThh:mm:ssZ`|Date
 bill.customFields|Additional invoice data provided by the merchant|Object
 bill.customer | Customer data of the invoice subject  (if specified in the invoice)|Object
 customer.phone | The customer’s phone (if specified in the invoice)|String
@@ -843,7 +843,7 @@ amount.value|Number|The invoice amount. The number is rounded down with two deci
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 bill.status|Object|Invoice status data
 status.value|String|Current [invoice status](#status)
-status.datetime|Status refresh date|Date
+status.changedDateTime|Status refresh date|Date
 bill.customFields|Object|Additional invoice data provided by the merchant
 bill.customer | Customer data of the invoice subject |Object
 customer.phone | The customer’s phone (if specified in the invoice)|String
@@ -980,7 +980,7 @@ amount.value|Number|The invoice amount. The number is rounded down with two deci
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 bill.status|Object|Invoice status data
 status.value|String|Current [invoice status](#status)
-status.datetime|Status refresh date|Date
+status.changedDateTime|Status refresh date|Date
 bill.customFields|Object|Additional invoice data provided by the merchant
 bill.customer | Customer data of the invoice subject |Object
 customer.phone | The customer’s phone (if specified in the invoice)|String
