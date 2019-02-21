@@ -1,9 +1,9 @@
 ---
-title: QIWI Bill Payments REST API 1.0.0
+title: API QIWI Kassa REST API 1.0.0
 
 search: true
 
-metatitle: QIWI Bill Payments REST API 1.0.0
+metatitle: API QIWI Kassa REST API 1.0.0
 
 metadescription: QIWI Bill Payments API opens a way to operate with invoices from your service or application. Invoice is the unique request for the payment. By default, the user may pay the invoice with any accessible means. API supports issuing and cancelling invoices, making refunds and checking operation status.
 
@@ -24,7 +24,7 @@ toc_footers:
 
 ---
 
-# Universal Payment Protocol {#introduction}
+# API QIWI Kassa {#introduction}
 
 ###### Last update: 2018-10-17 | [Edit on GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_en.html.md)
 
@@ -1264,7 +1264,7 @@ FULL| Full refund of the invoice amount|+
 
  This guideline helps to reduce the time it takes customers to go from checkout to payment form.
 
-* If QIWI Universal Payment Protocol is the one of payments methods on your page, we recommend to show all available payment methods' icons:
+* If API QIWI Kassa is the one of payments methods on your page, we recommend to show all available payment methods' icons:
 
   ![Operation Flow](/images/var_1_en.png)
 
@@ -1272,7 +1272,7 @@ FULL| Full refund of the invoice amount|+
 
   ![Operation Flow](/images/var_2_en.png)
 
-* If QIWI Universal Payment Protocol is the only one method on your checkout, 'QIWI Кассa' or QIWI logo is not required. Show payment methods' icons under a payment button:
+* If API QIWI Kassa is the only one method on your checkout, 'QIWI Кассa' or QIWI logo is not required. Show payment methods' icons under a payment button:
 
   ![Operation Flow](/images/var_3_en.png)
 
