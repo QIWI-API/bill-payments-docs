@@ -1,11 +1,11 @@
 ---
-title: API QIWI Kassa REST API 1.0.0
+title: QIWI Checkout API REST API 1.0.0
 
 search: true
 
-metatitle: API QIWI Kassa REST API 1.0.0
+metatitle: QIWI Checkout API REST API 1.0.0
 
-metadescription: QIWI Bill Payments API opens a way to operate with invoices from your service or application. Invoice is the unique request for the payment. By default, the user may pay the invoice with any accessible means. API supports issuing and cancelling invoices, making refunds and checking operation status.
+metadescription: QIWI Checkout API opens a way to operate with invoices from your service or application. Invoice is the unique request for the payment. By default, the user may pay the invoice with any accessible means. API supports issuing and cancelling invoices, making refunds and checking operation status.
 
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
@@ -24,11 +24,11 @@ toc_footers:
 
 ---
 
-# API QIWI Kassa {#introduction}
+# QIWI Checkout API {#introduction}
 
-###### Last update: 2018-10-17 | [Edit on GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_en.html.md)
+###### Last update: 2019-02-25 | [Edit on GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_en.html.md)
 
-QIWI Bill Payments API opens a way to operations with invoices from your service or application. Invoice is the unique request for the payment. The user may pay the invoice with any accessible means. API supports  issuing and cancelling invoices, making refunds and checking operation status.
+QIWI Checkout API opens a way to operations with invoices from your service or application. Invoice is the unique request for the payment. The user may pay the invoice with any accessible means. API supports  issuing and cancelling invoices, making refunds and checking operation status.
 
 **To use API,  you need public and secret keys. Keys are available after [registration and integration](https://kassa.qiwi.com/pay).**
 
