@@ -5,6 +5,8 @@ search: true
 
 metatitle: API QIWI Кассы 1.0.0
 
+
+
 metadescription: API QIWI Кассы открывает доступ к операциям с выставляемыми счетами. Счет - универсальная заявка на оплату. По-умолчанию пользователю доступно несколько способов оплаты. В API поддерживаются операции выставления и отмены счетов, возврата средств по оплаченным счетам, а также проверки статуса выполнения операций.
 
 language_tabs:
@@ -24,153 +26,18 @@ toc_footers:
  - <a href='mailto:bss@qiwi.com'>Обратная связь</a>
 
 ---
+# API QIWI Кассы
 
-# API QIWI Кассы {#introduction}
-
-###### Последнее обновление: 2019-02-25 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_ru.html.md)
+###### Последнее обновление: 2019-03-20 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_ru.html.md)
 
 API QIWI Кассы открывает доступ к операциям с выставляемыми счетами. Счет - универсальная заявка на оплату. По-умолчанию пользователю доступно несколько способов оплаты. 
 В API поддерживаются операции выставления и отмены счетов, возврата средств по оплаченным счетам, а также проверки статуса выполнения операций.
 
 **Для работы API потребуются публичный и секретный ключи. Ключи создаются в личном кабинете после [регистрации и подключения](https://kassa.qiwi.com/pay).**
 
-## Оформление
-
-При переходе на платежную страницу с вашего сайта мы рекомендуем <b>выводить иконки всех способов оплаты</b>, доступных на форме. Это увеличивает конверсию в платеж, т.к. позволяет быстрее находить привычный способ оплаты. Например:
-
- ![Operation Flow](/images/var_1.png)
-
- <a href="/images/QIWI_Kassa.svg" download>Скачать логотип QIWI Кассы</a>
-
- <a href="/images/icons.svg" download>Скачать иконки способов оплаты</a>
-
- Все варианты оформления  <a href="#design">в соответствующем разделе</a>
-
-## SDK и библиотеки {#sdk}
-
-* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Готовое решение для разработки server2server интеграции c помощью Node.js.
-* [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) - Готовое решение для разработки server2server интеграции c помощью PHP.
-* [Java SDK](https://github.com/QIWI-API/bill-payments-java-sdk) - Готовое решение для разработки server2server интеграции c помощью Java.
-* [.Net SDK](https://github.com/QIWI-API/bill-payments-dotnet-sdk) - Готовое решение для разработки server2server интеграции c помощью C# .Net.
-
-## Решения для CMS {#cms}
-
-* [Wordpress](https://wordpress.org/plugins/woo-qiwi-payment-gateway/) -  расширение под Woocommerce для работы с заказами
-* [Онлайн Лейка](https://wordpress.org/plugins/leyka/) -  Wordpress расширение для благотворительности
-* [1С-Битрикс](http://marketplace.1c-bitrix.ru/solutions/qiwikassa.checkout/) - решение для работы с заказами
-
-## Персонализация {#custom}
-
-Персонализация  позволяет создать платежную форму под Ваш стиль, настраивается лого , фон и цвет кнопок. 
-Создать стили можно в личном кабинете на kassa.qiwi.com ,  при настройке задается кодСтиля , который предается в запросе на создание счета. Возможно создать несколько стилей.
-В запросе необходимо передавать переменную: "themeCode":"кодСтиля" в параметре customFields.
-
-Параметр|Описание|Тип|
----------|--------|---|---------|---
-customFields[]|Дополнительные данные счета|URL-закодированная строка String(255)
-
- >Пример выставления счета через платежную форму
-
-~~~shell
-curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customField[themeCode]=кодСтиля
-~~~
-
- >Пример выставления счета через API
-
-~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
--X PUT 
--H 'Accept: application/json' 
--H 'Content-Type: application/json' 
--H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
--d '{ 
-   "amount": {  
-     "currency": "RUB",  
-     "value": 100.00 
-   }, 
-   "comment": "Text comment", 
-   "expirationDateTime": "2018-04-13T14:30:00+03:00", 
-   "customer": {}, 
-   "customFields"{"themeCode":"кодСтиля"} 
-   }
-~~~
-
-## Checkout Popup {#popup}
-
-[Скачать библиотеку QIWI Checkout Popup ](https://github.com/QIWI-API/qiwi-invoicing-popup)
 
 
-Установка и подключение :
-```
-<script src='https://oplata.qiwi.com/popup/v1.js'></script>
-```
-
-В библиотеке доступно 2 метода создание нового счета и открытие существующего.
-
-###  Выставление нового счета {#createpopup}
-Метод  QiwiCheckout.createInvoice
-
-| Параметр | Описание | Тип | Обязательное |
-|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
-| publicKey | Ключ идентификации мерчанта, полученный в QIWI Кассе | String | + |
-| amount | Сумма, на которую выставляется счет, округленная в меньшую сторону до 2 десятичных знаков | Number(6.2) | + |
-| phone | Номер телефона пользователя, на который выставляется счет (в международном формате) | String | - |
-| email | E-mail пользователя, куда будет отправлена ссылка для оплаты счета | String | - |
-| account | Идентификатор пользователя в системе мерчанта | String | - |
-| comment | Комментарий к счету | String(255) | - |
-| customFields | Дополнительные данные счета | Object | - |
-| lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус EXPIRED и последующая оплата станет невозможна.| Строка в виде `ГГГГ-ММ-ДДTччмм` | - |
-
->Пример выставления счета через popup
-
-~~~ppp
-QiwiCheckout.createInvoice({
-    publicKey: '5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3c******',
-    amount: 1.23,
-    phone: '79123456789',
-})
-    .then(data => {
-        //  data === {
-        //    publicKey: '5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3c******',
-        //    amount: 1.23,
-        //    phone: '79123456789',
-        //  }
-    })
-    .catch(error => {
-        //  error === {
-        //      reason: "PAYMENT_FAILED"
-        //  }
-    })
-~~~
-
-
-###  Открытие существующего счета {#openpopup}
-Метод  QiwiCheckout.openInvoice
-
-| Параметр | Описание | Тип | Обязательное |
-|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
-| payUrl | URL инвойса | String | + |
-
->Пример открытия уже созданного счета в popup
-
-~~~ppp
-params = {
-    payUrl: 'https://oplata.qiwi.com/form?invoiceUid=06df838c-0f86-4be3-aced-a950c244b5b1'
-}
-
-QiwiCheckout.openInvoice(params)
-    .then(data => {
-        // ...
-    })
-    .catch(error => {
-        // ...
-    })
-~~~
-
-
-
-
-## Последовательность операций {#steps}
+## Схема работы {#steps}
 
 ![Operation Flow](/images/bill_payments.png)
 
@@ -230,102 +97,16 @@ var secretKey = "eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjg
 var client = BillPaymentClientFactory.createDefault(secretKey);
 ~~~
 
-## 1.1 Выставление счета через платежную форму {#http}
 
-Простой способ для интеграции. При открытии формы клиенту автоматически выставляется счет. Параметры счета передаются в открытом виде в ссылке. Далее клиенту отображается платежная форма с выбором способа оплаты.
-При использовании этого способа нельзя гарантировать, что все счета выставлены мерчантом, в отличие от [выставления по API](#create).
+## Взаимодействие через API {#API}
 
-
-<h3 class="request method" id="payform_flow">REDIRECT → </h3>
-
-<ul class="nestedList url">
-    <li><h3>URL <span>https://oplata.qiwi.com/create</span></h3></li>
-</ul>
-
-~~~javascript
-const publicKey = 'Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******';
-
-const params = {
-    publicKey,
-    amount: 42.24,
-    billId: '893794793973',
-    successUrl: 'http://test.ru/',
-    email: 'm@ya.ru'
-};
-
-const link = qiwiApi.createPaymentForm(params);
-~~~
-
-~~~shell
-curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&email=m@ya.ru
-~~~
-
-~~~php
-<?php
-
-$publicKey = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zf******';
-$params = [
-  'publicKey' => $publicKey,
-  'amount' => 200,
-  'billId' => '893794793973'
-];
-
-/** @var \Qiwi\Api\BillPayments $billPayments */
-$link = $billPayments->createPaymentForm($params);
-
-echo $link;
-
-?>
-~~~
-
-~~~java
-String publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc";
- MoneyAmount amount = new MoneyAmount(
-        BigDecimal.valueOf(499.90),
-        Currency.getInstance("RUB")
-);
-String billId = UUID.randomUUID().toString();
-String successUrl = "https://merchant.com/payment/success?billId=893794793973";
- String paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
-~~~
-
-
-~~~csharp
-var publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc";
-
-var amount = new MoneyAmount
-{
-    ValueDecimal = 499.9m,
-    CurrencyEnum = CurrencyEnum.Rub
-};
-var billId = Guid.NewGuid().ToString();
-var successUrl = "https://merchant.com/payment/success?billId=893794793973";
-
-var paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
-~~~
-
-<ul class="nestedList params">
-    <li><h3>Параметры</h3><span>В ссылке на веб-форму указываются параметры счета.</span></li>
-</ul>
-
-Параметр|Описание|Тип|Обяз.
----------|--------|---|---------|---|----
-publicKey | Ключ идентификации мерчанта, полученный в QIWI Кассе|String|+
-billId|Уникальный идентификатор счета в системе мерчанта|URL-закодированная строка String(200)|-
-amount| Сумма, на которую выставляется счет, округленная в меньшую сторону до 2 десятичных знаков | Number(6.2)|-
-phone | Номер телефона пользователя, на который выставляется счет (в международном формате) | URL-закодированная строка|-
-email | E-mail пользователя, куда будет отправлена ссылка для оплаты счета | URL-закодированная строка|-
-account | Идентификатор пользователя в системе мерчанта | URL-закодированная строка |-
-comment | Комментарий к счету|URL-закодированная строка String(255)|-
-customFields[]|Дополнительные данные счета|URL-закодированная строка String(255)|-
-lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус `EXPIRED` и последующая оплата станет невозможна.<br> **Внимание! По истечении 45 суток от даты выставления счет автоматически будет переведен в финальный статус**|URL-закодированная строка<br>`ГГГГ-ММ-ДДTччмм`|-
-successUrl|URL для переадресации в случае успешной оплаты с баланса QIWI Кошелька. При ином способе оплаты переадресация не выполняется. Ссылка должна вести на сайт мерчанта.|URL-закодированная строка|-
-
-
-## 1.2 Выставление счета по API {#create}
+## 1. Выставление счета {#create}
 
 Надежный способ для интеграции. Параметры передаются server2server с использованием авторизации.
 Метод позволяет выставить счет, при успешном выполнении запроса в ответе вернется параметр payUrl - ссылка для редиректа пользователя на платежную форму. 
+
+**[Так же есть способ выставления счета через платежную форму](#http)**
+
 
 <h3 class="request method">Запрос → PUT</h3>
 
@@ -336,7 +117,7 @@ const fields = {
     amount: 1.00,
     currency: 'RUB',
     comment: 'Hello world',
-    expirationDateTime: '2018-03-02T08:44:07'
+    expirationDateTime: '2018-03-02T08:44:07+03:00'
 };
 
 qiwiRestApi.createBill( billId, fields ).then( data => {
@@ -370,7 +151,7 @@ $fields = [
   'amount' => 1.00,
   'currency' => 'RUB',
   'comment' => 'test',
-  'expirationDateTime' => '2018-03-02T08:44:07',
+  'expirationDateTime' => '2018-03-02T08:44:07+03:00',
   'email' => 'example@mail.org',
   'account' => 'client4563'
 ];
@@ -403,25 +184,30 @@ BillResponse response = client.createBill(billInfo);
 ~~~
 
 ~~~csharp
-var billInfo = new CreateBillInfo
-{
-    BillId = Guid.NewGuid().ToString(),
-    Amount = new MoneyAmount
+client.CreateBill(
+    info: new CreateBillInfo
     {
-        ValueDecimal = 199.9m,
-        CurrencyEnum = CurrencyEnum.Rub
+        BillId = Guid.NewGuid().ToString(),
+        Amount = new MoneyAmount
+        {
+            ValueDecimal = 199.9m,
+            CurrencyEnum = CurrencyEnum.Rub
+        },
+        Comment = "comment",
+        ExpirationDateTime = DateTime.Now.AddDays(45),
+        Customer = new Customer
+        {
+            Email = "example@mail.org",
+            Account = Guid.NewGuid().ToString(),
+            Phone = "79123456789"
+        },
+        SuccessUrl = new Uri("http://merchant.ru/success")
     },
-    Comment = "comment",
-    ExpirationDateTime = DateTime.Now.AddDays(45),
-    Customer = new Customer
+    customFields: new CustomFields
     {
-        Email = "example@mail.org",
-        Account = Guid.NewGuid().ToString(),
-        Phone = "79123456789"
-    },
-    SuccessUrl = new Uri("http://merchant.ru/success")
-};
-var response = client.createBill(billInfo);
+        ThemeCode = "кодСтиля"
+    }
+);
 ~~~
 
 
@@ -548,7 +334,7 @@ Host: server.ru
 
 
 Уведомление представляет собой входящий POST-запрос. Тело запроса содержит JSON-сериализованные данные счета (кодировка UTF-8).
-Aдрес сервера для уведомлений указывается на сайте <a href="https://kassa.qiwi.com/">kassa.qiwi.com</a> в разделе "Настройка протокола".
+Aдрес сервера для уведомлений указывается на сайте <a href="https://kassa.qiwi.com/">kassa.qiwi.com</a> в разделе "Настройка протокола" или на <a href="https://p2p.qiwi.com/">p2p.qiwi.com</a> при генерации ключей.
 
 <ul class="nestedList header">
     <li><h3>HEADERS</h3>
@@ -560,7 +346,9 @@ Aдрес сервера для уведомлений указывается н
     </li>
 </ul>
 
-### Авторизация уведомлений {#notifications_auth}
+
+
+#### Авторизация уведомлений {#notifications_auth}
 
 После получения входящего уведомления необходимо проверить подлинность данного уведомления. Для этого используется механизм цифровой подписи. Подпись уведомления отправляется в заголовке `X-Api-Signature-SHA256`. Для формирования подписи используется механизм проверки целостности HMAC с хэш-функцией SHA256.
 
@@ -659,22 +447,22 @@ Cтрока и ключ подписи кодируются в UTF-8.
 Параметр|Описание|Тип
 ---------|--------|---
 bill|Данные о счете|Object
-bill.billId|Уникальный идентификатор счета в системе мерчанта|String(200)
-bill.siteId|Идентификатор сайта мерчанта в QIWI Кассе| String
-bill.amount|Данные о сумме счета|Object
+billId|Уникальный идентификатор счета в системе мерчанта|String(200)
+siteId|Идентификатор сайта мерчанта в QIWI Кассе| String
+amount|Данные о сумме счета|Object
 amount.value | Сумма счета, округленная до двух десятичных знаков в меньшую сторону | Number(6.2)
 amount.currency | Идентификатор валюты счета (Alpha-3 ISO 4217 код) | String(3)
-bill.status | Данные о статусе счета | Object
+status | Данные о статусе счета | Object
 status.value |Строковое значение статуса | String
 status.changedDateTime|Дата обновления статуса| Формат даты<br>`ГГГГ-ММ-ДДTЧЧ:ММ:ССZ`
-bill.customer | Данные о пользователе, на которого был выставлен счет| Object
+customer | Данные о пользователе, на которого был выставлен счет| Object
 customer.phone |Номер телефона, на который был выставлен счет (если был указан при выставлении счета) |String
 customer.email|E-mail пользователя (если был указан при выставлении счета)|String
 customer.account| Идентификатор пользователя в системе мерчанта (если был указан при выставлении счета)|String
-bill.creationDateTime | Дата создания счета | Формат даты<br>`ГГГГ-ММ-ДДTЧЧ:ММ:ССZ`
-bill.expirationDateTime | Срок оплаты счета | Формат даты<br>`ГГГГ-ММ-ДДTЧЧ:ММ:ССZ`
-bill.comment | Комментарий к счету | String(255)
-bill.customFields | Дополнительные данные счета (если были указаны при выставлении счета).| Object
+creationDateTime | Дата создания счета | Формат даты<br>`ГГГГ-ММ-ДДTЧЧ:ММ:ССZ`
+expirationDateTime | Срок оплаты счета | Формат даты<br>`ГГГГ-ММ-ДДTЧЧ:ММ:ССZ`
+comment | Комментарий к счету | String(255)
+customFields | Дополнительные данные счета (если были указаны при выставлении счета).| Object
 version | Версия уведомлений | String
 
 <h3 class="request method">Ответ → POST</h3>
@@ -694,7 +482,7 @@ Content-Type: application/json
 Если в ответе код результата обработки уведомления отличается от 0 и/или код состояния HTTP отличается от 200 (OK), это интерпретируется как временная ошибка мерчанта. Сервер QIWI будет повторять запрос с нарастающим интервалом в течение суток.
 </aside>
 
-### Заголовки
+#### Заголовки
 
 *  `Content-type: application/json`
 
@@ -1230,7 +1018,246 @@ EXPIRED	|Время жизни счета истекло. Счет не опла
 PARTIAL | Частичный возврат суммы| -
 FULL| Полный возврат суммы|+
 
-## Рекомендации по оформлению {#design}
+
+
+
+# Дополнительно
+
+## Выставление счета через платежную форму {#http}
+
+Простой способ для интеграции. При открытии формы клиенту автоматически выставляется счет. Параметры счета передаются в открытом виде в ссылке. Далее клиенту отображается платежная форма с выбором способа оплаты.
+При использовании этого способа нельзя гарантировать, что все счета выставлены мерчантом, в отличие от [выставления по API](#create).
+
+
+<h3 class="request method" id="payform_flow">REDIRECT → </h3>
+
+<ul class="nestedList url">
+    <li><h3>URL <span>https://oplata.qiwi.com/create</span></h3></li>
+</ul>
+
+~~~javascript
+const publicKey = 'Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******';
+
+const params = {
+    publicKey,
+    amount: 42.24,
+    billId: '893794793973',
+    successUrl: 'http://test.ru/',
+    email: 'm@ya.ru'
+};
+
+const link = qiwiApi.createPaymentForm(params);
+~~~
+
+~~~shell
+curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&email=m@ya.ru
+~~~
+
+~~~php
+<?php
+
+$publicKey = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zf******';
+$params = [
+  'publicKey' => $publicKey,
+  'amount' => 200,
+  'billId' => '893794793973'
+];
+
+/** @var \Qiwi\Api\BillPayments $billPayments */
+$link = $billPayments->createPaymentForm($params);
+
+echo $link;
+
+?>
+~~~
+
+~~~java
+String publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc";
+ MoneyAmount amount = new MoneyAmount(
+        BigDecimal.valueOf(499.90),
+        Currency.getInstance("RUB")
+);
+String billId = UUID.randomUUID().toString();
+String successUrl = "https://merchant.com/payment/success?billId=893794793973";
+ String paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
+~~~
+
+
+~~~csharp
+var publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc";
+
+var amount = new MoneyAmount
+{
+    ValueDecimal = 499.9m,
+    CurrencyEnum = CurrencyEnum.Rub
+};
+var billId = Guid.NewGuid().ToString();
+var successUrl = "https://merchant.com/payment/success?billId=893794793973";
+
+var paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
+~~~
+
+<ul class="nestedList params">
+    <li><h3>Параметры</h3><span>В ссылке на веб-форму указываются параметры счета.</span></li>
+</ul>
+
+Параметр|Описание|Тип|Обяз.
+---------|--------|---|---------|---|----
+publicKey | Ключ идентификации мерчанта, полученный в QIWI Кассе|String|+
+billId|Уникальный идентификатор счета в системе мерчанта|URL-закодированная строка String(200)|-
+amount| Сумма, на которую выставляется счет, округленная в меньшую сторону до 2 десятичных знаков | Number(6.2)|-
+phone | Номер телефона пользователя, на который выставляется счет (в международном формате) | URL-закодированная строка|-
+email | E-mail пользователя, куда будет отправлена ссылка для оплаты счета | URL-закодированная строка|-
+account | Идентификатор пользователя в системе мерчанта | URL-закодированная строка |-
+comment | Комментарий к счету|URL-закодированная строка String(255)|-
+customFields[]|Дополнительные данные счета|URL-закодированная строка String(255)|-
+lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус `EXPIRED` и последующая оплата станет невозможна.<br> **Внимание! По истечении 45 суток от даты выставления счет автоматически будет переведен в финальный статус**|URL-закодированная строка<br>`ГГГГ-ММ-ДДTччмм`|-
+successUrl|URL для переадресации в случае успешной оплаты с баланса QIWI Кошелька. При ином способе оплаты переадресация не выполняется. Ссылка должна вести на сайт мерчанта.|URL-закодированная строка|-
+
+## Персонализация {#custom}
+
+Персонализация  позволяет создать платежную форму под Ваш стиль, настраивается лого , фон и цвет кнопок. 
+Создать стили можно в личном кабинете на kassa.qiwi.com ,  при настройке задается кодСтиля , который предается в запросе на создание счета. Возможно создать несколько стилей.
+В запросе необходимо передавать переменную: "themeCode":"кодСтиля" в параметре customFields.
+
+Параметр|Описание|Тип|
+---------|--------|---|---------|---
+customFields[]|Дополнительные данные счета|URL-закодированная строка String(255)
+
+ >Пример передачи параметра при работе с формой
+
+~~~shell
+curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customField[themeCode]=кодСтиля
+~~~
+
+ >Пример передачи параметра при работе через API
+
+~~~shell
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
+-X PUT 
+-H 'Accept: application/json' 
+-H 'Content-Type: application/json' 
+-H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
+-d '{ 
+   "amount": {  
+     "currency": "RUB",  
+     "value": 100.00 
+   }, 
+   "comment": "Text comment", 
+   "expirationDateTime": "2018-04-13T14:30:00+03:00", 
+   "customer": {}, 
+   "customFields"{"themeCode":"кодСтиля"} 
+   }
+~~~
+
+
+![Customer form](/images/Custom.png)
+
+## Checkout Popup {#popup}
+
+Высплывающие окно, позволяет открыть форму оплаты поверх вашего сайта. 
+В библиотеке доступно 2 метода создание нового счета и открытие существующего.
+
+[Скачать библиотеку QIWI Checkout Popup ](https://github.com/QIWI-API/qiwi-invoicing-popup)
+
+
+Установка и подключение :
+```
+<script src='https://oplata.qiwi.com/popup/v1.js'></script>
+```
+
+###  Выставление нового счета  {#createpopup}
+Метод  QiwiCheckout.createInvoice
+
+| Параметр | Описание | Тип | Обязательное |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
+| publicKey | Ключ идентификации мерчанта, полученный в QIWI Кассе | String | + |
+| amount | Сумма, на которую выставляется счет, округленная в меньшую сторону до 2 десятичных знаков | Number(6.2) | + |
+| phone | Номер телефона пользователя, на который выставляется счет (в международном формате) | String | - |
+| email | E-mail пользователя, куда будет отправлена ссылка для оплаты счета | String | - |
+| account | Идентификатор пользователя в системе мерчанта | String | - |
+| comment | Комментарий к счету | String(255) | - |
+| customFields | Дополнительные данные счета | Object | - |
+| lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус EXPIRED и последующая оплата станет невозможна.| Строка в виде `ГГГГ-ММ-ДДTччмм` | - |
+
+>Пример выставления счета через popup
+
+~~~ppp
+QiwiCheckout.createInvoice({
+    publicKey: '5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3c******',
+    amount: 1.23,
+    phone: '79123456789',
+})
+    .then(data => {
+        //  data === {
+        //    publicKey: '5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3c******',
+        //    amount: 1.23,
+        //    phone: '79123456789',
+        //  }
+    })
+    .catch(error => {
+        //  error === {
+        //      reason: "PAYMENT_FAILED"
+        //  }
+    })
+~~~
+
+
+###  Открытие существующего счета {#openpopup}
+Метод  QiwiCheckout.openInvoice
+
+| Параметр | Описание | Тип | Обязательное |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
+| payUrl | URL инвойса | String | + |
+
+>Пример открытия уже созданного счета в popup
+
+~~~ppp
+params = {
+    payUrl: 'https://oplata.qiwi.com/form?invoiceUid=06df838c-0f86-4be3-aced-a950c244b5b1'
+}
+
+QiwiCheckout.openInvoice(params)
+    .then(data => {
+        // ...
+    })
+    .catch(error => {
+        // ...
+    })
+~~~
+
+## Возможности при открытие счета 
+
+При выставлении счета через API в ответ приходит url с формой для оплаты, к нему можно добавить следующие параметры:
+
+| Параметр | Описание | Тип | 
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| paySource | При открытие формы, сразу будет выбран способ оплаты. Возможные значения : qw <br>card <br>mobile <br>sovest <br> Если способ оплаты недоступен - выбирается рекомендуемый способ оплаты | 
+| successUrl | URL для переадресации в случае успешной оплаты с баланса QIWI Кошелька. При ином способе оплаты переадресация не выполняется. Ссылка должна вести на сайт мерчанта. | Object | 
+| lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус EXPIRED и последующая оплата станет невозможна.| Строка в виде `ГГГГ-ММ-ДДTччмм` | 
+
+# Готовые решения
+
+## SDK и библиотеки {#sdk}
+
+* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Готовое решение для разработки server2server интеграции c помощью Node.js.
+* [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) - Готовое решение для разработки server2server интеграции c помощью PHP.
+* [Java SDK](https://github.com/QIWI-API/bill-payments-java-sdk) - Готовое решение для разработки server2server интеграции c помощью Java.
+* [.Net SDK](https://github.com/QIWI-API/bill-payments-dotnet-sdk) - Готовое решение для разработки server2server интеграции c помощью C# .Net.
+
+## Решения для CMS {#cms}
+
+* [Wordpress](https://wordpress.org/plugins/woo-qiwi-payment-gateway/) -  расширение под Woocommerce для работы с заказами
+* [Онлайн Лейка](https://wordpress.org/plugins/leyka/) -  Wordpress расширение для благотворительности
+* [1С-Битрикс](http://marketplace.1c-bitrix.ru/solutions/qiwikassa.checkout/) - решение для работы с заказами
+
+
+
+
+
+# Рекомендации к оформлению
+
+## Иконки {#design}
 
 Данные рекомендации помогут вашим пользователям быстрее сориентироваться на странице выбора способов оплаты.
 
