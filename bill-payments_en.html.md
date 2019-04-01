@@ -69,7 +69,7 @@ customFields[]|Additional invoice data|URL-encoded, String(255)|
  >Invoice Issue on Pay Form
 
 ~~~shell
-curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customField[themeCode]=codeStyle
+curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customFields[themeCode]=codeStyle
 ~~~
 
  >Invoice Issue by API
@@ -88,7 +88,7 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
    "comment": "Text comment", 
    "expirationDateTime": "2018-04-13T14:30:00+03:00", 
    "customer": {}, 
-   "customFields"{"themeCode":"codeStyle"} 
+   "customFields": {"themeCode":"codeStyle"}
    }
 ~~~
 
@@ -103,7 +103,7 @@ Installation:
 The library has 2 metods: create a new invoice and open an existing one.
 
 ###  Create new invoice {#createpopup}
-Metod  QiwiCheckout.createInvoice
+Metod  `QiwiCheckout.createInvoice`
 
 | Parameter | Description | Type | Required |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
@@ -114,9 +114,7 @@ Metod  QiwiCheckout.createInvoice
 | account | Client identifier in merchant’s system | String | - |
 | comment | Invoice commentary | String(255) | - |
 | customFields | Additional invoice data | Object | - |
-| lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void.
-Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| URL-encoded string
-YYYY-MM-DDThhmm | - |
+| lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns `EXPIRED` final status and it becomes void.<br>**Important!** Invoice will be automatically expired when 45 days is passed after the invoicing date| URL-encoded string `YYYY-MM-DDThhmm` | - |
 
 >Create new invoice
 
@@ -145,8 +143,8 @@ QiwiCheckout.createInvoice(params)
 ~~~
 
 
-###  Open an existing one {#openpopup}
-Function  QiwiCheckout.openInvoice
+###  Open an existing invoice {#openpopup}
+Function  `QiwiCheckout.openInvoice`
 
 | Parameter | Description | Type | Required |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
@@ -191,9 +189,9 @@ QiwiCheckout.openInvoice(params)
 
 ## Authorization {#auth}
 
-API requests from the merchant's side are authorized by the API secret key (SECRET_KEY). Put this parameter to <i>Authorization</i> header, as "Bearer SECRET_KEY".
+API requests from the merchant's side are authorized by the API secret key (`SECRET_KEY`). Put this parameter to <i>Authorization</i> header, as "Bearer SECRET_KEY".
 
-Public key (PUBLIC_KEY) is used when issuing invoices via the Pay Form.
+Public key (`PUBLIC_KEY`) is used when issuing invoices via the Pay Form.
 
 **Keys are available after [registration and integration](https://kassa.qiwi.com/pay).**
 
@@ -519,16 +517,16 @@ siteId|Number|Merchant's site identifier in QIWI Kassa
 amount.value|String|The invoice amount. The number is rounded down with two decimal places.
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status.value|String | String representation of the status
-status.changedDateTime|Date|Status refresh date. Date format:<br>`YYYY-MM-DDThh:mm:ss±hh`
+status.changedDateTime|String|Status refresh date. Date format:<br>`YYYY-MM-DDThh:mm:ss±hh`
 customer|Object | Customer data of the invoice subject
 customer.phone|String | The customer’s phone (if specified in the invoice)
 customer.email|String|The customer's e-mail  (if specified in the invoice)
 customer.account| String|The customer's identifier in the merchant's system (if specified in the invoice)
 customFields|Object|Additional invoice data provided by the merchant
 comment|String|Comment to the invoice
-creationDateTime|Date|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ss±hh`
+creationDateTime|String|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ss±hh`
 payUrl|String|Pay form link
-expirationDateTime|Date|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ss±hh`
+expirationDateTime|String|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ss±hh`
 
 ## 2. Invoice Payment Notifications {#notification}
 
@@ -582,7 +580,7 @@ Upon receiving inbound notification you need to verify it by digital signature f
 
 Signature verification algorithm is as follows:
 
-1. Prepare a string of the following notification's parameters separated by "\|":
+1. Prepare a string of the following notification's parameters separated by `|`:
 
     `invoice_parameters = {amount.currency}|{amount.value}|{billId}|{siteId}|{status.value}`
 
@@ -591,7 +589,8 @@ Signature verification algorithm is as follows:
 2. Apply HMAC-SHA256 function:
 
     `hash = HMAС(SHA256, secret_key, invoice_parameters)`
-    Where:
+
+    where:
 
     * `secret_key` – function key;
     * `invoice_parameters` – string from step 1.
@@ -683,21 +682,21 @@ amount.value|The invoice amount. The number is rounded down with two decimal pla
 amount.currency|Currency identifier of the invoice (Alpha-3 ISO 4217 code)|String(3)
 bill.status|Invoice status data|Object
 status.value|Current [invoice status](#status)|String
-status.changedDateTime|Status refresh date. Date format:<br>`YYYY-MM-DDThh:mm:ssZ`|Date
+status.changedDateTime|Status refresh date. Date format:<br>`YYYY-MM-DDThh:mm:ssZ`|String
 bill.customFields|Additional invoice data provided by the merchant|Object
 bill.customer | Customer data of the invoice subject  (if specified in the invoice)|Object
 customer.phone | The customer’s phone (if specified in the invoice)|String
 customer.email|The customer's e-mail  (if specified in the invoice)|String
 customer.account|The customer's identifier in the merchant's system (if specified in the invoice)| String
 bill.comment|Comment to the invoice|String(255)
-bill.creationDateTime|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ssZ`|Date
+bill.creationDateTime|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ssZ`|String
 bill.payUrl|Pay form link|String
-bill.expirationDateTime|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ssZ`|Date
+bill.expirationDateTime|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ssZ`|String
 version | Notification service version | String
 
 <h3 class="request method">Response → POST</h3>
 
-~~~
+~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -835,24 +834,23 @@ var response = client.getBillInfo(billId);
 
 Parameter|Type|Description
 --------|---|--------
-bill|Object|Invoice data
-bill.billId|String|Unique invoice identifier in the merchant's system
-bill.siteId|String|Merchant's site identifier in QIWI Kassa
-bill.amount|Object|The invoice amount data
+billId|String|Unique invoice identifier in the merchant's system
+siteId|String|Merchant's site identifier in QIWI Kassa
+amount|Object|The invoice amount data
 amount.value|Number|The invoice amount. The number is rounded down with two decimal places.
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
-bill.status|Object|Invoice status data
+status|Object|Invoice status data
 status.value|String|Current [invoice status](#status)
-status.changedDateTime|Status refresh date|Date
-bill.customFields|Object|Additional invoice data provided by the merchant
-bill.customer | Customer data of the invoice subject |Object
-customer.phone | The customer’s phone (if specified in the invoice)|String
-customer.email|The customer's e-mail  (if specified in the invoice)|String
-customer.account|The customer's identifier in the merchant's system (if specified in the invoice)| String
-bill.comment|String|Comment to the invoice
-bill.creationDateTime|Date|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ss`
-bill.payUrl|String|Pay form link
-bill.expirationDateTime|Date|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ss`
+status.changedDateTime|String|Status refresh date
+customFields|Object|Additional invoice data provided by the merchant
+customer |Object | Customer data of the invoice subject
+customer.phone|String | The customer’s phone (if specified in the invoice)
+customer.email|String|The customer's e-mail  (if specified in the invoice)
+customer.account|String|The customer's identifier in the merchant's system (if specified in the invoice)
+comment|String|Comment to the invoice
+creationDateTime|String|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ss`
+payUrl|String|Pay form link
+expirationDateTime|String|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ss`
 
 ## 4. Cancelling the Invoice {#cancel}
 
@@ -922,7 +920,6 @@ var response = client.cancelBill(billId);
 
 ~~~json
 {
-  "bill": {
     "siteId": "23044",
     "billId": "893794793973",
     "amount": {
@@ -945,7 +942,6 @@ var response = client.cancelBill(billId);
     "creationDateTime": "2018-02-28T11:43:23",
     "expirationDateTime": "2018-04-14T11:43:23",
     "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=6848dd49-e260-4343-b258-62199cffe8c1"
-  }
 }
 ~~~
 
@@ -972,24 +968,23 @@ var response = client.cancelBill(billId);
 
 Parameter|Type|Description
 --------|---|--------
-bill|Object|Invoice data
-bill.billId|String|Unique invoice identifier in the merchant's system
-bill.siteId|String|Merchant's site identifier in QIWI Kassa
-bill.amount|Object|The invoice amount data
+billId|String|Unique invoice identifier in the merchant's system
+siteId|String|Merchant's site identifier in QIWI Kassa
+amount|Object|The invoice amount data
 amount.value|Number|The invoice amount. The number is rounded down with two decimal places.
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
-bill.status|Object|Invoice status data
+status|Object|Invoice status data
 status.value|String|Current [invoice status](#status)
-status.changedDateTime|Status refresh date|Date
-bill.customFields|Object|Additional invoice data provided by the merchant
-bill.customer | Customer data of the invoice subject |Object
-customer.phone | The customer’s phone (if specified in the invoice)|String
-customer.email|The customer's e-mail  (if specified in the invoice)|String
-customer.account|The customer's identifier in the merchant's system (if specified in the invoice)| String
-bill.comment|String|Comment to the invoice
-bill.creationDateTime|Date|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ss`
-bill.payUrl|String|Pay form link
-bill.expirationDateTime|Date|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ss`
+status.changedDateTime|String|Status refresh date
+customFields|Object|Additional invoice data provided by the merchant
+customer |Object | Customer data of the invoice subject
+customer.phone|String | The customer’s phone (if specified in the invoice)
+customer.email|String|The customer's e-mail  (if specified in the invoice)
+customer.account|String|The customer's identifier in the merchant's system (if specified in the invoice)
+comment|String|Comment to the invoice
+creationDateTime|String|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ss`
+payUrl|String|Pay form link
+expirationDateTime|String|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ss`
 
 
 ## 5. Refund {#refund}
