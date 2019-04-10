@@ -100,10 +100,10 @@ Installation:
 <script src='https://oplata.qiwi.com/popup/v1.js'></script>
 
 
-The library has 2 metods: create a new invoice and open an existing one.
+The library has two methods: create a new invoice and open an existing one.
 
 ###  Create new invoice {#createpopup}
-Metod  `QiwiCheckout.createInvoice`
+Call function  `QiwiCheckout.createInvoice`
 
 | Parameter | Description | Type | Required |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
@@ -144,7 +144,7 @@ QiwiCheckout.createInvoice(params)
 
 
 ###  Open an existing invoice {#openpopup}
-Function  `QiwiCheckout.openInvoice`
+Call function  `QiwiCheckout.openInvoice`
 
 | Parameter | Description | Type | Required |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
