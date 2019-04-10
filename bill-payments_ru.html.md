@@ -1156,7 +1156,7 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
 ![Customer form](/images/Custom.png)
 
 ## Checkout Popup {#popup}
-
+<button id="pop" class="button-popup" onclick="testPopup();">Пример работы popup</button>
 Высплывающее окно, позволяет открыть форму оплаты поверх вашего сайта.
 В библиотеке доступно два метода: создание нового счета и открытие существующего.
 
