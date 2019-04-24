@@ -57,7 +57,7 @@ API requests from the merchant's side are authorized by the API secret key (`SEC
 
 Public key (`PUBLIC_KEY`) is used when issuing invoices via the Pay Form.
 
-**Keys are available after [registration and integration](https://kassa.qiwi.com/pay).**
+**Keys are available after registration and integration [kassa.qiwi.com](https://kassa.qiwi.com/pay) or [p2p.qiwi.com](https://p2p.qiwi.com) .**
 
 <aside class="notice">
 Do not share secret key to third parties!
@@ -102,6 +102,7 @@ var client = BillPaymentClientFactory.createDefault(secretKey);
 ## 1. Invoice Issue by API {#create}
 
 It is the reliable method for integration. Parameters are sent by means of server2server requests with authorization. Method allows to issue an invoice, successful response contains `payUrl` link to redirect client on Pay Form.
+
 **[Additional features](#option)**
 
 <h3 class="request method">Request → PUT</h3>
@@ -1237,7 +1238,7 @@ QiwiCheckout.openInvoice(params)
 ~~~
 
 
-# SDK and CMS
+## SDK and CMS
 
 ### SDK and Libraries {#sdk}
 
@@ -1259,11 +1260,9 @@ You can add paratmetrs for payUrl ,received in response to the request to create
 | Parameter | Description | Type | 
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | paySource |Default payment method to show first for the client on QIWI Checkout. Possible values:
-<br>qw <br>card <br>mobile <br>sovest <br> 
-When specified method is inaccessible, the page contains notice about it and the client can choose another method.| String
+<br>qw <br>card <br>mobile <br>sovest <br> When specified method is inaccessible, the page contains notice about it and the client can choose another method.| String |
 | successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object | 
-| lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void.
-Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
+| lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void. Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
 
 
 
