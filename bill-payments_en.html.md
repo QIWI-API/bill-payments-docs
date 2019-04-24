@@ -1238,31 +1238,30 @@ QiwiCheckout.openInvoice(params)
 ~~~
 
 
-## SDK and CMS
-
-### SDK and Libraries {#sdk}
-
-* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Node JS package of ready-to-use solutions for server2server integration development.
-* [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) -  PHP package of ready-to-use solutions for server2server integration development.
-* [Java SDK](https://github.com/QIWI-API/bill-payments-java-sdk) - Java package of ready-to-use solutions for server2server integration development.
-* [.Net SDK ](https://github.com/QIWI-API/bill-payments-dotnet-sdk) - C# .net package of ready-to-use solutions for server2server integration development.
-
-### CMS Solutions {#cms}
-
-* [Wordpress](https://wordpress.org/plugins/woo-qiwi-payment-gateway/) -  plugin for Woocommerce for work with orders
-* [Online Leyka](https://wordpress.org/plugins/leyka/) -  Wordpress plagin for charity
-* [1С-Bitrix](http://marketplace.1c-bitrix.ru/solutions/qiwikassa.checkout/) - plugin for work with orders
-
 
 ## Invoice opening options {#option}
 You can add paratmetrs for payUrl ,received in response to the request to create an invoice.
  
 | Parameter | Description | Type | 
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| paySource |Default payment method to show first for the client on QIWI Checkout. Possible values:
-<br>qw <br>card <br>mobile <br>sovest <br> When specified method is inaccessible, the page contains notice about it and the client can choose another method.| String |
+| paySource |Default payment method to show first for the client on QIWI Checkout. Possible values: <br>qw <br>card <br>mobile <br>sovest <br> When specified method is inaccessible, the page contains notice about it and the client can choose another method.| String |
 | successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object | 
 | lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void. Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
+
+# SDK and CMS
+
+## SDK and Libraries {#sdk}
+
+* [NODE JS SDK](https://github.com/QIWI-API/bill-payments-node-js-sdk) - Node JS package of ready-to-use solutions for server2server integration development.
+* [PHP SDK](https://github.com/QIWI-API/bill-payments-php-sdk) -  PHP package of ready-to-use solutions for server2server integration development.
+* [Java SDK](https://github.com/QIWI-API/bill-payments-java-sdk) - Java package of ready-to-use solutions for server2server integration development.
+* [.Net SDK ](https://github.com/QIWI-API/bill-payments-dotnet-sdk) - C# .net package of ready-to-use solutions for server2server integration development.
+
+## CMS Solutions {#cms}
+
+* [Wordpress](https://wordpress.org/plugins/woo-qiwi-payment-gateway/) -  plugin for Woocommerce for work with orders
+* [Online Leyka](https://wordpress.org/plugins/leyka/) -  Wordpress plagin for charity
+* [1С-Bitrix](http://marketplace.1c-bitrix.ru/solutions/qiwikassa.checkout/) - plugin for work with orders
 
 
 
