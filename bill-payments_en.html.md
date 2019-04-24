@@ -102,6 +102,7 @@ var client = BillPaymentClientFactory.createDefault(secretKey);
 ## 1. Invoice Issue by API {#create}
 
 It is the reliable method for integration. Parameters are sent by means of server2server requests with authorization. Method allows to issue an invoice, successful response contains `payUrl` link to redirect client on Pay Form.
+**[Additional features](#option)**
 
 <h3 class="request method">Request → PUT</h3>
 
@@ -336,7 +337,7 @@ Notifications handler server URL is specified in <a href="https://kassa.qiwi.com
     </li>
 </ul>
 
-## Authorization on Merchant's Server {#notifications_auth}
+### Authorization on Merchant's Server {#notifications_auth}
 
 Upon receiving inbound notification you need to verify it by digital signature from notification HTTP header `X-Api-Signature-SHA256`. Signature is verified with HMAC algorithm integrity check with SHA256-hash function.
 
@@ -1021,7 +1022,7 @@ FULL| Full refund of the invoice amount|+
 
 # Additional features
 
-## 1. Invoice Issue on Pay Form {#http}
+## Invoice Issue on Pay Form {#http}
 
 It is the simplest way of integration. On opening Pay Form, client receives an invoice at the same time. The invoice data sends in URL explicitly. Client gets a Pay Form web page with multiple payment means. When using  this method, one cannot be sure that all invoices are issued by the merchant. [API invoice creation](#create) mitigates this risk.
 
@@ -1159,6 +1160,9 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
 
 ## Checkout Popup {#popup}
 
+<button id="pop" class="button-popup" onclick="testPopup();">Demo popup</button>
+
+
 [Download QIWI Checkout Popup ](https://github.com/QIWI-API/qiwi-invoicing-popup)
 
 Installation:
@@ -1168,8 +1172,6 @@ Installation:
 The library has two methods: create a new invoice and open an existing one.
 
 ###  Create new invoice {#createpopup}
-
-<button id="pop" class="button-popup" onclick="testPopup();">Demo popup</button>
 
 Call function  `QiwiCheckout.createInvoice`
 
@@ -1250,6 +1252,18 @@ QiwiCheckout.openInvoice(params)
 * [Online Leyka](https://wordpress.org/plugins/leyka/) -  Wordpress plagin for charity
 * [1С-Bitrix](http://marketplace.1c-bitrix.ru/solutions/qiwikassa.checkout/) - plugin for work with orders
 
+
+## Invoice opening options {#option}
+You can add paratmetrs for payUrl ,received in response to the request to create an invoice.
+ 
+| Parameter | Description | Type | 
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| paySource |Default payment method to show first for the client on QIWI Checkout. Possible values:
+<br>qw <br>card <br>mobile <br>sovest <br> 
+When specified method is inaccessible, the page contains notice about it and the client can choose another method.| String
+| successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object | 
+| lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void.
+Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
 
 
 
