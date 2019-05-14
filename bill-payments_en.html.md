@@ -1262,6 +1262,7 @@ You can add paratmetrs for payUrl ,received in response to the request to create
 * [Wordpress](https://wordpress.org/plugins/woo-qiwi-payment-gateway/) -  plugin for Woocommerce for work with orders
 * [Online Leyka](https://wordpress.org/plugins/leyka/) -  Wordpress plagin for charity
 * [1С-Bitrix](http://marketplace.1c-bitrix.ru/solutions/qiwikassa.checkout/) - plugin for work with orders
+* [Opencart](https://www.opencart.com/index.php?route=marketplace/extension/info&member_token=nH5fDsH3A5OkPF4zOe82hS0ypOhIqSEr&extension_id=36833) - plugin for work with orders
 
 
 
