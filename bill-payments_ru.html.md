@@ -16,7 +16,7 @@ language_tabs:
   - java: Java SDK
   - ppp: Popup
   - csharp: .Net SDK
-  
+
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 
@@ -62,7 +62,7 @@ API QIWI Кассы открывает доступ к операциям с в�
 **Ключи создаются в личном кабинете после регистрации и подключения на [kassa.qiwi.com](https://kassa.qiwi.com/pay) или [p2p.qiwi.com](https://p2p.qiwi.com).**
 
 <aside class="notice">
-Важно! Не передавайте секретный ключ третьим лицам!. 
+Важно! Не передавайте секретный ключ третьим лицам!.
 </aside>
 
 
@@ -106,7 +106,7 @@ var client = BillPaymentClientFactory.createDefault(secretKey);
 ## 1. Выставление счета {#create}
 
 Надежный способ для интеграции. Параметры передаются server2server с использованием авторизации.
-Метод позволяет выставить счет, при успешном выполнении запроса в ответе вернется параметр `payUrl` - ссылка для редиректа пользователя на платежную форму. 
+Метод позволяет выставить счет, при успешном выполнении запроса в ответе вернется параметр `payUrl` - ссылка для редиректа пользователя на платежную форму.
 
 **[Также существует способ выставления счета через платежную форму](#http)**
 
@@ -131,19 +131,19 @@ qiwiRestApi.createBill( billId, fields ).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
--X PUT 
--H 'Accept: application/json' 
--H 'Content-Type: application/json' 
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
+-X PUT
+-H 'Accept: application/json'
+-H 'Content-Type: application/json'
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
--d '{ 
+-d '{
    "amount": {  
      "currency": "RUB",  
-     "value": 100.00 
-   }, 
-   "comment": "Text comment", 
-   "expirationDateTime": "2018-04-13T14:30:00+03:00", 
-   "customer": {}, 
+     "value": 100.00
+   },
+   "comment": "Text comment",
+   "expirationDateTime": "2018-04-13T14:30:00+03:00",
+   "customer": {},
    "customFields": {}  
    }
 ~~~
@@ -229,7 +229,7 @@ client.CreateBill(
              <li><strong>customer.email</strong> - e-mail пользователя.</li>
              <li><strong>customer.account</strong> - Идентификатор пользователя в системе мерчанта.</li>
              <li><strong>customFields</strong> - Дополнительные поля.</li>
-             
+
         </ul>
     </li>
 </ul>
@@ -249,7 +249,7 @@ client.CreateBill(
 
 ~~~json
   {
-    "siteId": 23044,
+    "siteId": "23044",
     "billId": "893794793973",
     "amount": {
       "value": 100,
@@ -291,7 +291,7 @@ client.CreateBill(
 Параметр|Тип|Описание
 --------|---|--------
 billId|String|Уникальный идентификатор счета в системе мерчанта
-siteId|Number|Идентификатор сайта мерчанта в QIWI Кассе
+siteId|String|Идентификатор сайта мерчанта в QIWI Кассе
 amount|Object|Данные о сумме счета
 amount.value|Number|Сумма счета, округленная до 2 знаков после запятой в меньшую сторону
 amount.currency	|String|Валюта счета (Alpha-3 ISO 4217 код)
@@ -363,7 +363,7 @@ Aдрес сервера для уведомлений указывается н
 
    `invoice_parameters = {amount.currency}|{amount.value}|{billId}|{siteId}|{status.value}`
 
-   где `{*}` – значение параметра уведомления. Все значения при проверке подписи должны трактоваться как строки. 
+   где `{*}` – значение параметра уведомления. Все значения при проверке подписи должны трактоваться как строки.
 
 
 2. Вычислить HMAC-хэш c алгоритмом хэширования SHA256:
@@ -400,7 +400,7 @@ qiwiApi.checkNotificationSignature(
     validSignatureFromNotificationServer, notificationData, merchantSecret
 ); // true
 ~~~
- 
+
 ~~~php
 <?php
 
@@ -508,9 +508,9 @@ qiwiApi.getBillInfo(billId).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
--X GET 
--H 'Accept: application/json' 
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
+-X GET
+-H 'Accept: application/json'
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 ~~~
 
@@ -561,7 +561,7 @@ var response = client.getBillInfo(billId);
 
 ~~~json
   {
-    "siteId": 23044,
+    "siteId": "23044",
     "billId": "893794793973",
     "amount": {
       "value": 100,
@@ -633,10 +633,10 @@ qiwiApi.cancelBill(billId).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/reject 
--X POST 
--H 'Accept: application/json' 
--H 'Content-Type: application/json' 
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/reject
+-X POST
+-H 'Accept: application/json'
+-H 'Content-Type: application/json'
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 ~~~
 
@@ -772,10 +772,10 @@ qiwiApi.refund(billId, refundId, amount, currency).then( data => {
 
 ~~~shell
 curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refunds/899343443
--X PUT 
--H 'Accept: application/json' 
--H 'Content-Type: application/json' 
--H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************' 
+-X PUT
+-H 'Accept: application/json'
+-H 'Content-Type: application/json'
+-H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 -d '{
     "amount": {
     "currency": "RUB",
@@ -906,8 +906,8 @@ qiwiApi.getRefundInfo(billId, refundId).then( data => {
 
 ~~~shell
 curl https://api.qiwi.com/partner/bill/v1/893794793973/refund/899343443
--H 'Accept: application/json' 
--H 'Content-Type: application/json' 
+-H 'Accept: application/json'
+-H 'Content-Type: application/json'
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 ~~~
 
@@ -1134,19 +1134,19 @@ curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfm
  >Пример передачи параметра при работе через API
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
--X PUT 
--H 'Accept: application/json' 
--H 'Content-Type: application/json' 
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
+-X PUT
+-H 'Accept: application/json'
+-H 'Content-Type: application/json'
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
--d '{ 
+-d '{
    "amount": {  
      "currency": "RUB",  
-     "value": 100.00 
-   }, 
-   "comment": "Text comment", 
-   "expirationDateTime": "2018-04-13T14:30:00+03:00", 
-   "customer": {}, 
+     "value": 100.00
+   },
+   "comment": "Text comment",
+   "expirationDateTime": "2018-04-13T14:30:00+03:00",
+   "customer": {},
    "customFields": {"themeCode":"кодСтиля"}
    }
 ~~~
@@ -1233,10 +1233,10 @@ QiwiCheckout.openInvoice(params)
 
 При выставлении счета через API в ответ приходит url с формой для оплаты, к нему можно добавить следующие параметры:
 
-| Параметр | Описание | Тип | 
+| Параметр | Описание | Тип |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | paySource | При открытии формы сразу будет выбран способ оплаты. Возможные значения:<br>qw <br>card <br>mobile <br>sovest <br> Если способ оплаты недоступен - выбирается рекомендуемый способ оплаты | String
-| successUrl | URL для переадресации в случае успешной оплаты с баланса QIWI Кошелька. При ином способе оплаты переадресация не выполняется. Ссылка должна вести на сайт мерчанта. | Object | 
+| successUrl | URL для переадресации в случае успешной оплаты с баланса QIWI Кошелька. При ином способе оплаты переадресация не выполняется. Ссылка должна вести на сайт мерчанта. | Object |
 | lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус EXPIRED и последующая оплата станет невозможна.| String<br>`ГГГГ-ММ-ДДTччмм` |
 
 # Готовые решения

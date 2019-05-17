@@ -14,7 +14,7 @@ language_tabs:
   - java: Java SDK
   - ppp: Popup
   - csharp: .Net SDK
-  
+
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 
@@ -235,7 +235,7 @@ var response = client.createBill(billInfo);
 
 ~~~json
   {
-    "siteId": 23044,
+    "siteId": "23044",
     "billId": "893794793973",
     "amount": {
       "value": 100,
@@ -277,7 +277,7 @@ var response = client.createBill(billInfo);
 Parameter|Type|Description
 --------|---|--------
 billId|String|Unique invoice identifier in the merchant's system
-siteId|Number|Merchant's site identifier in QIWI Kassa
+siteId|String|Merchant's site identifier in QIWI Kassa
 amount.value|String|The invoice amount. The number is rounded down with two decimal places.
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status.value|String | String representation of the status
@@ -439,7 +439,7 @@ String and key of the signature are encoded in UTF-8.
 Parameter|Description|Type
 ---------|--------|---
 bill|Invoice data|Object
-bill.billId|Invoice identifier in the merchant's system|String
+bill.billId|Invoice identifier in the merchant's system|String(200)
 bill.siteId|Merchant's site identifier in QIWI Kassa|String
 bill.amount|The invoice amount data|Object
 amount.value|The invoice amount. The number is rounded down with two decimal places.|Number(6.2)
@@ -1140,19 +1140,19 @@ curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfm
  >Invoice Issue by API
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 
--X PUT 
--H 'Accept: application/json' 
--H 'Content-Type: application/json' 
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
+-X PUT
+-H 'Accept: application/json'
+-H 'Content-Type: application/json'
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
--d '{ 
+-d '{
    "amount": {  
      "currency": "RUB",  
-     "value": 100.00 
-   }, 
-   "comment": "Text comment", 
-   "expirationDateTime": "2018-04-13T14:30:00+03:00", 
-   "customer": {}, 
+     "value": 100.00
+   },
+   "comment": "Text comment",
+   "expirationDateTime": "2018-04-13T14:30:00+03:00",
+   "customer": {},
    "customFields": {"themeCode":"codeStyle"}
    }
 ~~~
@@ -1241,11 +1241,11 @@ QiwiCheckout.openInvoice(params)
 
 ## Invoice opening options {#option}
 You can add paratmetrs for payUrl ,received in response to the request to create an invoice.
- 
-| Parameter | Description | Type | 
+
+| Parameter | Description | Type |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | paySource |Default payment method to show first for the client on QIWI Checkout. Possible values: <br>qw <br>card <br>mobile <br>sovest <br> When specified method is inaccessible, the page contains notice about it and the client can choose another method.| String |
-| successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object | 
+| successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object |
 | lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void. Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
 
 # SDK and CMS
