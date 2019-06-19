@@ -352,7 +352,7 @@ Signature verification algorithm is as follows:
 
 2. Apply HMAC-SHA256 function:
 
-    `hash = HMAС(SHA256, secret_key, invoice_parameters)`
+    `hash = HMAС(SHA256, invoice_parameters, secret_key)`
 
     where:
 

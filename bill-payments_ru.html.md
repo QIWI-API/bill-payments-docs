@@ -368,7 +368,7 @@ Aдрес сервера для уведомлений указывается н
 
 2. Вычислить HMAC-хэш c алгоритмом хэширования SHA256:
 
-   `hash = HMAС(SHA256, secret_key, invoice_parameters)`
+   `hash = HMAС(SHA256, invoice_parameters, secret_key)`
    Где:
 
    * `secret_key` – ключ функции ;
