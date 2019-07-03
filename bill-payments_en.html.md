@@ -202,24 +202,6 @@ var billInfo = new CreateBillInfo
 var response = client.createBill(billInfo);
 ~~~
 
-<ul class="nestedList url">
-    <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billId}</span></h3>
-        <ul>
-        <strong>Parameters:</strong>
-             <li><strong>billId</strong> - unique invoice identifier in merchant's system.</li>
-             <li><strong>amount.currency</strong> - invoice currency (Alpha-3 ISO 4217 code).	</li>
-             <li><strong>amount.value</strong> - invoice amount rounded down to two decimals.</li>
-             <li><strong>comment</strong> - invoice commentary.</li>
-             <li><strong>expirationDateTime</strong> - invoice due date. Time should be specified with timezone. </li>
-             <li><strong>customer.phone</strong> - phone number to which invoice issued. </li>
-             <li><strong>customer.email</strong> - client's e-mail.</li>
-             <li><strong>customer.account</strong> - client's identifier in merchant's system.</li>
-             <li><strong>customFields</strong> - additional data.</li>
-
-        </ul>
-    </li>
-</ul>
-
 Parameter|Description|Type|Required
 ---------|--------|---|---------|---|----
 billId|Unique invoice identifier in merchant's system|String(200)|+
@@ -231,7 +213,6 @@ account | Client identifier in merchant's system |string |-
 comment | Invoice commentary|String(255)|-
 customFields[]|Additional invoice data|String(255)|-
 expirationDateTime |  invoice due date. Time should be specified with timezone. |string<br>`YYYY-MM-DDThhmm+\-hh:mm`|+
-
 
 
 
