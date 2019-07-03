@@ -220,6 +220,21 @@ var response = client.createBill(billInfo);
     </li>
 </ul>
 
+Parameter|Description|Type|Required
+---------|--------|---|---------|---|----
+billId|Unique invoice identifier in merchant's system|String(200)|+
+amount.currency| invoice amount rounded down to two decimals | (Alpha-3 ISO 4217 code)|+
+amount.value| Amount of the invoice rounded down on two decimals | Number(6.2)|+
+phone | Phone number of the client to which the invoice is issuing (international format) |string|-
+email | E-mail of the client where the invoice payment link will be sent |string|-
+account | Client identifier in merchant's system |string |-
+comment | Invoice commentary|String(255)|-
+customFields[]|Additional invoice data|String(255)|-
+expirationDateTime |  invoice due date. Time should be specified with timezone. |string<br>`YYYY-MM-DDThhmm+\-hh:mm`|+
+
+
+
+
 <ul class="nestedList header">
     <li><h3>HEADERS</h3>
         <ul>

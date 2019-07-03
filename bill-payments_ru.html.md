@@ -216,23 +216,18 @@ client.CreateBill(
 ~~~
 
 
-<ul class="nestedList url">
-    <li><h3>URL <span>https://api.qiwi.com/partner/bill/v1/bills/{billId}</span></h3>
-        <ul>
-        <strong>Параметры:</strong>
-             <li><strong>billId</strong> - уникальный идентификатор счета в системе мерчанта.</li>
-             <li><strong>amount.currency</strong> - валюта счета (Alpha-3 ISO 4217 код).	</li>
-             <li><strong>amount.value</strong> - сумма счета, округленная до двух десятичных знаков в меньшую сторону.</li>
-             <li><strong>comment</strong> - комментарий к счету.</li>
-             <li><strong>expirationDateTime</strong> - срок оплаты счета. Время передается с указанием часового пояса. </li>
-             <li><strong>customer.phone</strong> - номер телефона, на который был выставлен счет. </li>
-             <li><strong>customer.email</strong> - e-mail пользователя.</li>
-             <li><strong>customer.account</strong> - Идентификатор пользователя в системе мерчанта.</li>
-             <li><strong>customFields</strong> - Дополнительные поля.</li>
+Параметр|Описание|Тип|Обяз.
+---------|--------|---|---------|---|----
+billId|Уникальный идентификатор счета в системе мерчанта|string|+
+amount.value| Сумма, на которую выставляется счет, округленная в меньшую сторону до 2 десятичных знаков | Number(6.2)|+
+amount.currency| Валюта счета | (Alpha-3 ISO 4217 код)|+
+phone | Номер телефона пользователя, на который выставляется счет (в международном формате) |string|-
+email | E-mail пользователя, куда будет отправлена ссылка для оплаты счета |string|-
+account | Идентификатор пользователя в системе мерчанта |string|-
+comment | Комментарий к счету|String(255)|-
+customFields[]|Дополнительные данные счета|String(255)|-
+expirationDateTime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус `EXPIRED` и последующая оплата станет невозможна.<br> |URL-закодированная строка<br>`ГГГГ-ММ-ДДTччмм+\-чч:мм`|+
 
-        </ul>
-    </li>
-</ul>
 
 <ul class="nestedList header">
     <li><h3>HEADERS</h3>
