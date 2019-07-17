@@ -105,6 +105,10 @@ It is the reliable method for integration. Parameters are sent by means of serve
 
 **[Additional features](#option)**
 
+<aside class="notice">
+For testing, you can create and pay bills for 1 rub.
+</aside>
+
 <h3 class="request method">Request → PUT</h3>
 
 ~~~javascript
@@ -1126,6 +1130,11 @@ successUrl|The URL to which the client will be redirected in case of successful 
 
 Personalization allows you to create a payment form with your style, customizable logo, background and color of the buttons.  You can create styles in your account on kassa.qiwi.com , when setting up codeStyle. Possible to create several styles.
 In the query, you must pass the variable: "themeCode": "codeStyle" in the customFields parameter.
+
+
+<aside class="notice">
+For p2p , you can set a name in your account on p2p.qiwi.com .  The name is associated with the style.
+</aside>
 
  >Invoice Issue on Pay Form
 
