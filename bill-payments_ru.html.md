@@ -114,7 +114,7 @@ var client = BillPaymentClientFactory.createDefault(secretKey);
 
 
 <aside class="notice">
-Для тестирования, вы можете высталвять и олпчивать счета на 1р.
+Для тестирования, вы можете высталвять и оплачивать счета на 1р.
 </aside>
 
 
