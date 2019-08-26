@@ -101,7 +101,7 @@ var client = BillPaymentClientFactory.createDefault(secretKey);
 
 ## 1. Invoice Issue by API {#create}
 
-It is the reliable method for integration. Parameters are sent by means of server2server requests with authorization. Method allows to issue an invoice, successful response contains `payUrl` link to redirect client on Pay Form.
+It is the reliable method for integration. Parameters are sent by means of server2server requests with authorization. Method allows you to issue an invoice, successful response contains `payUrl` link to redirect client on Pay Form.
 
 **[Additional features](#option)**
 
@@ -753,7 +753,7 @@ expirationDateTime|String|Expiration date of the pay form link (invoice payment'
 
 ## 5. Refund {#refund}
 
-Method allows to make a refund.
+Method allows you to make a refund.
 
 <h3 class="request method">Request → PUT</h3>
 
