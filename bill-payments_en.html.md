@@ -294,6 +294,11 @@ expirationDateTime|String|Expiration date of the pay form link (invoice payment'
 
 ## 2. Invoice Payment Notifications {#notification}
 
+<aside class="warning">
+Callback is sent by HTTPS protocol on 443 port only.
+Certificate should be issued by any trusted center of certification (e.g. Comodo, Verisign, Thawte etc)
+</aside>
+
  >Notification example
 
 ~~~http
