@@ -106,7 +106,7 @@ It is the reliable method for integration. Parameters are sent by means of serve
 **[Additional features](#option)**
 
 <aside class="notice">
-For testing, you can create and pay bills for 1 rub.
+For testing purposes, you can create and pay bills for 1 ruble.
 </aside>
 
 <h3 class="request method">Request → PUT</h3>
@@ -623,6 +623,8 @@ expirationDateTime|String|Expiration date of the pay form link (invoice payment'
 
 ## 4. Cancelling the Invoice {#cancel}
 
+Use this method to cancel unpaid invoice.
+
 <h3 class="request method">Request → POST</h3>
 
 ~~~javascript
@@ -758,7 +760,7 @@ expirationDateTime|String|Expiration date of the pay form link (invoice payment'
 
 ## 5. Refund {#refund}
 
-Method allows you to make a refund.
+Method allows you to make a refund for the paid invoice.
 
 <h3 class="request method">Request → PUT</h3>
 
@@ -895,7 +897,7 @@ datetime|String|System date of refund processing. Date format:<br>`YYYY-MM-DDThh
 
 ## 6. Refund Status {#refund-status}
 
-Method requests for current refund status.
+Method returns current status of the refund .
 
 <h3 class="request method">Request → GET</h3>
 
@@ -1133,12 +1135,12 @@ successUrl|The URL to which the client will be redirected in case of successful 
 
 ## Personalization {#custom}
 
-Personalization allows you to create a payment form with your style, customizable logo, background and color of the buttons.  You can create styles in your account on kassa.qiwi.com , when setting up codeStyle. Possible to create several styles.
+Personalization allows you to create a payment form with your style, customizable logo, background and color of the buttons.  You can create styles in your account on [kassa.qiwi.com](https://kassa.qiwi.com/pay), when setting up codeStyle. Possible to create several styles.
 In the query, you must pass the variable: "themeCode": "codeStyle" in the customFields parameter.
 
 
 <aside class="notice">
-For p2p , you can set a name in your account on p2p.qiwi.com .  The name is associated with the style.
+For p2p users, you can set a name in your account on <a href="https://p2p.qiwi.com">p2p.qiwi.com</a>.  The name is associated with the style.
 </aside>
 
  >Invoice Issue on Pay Form
@@ -1250,11 +1252,11 @@ QiwiCheckout.openInvoice(params)
 
 
 ## Invoice opening options {#option}
-You can add paratmetrs for payUrl ,received in response to the request to create an invoice.
+You can add parameters for payUrl ,received in response to the request to create an invoice.
 
 | Parameter | Description | Type |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| paySource |Default payment method to show first for the client on QIWI Checkout. Possible values: <br>qw <br>card <br>mobile <br>sovest <br> When specified method is inaccessible, the page contains notice about it and the client can choose another method.| String |
+| paySource |Default payment method to show first for the client on QIWI Checkout. Possible values: <br>qw - QIWI Wallet<br>card - card payment <br>mobile - mobile account payment <br>sovest - Sovest card payment <br> When specified method is inaccessible, the page contains notice about it and the client can choose another method.| String |
 | successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object |
 | lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void. Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
 
