@@ -19,7 +19,7 @@ services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 
 toc_footers:
- - <a href='/'>Home page</a>
+ - <a href='/en/'>Home page</a>
  - <a href='mailto:bss@qiwi.com'>Feedback</a>
 
 ---
