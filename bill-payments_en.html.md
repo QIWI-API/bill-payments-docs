@@ -474,10 +474,10 @@ Content-Type: application/json
 }
 ~~~
 
-After receiving inbound notification request, you should verify its signature and returns the JSON-response. The processing result code should be returned in response. The result code should be in _error_ parameter.
+After receiving inbound notification request, you should verify its signature and returns the JSON-response. The processing result code should be returned in response. 
 
 <aside class="notice">
-Any response with result code other than 0 ("Success") and/or HTTP status code other than 200 (OK) will be treated as a temporary merchant's service error. QIWI server repeates the notification request with increasing period within the next 24 hours.
+Any response with HTTP status code other than 200 (OK) will be treated as a temporary merchant's service error. QIWI server repeates the notification request with increasing period within the next 24 hours.
 </aside>
 
 ### Headers
