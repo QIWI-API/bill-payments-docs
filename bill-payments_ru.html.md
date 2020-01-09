@@ -349,7 +349,7 @@ Host: server.ru
 
 Тело запроса содержит JSON-сериализованные данные счета (кодировка UTF-8).
 
-Aдрес сервера для уведомлений указывается на сайте <a href="https://kassa.qiwi.com/">kassa.qiwi.com</a> в разделе "Настройка протокола" или на <a href="https://p2p.qiwi.com/">p2p.qiwi.com</a> при генерации ключей.
+Адрес сервера для уведомлений указывается на сайте <a href="https://kassa.qiwi.com/">kassa.qiwi.com</a> в разделе "Настройка протокола" или на <a href="https://p2p.qiwi.com/">p2p.qiwi.com</a> при генерации ключей.
 
 <ul class="nestedList header">
     <li><h3>HEADERS</h3>
@@ -452,7 +452,7 @@ String validSignature = "07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c345144
  BillPaymentsUtils.checkNotificationSignature(validSignature, notification, merchantSecret); //true
 ~~~
 
-Cтрока и ключ подписи кодируются в UTF-8.
+Строка и ключ подписи кодируются в UTF-8.
 
 <ul class="nestedList params">
     <li><h3>Параметры</h3><span>В POST-запросе уведомления указаны параметры счета.</span>
@@ -492,7 +492,7 @@ Content-Type: application/json
 ~~~
 
 После того, как был получен входящий запрос-уведомление, необходимо проверить подлинность цифровой подписи и отправить ответ
-. 
+.
 
 <aside class="notice">
 Если в ответе код состояния HTTP отличается от 200 (OK), это интерпретируется как временная ошибка мерчанта. Сервер QIWI будет повторять запрос с нарастающим интервалом в течение суток.

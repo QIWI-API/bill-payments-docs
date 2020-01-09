@@ -40,7 +40,7 @@ QIWI Checkout API opens a way to operations with invoices from your service or a
 
 * Merchant redirects the user to [Pay Form](#http) link to issue an invoice for the order and to make the user pay for it. Or [issues an invoice by API](#create) and redirects to the Pay Form.
 
-* The user chooses the most convenient way to pay for the invoice on the Pay Form, and pay the inoice. By default, the optimal payment method is showed first.
+* The user chooses the most convenient way to pay for the invoice on the Pay Form. By default, the optimal payment method is showed first.
 
 * The merchant's service receives [notification](#notification) once the invoice is successfully paid by the user. You need to configure notifications on your [Personal Page](https://kassa.qiwi.com). Notifications contain authorization parameters which merchant needs to verify on its server.
 
@@ -216,7 +216,7 @@ email | E-mail of the client where the invoice payment link will be sent |string
 account | Client identifier in merchant's system |string |-
 comment | Invoice commentary|String(255)|-
 customFields[]|Additional invoice data|String(255)|-
-expirationDateTime |  invoice due date. Time should be specified with timezone. |string<br>`YYYY-MM-DDThhmm+\-hh:mm`|+
+expirationDateTime |  invoice due date. Time should be specified with time zone. |string<br>`YYYY-MM-DDThhmm+\-hh:mm`|+
 
 
 
@@ -474,10 +474,10 @@ Content-Type: application/json
 }
 ~~~
 
-After receiving inbound notification request, you should verify its signature and returns the JSON-response. The processing result code should be returned in response. 
+After receiving inbound notification request, you should verify its signature and returns the JSON-response. The processing result code should be returned in response.
 
 <aside class="notice">
-Any response with HTTP status code other than 200 (OK) will be treated as a temporary merchant's service error. QIWI server repeates the notification request with increasing period within the next 24 hours.
+Any response with HTTP status code other than 200 (OK) will be treated as a temporary merchant's service error. QIWI server repeats the notification request with increasing period within the next 24 hours.
 </aside>
 
 ### Headers
