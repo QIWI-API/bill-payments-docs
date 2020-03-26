@@ -1119,6 +1119,10 @@ const link = qiwiApi.createPaymentForm(params);
 curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&email=m@ya.ru
 ~~~
 
+<aside class="notice">
+When opening Payment Form in Webview on Android, you should enable <code>settings.setDomStorageEnabled(true)</code>
+</aside>
+
 <ul class="nestedList params">
     <li><h3>Parameters</h3><span>Invoice data are put in Payment Form URL.</span></li>
 </ul>
@@ -1267,6 +1271,7 @@ You can add parameters to URL from `payUrl` field in response to the [invoice re
 | Parameter | Description | Type |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | paySource |Pre-selected payment method for the client on Payment Form. Possible values: <br>`qw` - QIWI Wallet<br>`card` - card payment <br>`mobile` - mobile account payment <br>`sovest` - Sovest card payment <br> When specified method is inaccessible, the page automatically selects recommended method for the user.| String |
+| allowedPaySource |Selected payment method for the client on Payment Form. Possible values: <br>`qw` - QIWI Wallet<br>`card` - card payment <br>`mobile` - mobile account payment <br>`sovest` - Sovest card payment <br> When specified method is inaccessible, the page selects need method for the user.| Array |
 | successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object |
 | lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void. Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
 
