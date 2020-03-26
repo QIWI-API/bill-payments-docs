@@ -38,9 +38,9 @@ QIWI Checkout API opens a way to operations with invoices from your service or a
 
 * User submits an order on the merchant’s website.
 
-* Merchant redirects the user to [Pay Form](#http) link to issue an invoice for the order and to make the user pay for it. Or [issues an invoice by API](#create) and redirects to the Pay Form.
+* Merchant redirects the user to [Payment Form](#http) link to issue an invoice for the order and to make the user pay for it. Or [issues an invoice by API](#create) and redirects to the Payment Form.
 
-* The user chooses the most convenient way to pay for the invoice on the Pay Form. By default, the optimal payment method is showed first.
+* The user chooses the most convenient way to pay for the invoice on the Payment Form. By default, the optimal payment method is showed first.
 
 * The merchant's service receives [notification](#notification) once the invoice is successfully paid by the user. You need to configure notifications on your [Personal Page](https://kassa.qiwi.com). Notifications contain authorization parameters which merchant needs to verify on its server.
 
@@ -55,7 +55,7 @@ QIWI Checkout API opens a way to operations with invoices from your service or a
 
 API requests from the merchant's side are authorized by the API secret key (`SECRET_KEY`). Put this parameter to <i>Authorization</i> header, as "Bearer SECRET_KEY".
 
-Public key (`PUBLIC_KEY`) is used when issuing invoices via the Pay Form.
+Public key (`PUBLIC_KEY`) is used when issuing invoices via the Payment Form.
 
 **Keys are available after registration and integration [kassa.qiwi.com](https://kassa.qiwi.com/pay) or [p2p.qiwi.com](https://p2p.qiwi.com) .**
 
@@ -101,7 +101,7 @@ var client = BillPaymentClientFactory.createDefault(secretKey);
 
 ## 1. Invoice Issue by API {#create}
 
-It is the reliable method for integration. Parameters are sent by means of server2server requests with authorization. Method allows you to issue an invoice, successful response contains `payUrl` link to redirect client on Pay Form.
+It is the reliable method for integration. Parameters are sent by means of server2server requests with authorization. Method allows you to issue an invoice, successful response contains `payUrl` link to redirect client on Payment Form.
 
 **[Additional features](#option)**
 
@@ -1030,9 +1030,13 @@ FULL| Full refund of the invoice amount|+
 
 # Additional features
 
-## Invoice Issue on Pay Form {#http}
+## Invoice Issue on Payment Form {#http}
 
-It is the simplest way of integration. On opening Pay Form, client receives an invoice at the same time. The invoice data sends in URL explicitly. Client gets a Pay Form web page with multiple payment means. When using  this method, one cannot be sure that all invoices are issued by the merchant. [API invoice creation](#create) mitigates this risk.
+<aside class="notice">
+When opening Payment Form in Webview on Android, you should enable <code>settings.setDomStorageEnabled(true)</code>
+</aside>
+
+It is the simplest way of integration. On opening Payment Form, client receives an invoice at the same time. The invoice data sends in URL explicitly. Client gets a Payment Form web page with multiple payment means. When using  this method, one cannot be sure that all invoices are issued by the merchant. [API invoice creation](#create) mitigates this risk.
 
 ~~~javascript
 const QiwiBillPaymentsAPI = require('bill-payments-node-js-sdk');
@@ -1116,7 +1120,7 @@ curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfm
 ~~~
 
 <ul class="nestedList params">
-    <li><h3>Parameters</h3><span>Invoice data are put in Pay Form URL.</span></li>
+    <li><h3>Parameters</h3><span>Invoice data are put in Payment Form URL.</span></li>
 </ul>
 
 Parameter|Description|Type|Required
@@ -1143,7 +1147,7 @@ In the query, you must pass the variable: "themeCode": "codeStyle" in the custom
 For p2p users, you can set a name in your account on <a href="https://p2p.qiwi.com">p2p.qiwi.com</a>.  The name is associated with the style.
 </aside>
 
- >Invoice Issue on Pay Form
+ >Invoice Issue on Payment Form
 
 ~~~shell
 curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customFields[themeCode]=codeStyle
@@ -1252,11 +1256,17 @@ QiwiCheckout.openInvoice(params)
 
 
 ## Invoice opening options {#option}
-You can add parameters for payUrl ,received in response to the request to create an invoice.
+
+<aside class="notice">
+When opening Payment Form in Webview on Android, you should enable <code>settings.setDomStorageEnabled(true)</code>
+</aside>
+
+
+You can add parameters to URL from `payUrl` field in response to the [invoice request](#create).
 
 | Parameter | Description | Type |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| paySource |Default payment method to show first for the client on QIWI Checkout. Possible values: <br>qw - QIWI Wallet<br>card - card payment <br>mobile - mobile account payment <br>sovest - Sovest card payment <br> When specified method is inaccessible, the page contains notice about it and the client can choose another method.| String |
+| paySource |Pre-selected payment method for the client on Payment Form. Possible values: <br>`qw` - QIWI Wallet<br>`card` - card payment <br>`mobile` - mobile account payment <br>`sovest` - Sovest card payment <br> When specified method is inaccessible, the page automatically selects recommended method for the user.| String |
 | successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object |
 | lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void. Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
 
