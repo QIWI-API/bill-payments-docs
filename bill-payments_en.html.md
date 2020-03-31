@@ -127,10 +127,10 @@ qiwiRestApi.createBill( billId, fields ).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
--X PUT
--H 'Accept: application/json'
--H 'Content-Type: application/json'
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 \
+-X PUT \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 -d '{
    "amount": {
@@ -500,9 +500,9 @@ qiwiApi.getBillInfo(billId).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
--X GET
--H 'Accept: application/json'
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 \
+-X GET \
+-H 'Accept: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 ~~~
 
@@ -636,10 +636,10 @@ qiwiApi.cancelBill(billId).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/reject
--X POST
--H 'Accept: application/json'
--H 'Content-Type: application/json'
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/reject \
+-X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 ~~~
 
@@ -777,10 +777,10 @@ qiwiApi.refund(billId, refundId, amount, currency).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refunds/899343443
--X PUT
--H 'Accept: application/json'
--H 'Content-Type: application/json'
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refunds/899343443 \
+-X PUT \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 -d '{
     "amount": {
@@ -911,9 +911,9 @@ qiwiApi.getRefundInfo(billId, refundId).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refund/899343443
--H 'Accept: application/json'
--H 'Content-Type: application/json'
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refund/899343443 \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 ~~~
 
@@ -1266,12 +1266,18 @@ When opening Payment Form in Webview on Android, you should enable <code>setting
 </aside>
 
 
+> Invoice URL example
+
+~~~shell
+curl https://oplata.qiwi.com/form?invoiceUid=606a5f75-4f8e-4ce2-b400-967179502275&allowedPaySources=card
+~~~
+
 You can add parameters to URL from `payUrl` field in response to the [invoice request](#create).
 
 | Parameter | Description | Type |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | paySource |Pre-selected payment method for the client on Payment Form. Possible values: <br>`qw` - QIWI Wallet<br>`card` - card payment <br>`mobile` - mobile account payment <br>`sovest` - Sovest card payment <br> When specified method is inaccessible, the page automatically selects recommended method for the user.| String |
-| allowedPaySource |Selected payment method for the client on Payment Form. Possible values: <br>`qw` - QIWI Wallet<br>`card` - card payment <br>`mobile` - mobile account payment <br>`sovest` - Sovest card payment <br> When specified method is inaccessible, the page selects need method for the user.| Array |
+| allowedPaySources |Allow only these payment methods for the client on Payment Form. Possible values: <br>`qw` - QIWI Wallet<br>`card` - card payment <br>`mobile` - mobile account payment <br>`sovest` - Sovest card payment <br> When specified method is inaccessible, the page doesn't display it for the user.| comma separated string |
 | successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object |
 | lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void. Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
 

@@ -136,20 +136,20 @@ qiwiRestApi.createBill( billId, fields ).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
--X PUT
--H 'Accept: application/json'
--H 'Content-Type: application/json'
--H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
--d '{
-   "amount": {  
-     "currency": "RUB",  
-     "value": 100.00
-   },
-   "comment": "Text comment",
-   "expirationDateTime": "2018-04-13T14:30:00+03:00",
-   "customer": {},
-   "customFields": {}  
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 \
+-X PUT \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************' \
+-d '{ \
+   "amount": {  \
+     "currency": "RUB",  \
+     "value": 100.00 \
+   }, \
+   "comment": "Text comment", \
+   "expirationDateTime": "2018-04-13T14:30:00+03:00", \
+   "customer": {}, \
+   "customFields": {}  \
    }
 ~~~
 
@@ -519,9 +519,9 @@ qiwiApi.getBillInfo(billId).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
--X GET
--H 'Accept: application/json'
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 \
+-X GET \
+-H 'Accept: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 ~~~
 
@@ -646,10 +646,10 @@ qiwiApi.cancelBill(billId).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/reject
--X POST
--H 'Accept: application/json'
--H 'Content-Type: application/json'
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/reject \
+-X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 ~~~
 
@@ -784,10 +784,10 @@ qiwiApi.refund(billId, refundId, amount, currency).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refunds/899343443
--X PUT
--H 'Accept: application/json'
--H 'Content-Type: application/json'
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973/refunds/899343443 \
+-X PUT \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 -d '{
     "amount": {
@@ -918,9 +918,9 @@ qiwiApi.getRefundInfo(billId, refundId).then( data => {
 ~~~
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/893794793973/refund/899343443
--H 'Accept: application/json'
--H 'Content-Type: application/json'
+curl https://api.qiwi.com/partner/bill/v1/893794793973/refund/899343443 \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 ~~~
 
@@ -1154,10 +1154,10 @@ curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfm
  >Пример передачи параметра при работе через API
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
--X PUT
--H 'Accept: application/json'
--H 'Content-Type: application/json'
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 \
+-X PUT \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
 -H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
 -d '{
    "amount": {  
@@ -1225,6 +1225,7 @@ QiwiCheckout.createInvoice({
 | lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус EXPIRED и последующая оплата станет невозможна.| Строка в виде `ГГГГ-ММ-ДДTччмм` | - |
 
 ###  Открытие существующего счета {#openpopup}
+
 Метод  `QiwiCheckout.openInvoice`
 
 >Пример открытия уже созданного счета в popup
@@ -1256,12 +1257,16 @@ QiwiCheckout.openInvoice(params)
 
 При [выставлении счета](#create) через API в ответе приходит `payUrl` с ссылкой на форму оплаты. К ссылке можно добавить следующие параметры:
 
+> Пример ссылки
 
+~~~shell
+curl https://oplata.qiwi.com/form?invoiceUid=606a5f75-4f8e-4ce2-b400-967179502275&allowedPaySources=card
+~~~
 
 | Параметр | Описание | Тип |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | paySource | При открытии формы сразу будет выбран указанный способ оплаты. Возможные значения:<br>`qw` - QIWI Кошелек<br>`card` - банковская карта<br>`mobile` - платеж со счета мобильного телефона<br>`sovest` - карта СОВЕСТЬ<br> Если способ оплаты недоступен - выбирается рекомендуемый для  данного пользователя способ оплаты | String
-| allowedPaySource | При открытии формы будет только указанный способ оплаты. (Если он доступен) Возможные значения:<br>`qw` - QIWI Кошелек<br>`card` - банковская карта<br>`mobile` - платеж со счета мобильного телефона<br>`sovest` - карта СОВЕСТЬ<br> Если способ оплаты недоступен - выбирается рекомендуемый для  данного пользователя способ оплаты | Array
+| allowedPaySources | При открытии формы будут отображаться только указанные способы оплаты. (Если они доступны) Возможные значения:<br>`qw` - QIWI Кошелек<br>`card` - банковская карта<br>`mobile` - платеж со счета мобильного телефона<br>`sovest` - карта СОВЕСТЬ<br> Если способ оплаты недоступен - выбирается рекомендуемый для  данного пользователя способ оплаты | comma separated string
 | successUrl | URL для переадресации в случае успешной оплаты с баланса QIWI Кошелька. При ином способе оплаты переадресация не выполняется. Ссылка должна вести на сайт мерчанта. | Object |
 | lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус EXPIRED и последующая оплата станет невозможна.| String<br>`ГГГГ-ММ-ДДTччмм` |
 
