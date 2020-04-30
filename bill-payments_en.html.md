@@ -210,7 +210,7 @@ Parameter|Description|Type|Required
 ---------|--------|---|---------|---|----
 billId|Unique invoice identifier in merchant's system|String(200)|+
 amount.currency| invoice amount rounded down to two decimals | (Alpha-3 ISO 4217 code)|+
-amount.value| Amount of the invoice rounded down on two decimals | Number(6.2)|+
+amount.value| Amount of the invoice rounded down to two decimals | Number(6.2)|+
 phone | Phone number of the client to which the invoice is issuing (international format) |string|-
 email | E-mail of the client where the invoice payment link will be sent |string|-
 account | Client identifier in merchant's system |string |-
@@ -278,7 +278,7 @@ Parameter|Type|Description
 --------|---|--------
 billId|String|Unique invoice identifier in the merchant's system
 siteId|String|Merchant's site identifier in QIWI Kassa
-amount.value|String|The invoice amount. The number is rounded down with two decimal places.
+amount.value|String|The invoice amount. The number is rounded down to two decimals
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status.value|String | String representation of the status
 status.changedDateTime|String|Status refresh date. Date format:<br>`YYYY-MM-DDThh:mm:ss±hh`
@@ -447,7 +447,7 @@ bill|Invoice data|Object
 bill.billId|Invoice identifier in the merchant's system|String(200)
 bill.siteId|Merchant's site identifier in QIWI Kassa|String
 bill.amount|The invoice amount data|Object
-amount.value|The invoice amount. The number is rounded down with two decimal places.|Number(6.2)
+amount.value|The invoice amount. The number is rounded down to two decimals|Number(6.2)
 amount.currency|Currency identifier of the invoice (Alpha-3 ISO 4217 code)|String(3)
 bill.status|Invoice status data|Object
 status.value|Current [invoice status](#status)|String
@@ -606,7 +606,7 @@ Parameter|Type|Description
 billId|String|Unique invoice identifier in the merchant's system
 siteId|String|Merchant's site identifier in QIWI Kassa
 amount|Object|The invoice amount data
-amount.value|Number|The invoice amount. The number is rounded down with two decimal places.
+amount.value|Number|The invoice amount. The number is rounded down to two decimals
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status|Object|Invoice status data
 status.value|String|Current [invoice status](#status)
@@ -742,7 +742,7 @@ Parameter|Type|Description
 billId|String|Unique invoice identifier in the merchant's system
 siteId|String|Merchant's site identifier in QIWI Kassa
 amount|Object|The invoice amount data
-amount.value|Number|The invoice amount. The number is rounded down with two decimal places.
+amount.value|Number|The invoice amount. The number is rounded down to two decimals
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status|Object|Invoice status data
 status.value|String|Current [invoice status](#status)
@@ -890,7 +890,7 @@ Parameter|Type|Description
 --------|---|--------
 datetime|String|When response with error: request processing system date
 refundId|String|Unique refund identifier in merchant's system
-amount.value|Number|The invoice amount. The number is rounded down with two decimal places.
+amount.value|Number|The invoice amount. The number is rounded down to two decimals
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status|String| [Refund status](#status_refund)
 datetime|String|System date of refund processing. Date format:<br>`YYYY-MM-DDThh:mm:ssZ`
@@ -1005,7 +1005,7 @@ Parameter|Type|Description
 --------|---|--------
 datetime|String|When response with error: request processing system date
 refundId|String|Unique refund identifier in merchant's system
-amount.value|Number|The invoice amount. The number is rounded down with two decimal places.
+amount.value|Number|The invoice amount. The number is rounded down to two decimals
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status|String| [Refund status](#status_refund)
 datetime|String|System date of refund processing. Date format:<br>`YYYY-MM-DDThh:mm:ssZ`
