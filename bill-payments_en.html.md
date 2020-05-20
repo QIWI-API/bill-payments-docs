@@ -889,7 +889,7 @@ var refundResponse = client.refundBill(paidBillId, refundId, amount);
 Parameter|Type|Description
 --------|---|--------
 datetime|String|When response with error: request processing system date
-refundId|String|Unique refund identifier in merchant's system
+refundId|String|Unique refund identifier given by the merchant
 amount.value|Number|The invoice amount. The number is rounded down to two decimals
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status|String| [Refund status](#status_refund)
@@ -1004,7 +1004,7 @@ var response = client.getRefundInfo(paidBillId, refundId);
 Parameter|Type|Description
 --------|---|--------
 datetime|String|When response with error: request processing system date
-refundId|String|Unique refund identifier in merchant's system
+refundId|String|Unique refund identifier given by the merchant
 amount.value|Number|The invoice amount. The number is rounded down to two decimals
 amount.currency|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status|String| [Refund status](#status_refund)
@@ -1130,15 +1130,15 @@ When opening Payment Form in Webview on Android, you should enable <code>setting
 Parameter|Description|Type|Required
 ---------|--------|---|---------|---|----
 publicKey | Merchant public key received in QIWI Kassa|String|+
-billId|Unique invoice identifier in merchant's system|URL-encoded, String(200)|-
+billId|Unique invoice identifier given by the merchant|URL-encoded, String(200)|-
 amount| Amount of the invoice rounded down on two decimals | Number(6.2)|-
 phone | Phone number of the client to which the invoice is issuing (international format) | URL-encoded string|-
 email | E-mail of the client where the invoice payment link will be sent | URL-encoded string|-
-account | Client identifier in merchant's system | URL-encoded string |-
+account | Client identifier  | URL-encoded string |-
 comment | Invoice commentary|URL-encoded, String(255)|-
 customFields[]|Additional invoice data|URL-encoded, String(255)|-
-lifetime | Expiration date of the pay form link (invoice payment's due date). If the invoice is not paid after that date, the invoice assigns `EXPIRED` final status and it becomes void.<br> **Important! Invoice will be automatically expired when 45 days is passed after the invoicing date**|URL-encoded string<br>`YYYY-MM-DDThhmm`|-
-successUrl|The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant's site.|URL-encoded string|-
+lifetime | Expiration date of the pay form link (invoice payment due date). If the invoice is not paid after that date, the invoice assigns `EXPIRED` final status and it becomes void.<br> **Important! Invoice will be automatically expired when 45 days is passed after the invoicing date**|URL-encoded string<br>`YYYY-MM-DDThhmm`|-
+successUrl|The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must belong to the merchant.|URL-encoded string|-
 
 
 ## Personalization {#custom}
@@ -1160,21 +1160,21 @@ curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfm
  >Invoice Issue by API
 
 ~~~shell
-curl https://api.qiwi.com/partner/bill/v1/bills/893794793973
--X PUT
--H 'Accept: application/json'
--H 'Content-Type: application/json'
--H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************'
--d '{
-   "amount": {  
-     "currency": "RUB",  
-     "value": 100.00
-   },
-   "comment": "Text comment",
-   "expirationDateTime": "2018-04-13T14:30:00+03:00",
-   "customer": {},
-   "customFields": {"themeCode":"codeStyle"}
-   }
+curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 \
+-X PUT \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNGHJK43JFJDK595FJFJMjlCRkFFRDM5OE***********************' \
+-d '{ \
+   "amount": {   \
+     "currency": "RUB",  \
+     "value": 100.00 \
+   }, \
+   "comment": "Text comment", \
+   "expirationDateTime": "2018-04-13T14:30:00+03:00", \
+   "customer": {}, \
+   "customFields": {"themeCode":"codeStyle"} \
+}'
 ~~~
 
 ![Customer form](/images/Custom.png)
@@ -1278,7 +1278,7 @@ You can add parameters to URL from `payUrl` field in response to the [invoice re
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | paySource |Pre-selected payment method for the client on Payment Form. Possible values: <br>`qw` - QIWI Wallet<br>`card` - card payment <br>`mobile` - mobile account payment <br>`sovest` - Sovest card payment <br> When specified method is inaccessible, the page automatically selects recommended method for the user.| String |
 | allowedPaySources |Allow only these payment methods for the client on Payment Form. Possible values: <br>`qw` - QIWI Wallet<br>`card` - card payment <br>`mobile` - mobile account payment <br>`sovest` - Sovest card payment <br> | comma separated string |
-| successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must be within merchant’s site. | Object |
+| successUrl | The URL to which the client will be redirected in case of successful payment from its QIWI Wallet balance. When payment is by any other means, redirection is not performed. URL must belong to the merchant. | URL-encoded string |
 | lifetime | Expiration date of the pay form link (invoice payment’s due date). If the invoice is not paid after that date, the invoice assigns EXPIRED final status and it becomes void. Important! Invoice will be automatically expired when 45 days is passed after the invoicing date| String<br>`YYYY-MM-DDThhmm` |
 
 # SDK and CMS
