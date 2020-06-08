@@ -313,6 +313,8 @@ expirationDateTime|String|Срок действия созданной форм�
 Сертификат должен быть выдан доверенным центром сертификации (напр., Comodo, Verisign, Thawte и т.п.)
 </aside>
 
+<h3 class="request method">Запрос ← POST</h3>
+
  >Пример уведомления
 
 ~~~http
@@ -479,7 +481,7 @@ comment | Комментарий к счету | String(255)
 customFields | Дополнительные данные счета (если были указаны при выставлении счета).| Object
 version | Версия уведомлений | String
 
-<h3 class="request method">Ответ → POST</h3>
+<h3 class="request method">Ответ → </h3>
 
 ~~~http
 HTTP/1.1 200 OK
@@ -490,17 +492,19 @@ Content-Type: application/json
 }
 ~~~
 
-После того, как был получен входящий запрос-уведомление, необходимо проверить подлинность цифровой подписи и отправить ответ
-.
+<ul class="nestedList header">
+    <li><h3>HEADERS</h3>
+        <ul>
+             <li>Content-type: application/json</li>
+        </ul>
+    </li>
+</ul>
+
+После того, как был получен входящий запрос-уведомление, необходимо проверить подлинность цифровой подписи и отправить ответ.
 
 <aside class="notice">
 Если в ответе код состояния HTTP отличается от 200 (OK), это интерпретируется как временная ошибка мерчанта. Сервер QIWI будет повторять запрос с нарастающим интервалом в течение суток.
 </aside>
-
-### Заголовки
-
-*  `Content-type: application/json`
-
 
 ## 3. Проверка статуса оплаты счета {#invoice-status}
 
@@ -837,8 +841,9 @@ var refundResponse = client.refundBill(paidBillId, refundId, amount);
         <strong>Параметры:</strong>
              <li><strong>billId</strong> - уникальный идентификатор счета в системе мерчанта.</li>
              <li><strong>refundId</strong> - уникальный идентификатор возврата в системе мерчанта.</li>
+             <li>в JSON-теле запроса:<ul>
              <li><strong>amount.value</strong> - сумма возврата.</li>
-             <li><strong>amount.currency</strong> - валюта возврата.</li>
+             <li><strong>amount.currency</strong> - валюта возврата.</li></ul></li>
         </ul>
     </li>
 </ul>
@@ -848,7 +853,7 @@ var refundResponse = client.refundBill(paidBillId, refundId, amount);
         <ul>
              <li>Authorization: Bearer <a href="#auth">SECRET_KEY</a></li>
              <li>Accept: application/json</li>
-             <li>application/json;charset=UTF-8</li>
+             <li>Content-Type: application/json</li>
         </ul>
     </li>
 </ul>
@@ -964,7 +969,6 @@ var response = client.getRefundInfo(paidBillId, refundId);
         <ul>
              <li>Authorization: Bearer <a href="#auth">SECRET_KEY</a></li>
              <li>Accept: application/json</li>
-             <li>application/json;charset=UTF-8</li>
         </ul>
     </li>
 </ul>
