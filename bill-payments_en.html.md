@@ -1150,8 +1150,11 @@ successUrl|The URL to which the client will be redirected in case of successful 
 
 ## Personalization {#custom}
 
-Personalization allows you to create a payment form with your style, customizable logo, background and color of the buttons.  You can create styles in your account on [kassa.qiwi.com](https://kassa.qiwi.com/pay), when setting up codeStyle. Possible to create several styles.
-In the query, you must pass the variable: "themeCode": "codeStyle" in the customFields parameter.
+Personalization allows you to create a payment form with your style, customizable logo, background and color of the buttons.
+
+You can create styles in your account on [kassa.qiwi.com](https://kassa.qiwi.com/pay). It is possible to create several styles.
+
+When setting up, you create a code linked to the style (for example, `codeStyle`). To use style on the Payment Form, you must pass the variable: `"themeCode": "codeStyle"` with respective code of the style in the `customFields` parameter of the [invoice request](#create) or  [opening Payment Form URL](#http).
 
 
 <aside class="notice">
@@ -1161,7 +1164,7 @@ For p2p users, you can set a name in your account on <a href="https://p2p.qiwi.c
  >Invoice Issue on Payment Form
 
 ~~~shell
-curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customFields[themeCode]=codeStyle
+curl https://oplata.qiwi.com/create?publicKey=Fnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypc*******&amount=100&billId=893794793973&successUrl=http%3A%2F%2Ftest.ru%3F&customFields%5BthemeCode%5D=codeStyle
 ~~~
 
  >Invoice Issue by API
