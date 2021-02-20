@@ -7,6 +7,8 @@ metatitle: QIWI Checkout API  1.0.0
 
 metadescription: QIWI Checkout API opens a way to operate with invoices from your service or application. Invoice is the unique request for the payment. By default, the user may pay the invoice with any accessible means. API supports issuing and cancelling invoices, making refunds and checking operation status.
 
+category: p2p
+
 language_tabs:
   - shell
   - javascript: Node.js SDK
