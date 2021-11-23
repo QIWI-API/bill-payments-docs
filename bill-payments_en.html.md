@@ -628,7 +628,7 @@ customer.email|String|The customer's e-mail  (if specified in the invoice)
 customer.account|String|The customer's identifier in the merchant's system (if specified in the invoice)
 comment|String|Comment to the invoice
 creationDateTime|String|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ss`
-payUrl|String|Pay form link
+payUrl|String|Pay form URL
 expirationDateTime|String|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ss`
 
 ## 4. Cancelling the Invoice {#cancel}
@@ -764,7 +764,7 @@ customer.email|String|The customer's e-mail  (if specified in the invoice)
 customer.account|String|The customer's identifier in the merchant's system (if specified in the invoice)
 comment|String|Comment to the invoice
 creationDateTime|String|System date of the invoice creation. Date format:<br>`YYYY-MM-DDThh:mm:ss`
-payUrl|String|Pay form link
+payUrl|String|Pay form URL
 expirationDateTime|String|Expiration date of the pay form link (invoice payment's due date). Date format:<br>`YYYY-MM-DDThh:mm:ss`
 
 
@@ -1251,7 +1251,7 @@ Call function  `QiwiCheckout.openInvoice`
 
 | Parameter | Description | Type | Required |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------|
-| payUrl | Pay form link| String | + |
+| payUrl | Pay form URL| String | + |
 
 >Open an existing one
 
@@ -1284,7 +1284,7 @@ When opening Payment Form in Webview on Android, you should enable <code>setting
 curl https://oplata.qiwi.com/form?invoiceUid=606a5f75-4f8e-4ce2-b400-967179502275&allowedPaySources=card
 ~~~
 
-You can add parameters to URL from `payUrl` field in response to the [invoice request](#create).
+You can add parameters to URL from `payUrl` field of the response to [invoice request](#create).
 
 | Parameter | Description | Type |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
