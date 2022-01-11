@@ -146,7 +146,7 @@ curl https://api.qiwi.com/partner/bill/v1/bills/893794793973 \
      "currency": "RUB",  \
      "value": 100.00 \
    }, \
-   "comment": "Text comment", \
+   "comment": "Мой комментарий", \
    "expirationDateTime": "2018-04-13T14:30:00+03:00", \
    "customer": {}, \
    "customFields": {}  \
