@@ -11,7 +11,7 @@ POST /qiwi-notify.php HTTP/1.1
 Accept: application/json
 Content-type: application/json
 X-Api-Signature-SHA256: J4WNfNZd***V5mv2w=
-Host: server.ru
+Host: example.com
 
 {
   "bill": {

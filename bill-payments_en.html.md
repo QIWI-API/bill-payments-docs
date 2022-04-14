@@ -191,7 +191,7 @@ CreateBillInfo billInfo = new CreateBillInfo(
                         UUID.randomUUID().toString(),
                         "79123456789"
                 ),
-                "http://merchant.ru/success"
+                "http://example.com/success"
         );
 BillResponse response = client.createBill(billInfo);
 ~~~
@@ -213,7 +213,7 @@ var billInfo = new CreateBillInfo
         Account = Guid.NewGuid().ToString(),
         Phone = "79123456789"
     },
-    SuccessUrl = new Uri("http://merchant.ru/success")
+    SuccessUrl = new Uri("http://example.com/success")
 };
 var response = client.createBill(billInfo);
 ~~~
@@ -311,7 +311,7 @@ POST /qiwi-notify.php HTTP/1.1
 Accept: application/json
 Content-type: application/json
 X-Api-Signature-SHA256: J4WNfNZd***V5mv2w=
-Host: server.ru
+Host: example.com
 
 { "bill":
   {
