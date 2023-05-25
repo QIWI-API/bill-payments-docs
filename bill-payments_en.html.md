@@ -28,7 +28,7 @@ toc_footers:
 
 # QIWI Checkout API {#introduction}
 
-###### Last update: 2019-04-24 | [Edit on GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_en.html.md)
+###### [Edit on GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_en.html.md)
 
 QIWI Checkout API opens a way to operations with invoices from your service or application. Invoice is the unique request for the payment. The user may pay the invoice with any accessible means. API supports  issuing and cancelling invoices, making refunds and checking operation status.
 

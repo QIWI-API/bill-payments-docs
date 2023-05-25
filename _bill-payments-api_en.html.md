@@ -1,6 +1,6 @@
 # QIWI Bill Payments REST API {#bill-payments-api}
 
-###### Last update: 2017-10-23 | [Edit on GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/_bill-payments-api_en.html.md)
+###### [Edit on GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/_bill-payments-api_en.html.md)
 
 ## Authorization {#auth}
 
@@ -216,7 +216,7 @@ pay_url|String|Pay form link
 
 ## Operation Results {#results}
 
-###### Last update: 2017-10-27 | [Edit on Github](https://github.com/QIWI-API/bill-payments-docs/blob/master/_bill-payments-api_en.html.md)
+###### [Edit on Github](https://github.com/QIWI-API/bill-payments-docs/blob/master/_bill-payments-api_en.html.md)
 
 Code| Description |
 ---|----------|
@@ -228,7 +228,7 @@ SUCCESS|Successful result
 
 ## Operation Statuses {#statuses}
 
-###### Last update: 2017-10-27 | [Edit on Github](https://github.com/QIWI-API/bill-payments-docs/blob/master/_bill-payments-api_en.html.md)
+###### [Edit on Github](https://github.com/QIWI-API/bill-payments-docs/blob/master/_bill-payments-api_en.html.md)
 
 ### Invoice Status {#status}
 
@@ -250,7 +250,7 @@ fail|Payment refund is unsuccessful|Y
 
 ## Error Codes {#err-codes}
 
-###### Last update: 2017-10-27 | [Edit on Github](https://github.com/QIWI-API/bill-payments-docs/blob/master/_bill-payments-api_en.html.md)
+###### [Edit on Github](https://github.com/QIWI-API/bill-payments-docs/blob/master/_bill-payments-api_en.html.md)
 
 Code| Description
 ---|----------

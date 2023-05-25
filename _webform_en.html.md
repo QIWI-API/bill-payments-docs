@@ -1,6 +1,6 @@
 # QIWI Pay Form {#http}
 
-###### Last update: 2017-11-15 | [Edit on GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_webform_en.html.md)
+###### [Edit on GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_webform_en.html.md)
 
 Client receives a pay form with a number of ways to pay for the invoice.
 

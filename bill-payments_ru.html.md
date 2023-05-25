@@ -28,7 +28,7 @@ toc_footers:
 ---
 # API QIWI Кассы
 
-###### Последнее обновление: 2019-03-20 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_ru.html.md)
+###### [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-docs/blob/master/bill-payments_ru.html.md)
 
 API QIWI Кассы открывает доступ к операциям с выставляемыми счетами. Счет - универсальная заявка на оплату. По умолчанию пользователю доступно несколько способов оплаты.
 В API поддерживаются операции выставления и отмены счетов, возврата средств по оплаченным счетам, а также проверки статуса выполнения операций.

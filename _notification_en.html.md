@@ -1,6 +1,6 @@
 # Invoice Payment Notifications {#notification}
 
-###### Last update: 2017-11-14 | [Edit on GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_notification_en.html.md)
+###### [Edit on GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/_notification_en.html.md)
 
 Notification is a POST-request (callback). The request's body contains JSON-serialized invoice data encoded by UTF-8.
 
